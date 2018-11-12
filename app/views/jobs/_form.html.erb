@@ -1,0 +1,29 @@
+<%= simple_form_for(@job) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <% if @job.errors.any? %>
+    <div class="errors-container">
+      <ul>
+        <% @job.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-inputs">
+    <%= f.input :title %><br>
+    <%= f.input :location %><br>
+    <%= f.input :skill %><br>
+    <%= f.input :rate %><br>
+    <%= f.input :start_date %><br>
+    <%= f.input :duration %><br>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
+
+<!-- TAKE IT AS A PLACEHOLDER -->
