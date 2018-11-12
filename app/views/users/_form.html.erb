@@ -1,0 +1,29 @@
+<%= simple_form_for(@user) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <% if @user.errors.any? %>
+    <div class="errors-container">
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-inputs">
+    <%= f.input :name %><br>
+    <%= f.input :email %><br>
+    <%= f.input :address %><br>
+    <%= f.input :area_of_influence %><br>
+    <%= f.input :skill %><br>
+    <%= f.input :rate %><br>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
+
+<!-- TAKE IT AS A PLACEHOLDER -->

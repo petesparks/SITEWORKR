@@ -1,0 +1,20 @@
+<h1><%= link_to "Jobs(#{@jobs.count})", jobs_path %></h1>
+<%= link_to 'Add job', new_job_path %>
+<div class="container">
+  <ul>
+    <% @jobs.each do |job| %>
+    <li>
+      <h3>Job title: <%= link_to job.title, job %></h3><br>
+      <p>Location: <%= job.location %></p>
+      <p>Skill: <%= job.skill %></p>
+      <p>Rate: £<%= job.rate %>per day</p>
+      <p>Start date: <%= job.start_date %></p>
+      <p>Duration:  <%= job.duration %></p>
+      <%= link_to '', job, class: "fas fa-eye" %> <%= link_to '', edit_job_path(job), class: "fas fa-edit" %> <%= link_to '', job, method: :delete, class: "fas fa-trash-alt", data: { confirm: 'Are you sure?' } %>
+    </li>
+    <% end %>
+  </ul>
+
+</div>
+
+

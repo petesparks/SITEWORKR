@@ -9,6 +9,4 @@ class User < ApplicationRecord
   validates :address, presence: true
   validates :area_of_influence, presence: true
   validates :skill, presence: true
-
-
 end

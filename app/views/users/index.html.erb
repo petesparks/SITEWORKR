@@ -1,0 +1,18 @@
+<h1><%= link_to "users(#{@users.count})", users_path %></h1>
+<%= link_to 'Add user', new_user_path %>
+<div class="container">
+  <ul>
+    <% @users.each do |user| %>
+    <li>
+      <h3>Name: <%= link_to user.name, user %></h3><br>
+      <p>Address: <%= user.address %></p>
+      <p>Radius: <%= user.area_of_influence %> miles</p>
+      <p>Skill: <%= user.skill %></p>
+      <p>Email: <%= user.email %></p>
+      <%= link_to '', user, class: "fas fa-eye" %> <%= link_to '', edit_user_path(user), class: "fas fa-edit" %> <%= link_to '', user, method: :delete, class: "fas fa-trash-alt", data: { confirm: 'Are you sure?' } %>
+    </li>
+    <% end %>
+  </ul>
+
+</div>
+
