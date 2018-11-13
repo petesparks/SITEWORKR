@@ -1,16 +1,21 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_user!, only: :index
+  skip_before_action :authenticate_user!, only: [:index, :search]
 
   def index
     @users = User.all
   end
 
   def show
+
   end
 
   def new
     @user = User.new
+  end
+
+  def search
+    @users = User.where("skill ILIKE '%#{params[:search]}%'")
   end
 
   def edit
@@ -43,7 +48,6 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    raise
     @user = User.find(params[:id])
   end
 

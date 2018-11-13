@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   root to: 'pages#home'
 
-  resources :users, only: [:index, :show, :create, :update, :destroy]
+  resources :users, only: [:index, :show, :create, :update, :destroy] do
+    collection do
+      get 'search', to: "users#search"
+    end
+  end
   resources :matches
   resources :jobs
 

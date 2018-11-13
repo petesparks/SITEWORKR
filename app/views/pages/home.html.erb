@@ -3,6 +3,9 @@
     <h1>Siteworkr</h1>
     <h3>Build a workforce or join a team</h3>
     <p>connect to local skilled siteworkrs</p>
-    <a class="btn btn-primary btn-lg">Start now</a>
-  </div>
+    <%= form_tag search_users_path, method: :get do %>
+      <%= text_field_tag :search, params[:search], placeholder: "what skill are you looking for", class: "form-control" %>
+    <% end %>
+<!--     <a class="btn btn-primary btn-lg">Start now</a>
+ -->  </div>
 </div>

@@ -1,3 +1,6 @@
+
+
+
 <h3>Name: <%= @user.name %></h3><br>
 <p>Address: <%= @user.address %></p>
 <p>Radius: <%= @user.area_of_influence %> miles</p>
@@ -5,5 +8,5 @@
 <p>Email: <%= @user.email %></p>
 
 
-<%= link_to '', edit_user_path(@user), class: "fas fa-edit" %>
+<%= link_to '', edit_user_registration_path(@user), class: "fas fa-edit" %>
 <%= link_to 'Back', users_path %>
