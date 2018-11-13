@@ -1,9 +1,47 @@
-<h3>Name: <%= @user.name %></h3><br>
-<p>Address: <%= @user.address %></p>
-<p>Radius: <%= @user.area_of_influence %> miles</p>
-<p>Skill: <%= @user.skill %></p>
-<p>Email: <%= @user.email %></p>
-
-
-<%= link_to '', edit_user_path(@user), class: "fas fa-edit" %>
-<%= link_to 'Back', users_path %>
+<div class="container">
+  <h3 style="text-align:right;"><%= @user.name %>'s profile</h3>
+  <div class="row mg-30">
+    <div class="col-sm-3">
+      <div class="user-card">
+        <%= image_tag 'https://www.uni-regensburg.de/Fakultaeten/phil_Fak_II/Psychologie/Psy_II/beautycheck/english/durchschnittsgesichter/m(01-32)_gr.jpg', class: "avatar-large" %>
+        <h3><%= @user.name %></h3><br>
+        <p><%= @user.address %></p>
+        <p>Skill: <%= @user.skill %></p>
+        <div class="btn btn-primary">Contact</div>
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <h5 class="profile-header">Short profile</h5>
+      <div class="about-card">
+        <p> It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum </p>
+      </div>
+        <h5 class="profile-header">Work History</h5>
+      <div class="experience">
+        <div class="experience-card">
+          <h6>Carpenter</h6>
+          <p>Job description lorem ipsum worked on an actual project where we did actual things relating to constructing real things. Not web applications. Like real life things.</p>
+        </div>
+        <div class="experience-card">
+          <h6>Handyman</h6>
+          <p>Short Spell as handyman</p>
+        </div>
+        <div class="experience-card">
+          <h6>Carpenter</h6>
+          <p>Job description lorem ipsum worked on an actual project where we did actual things relating to constructing real things. Not web applications. Like real life things.</p>
+        </div>
+        <div class="experience-card">
+          <h6>Handyman</h6>
+          <p>Short Spell as handyman</p>
+        </div>
+        <div class="experience-card">
+          <h6>Carpenter</h6>
+          <p>Job description lorem ipsum worked on an actual project where we did actual things relating to constructing real things. Not web applications. Like real life things.</p>
+        </div>
+        <div class="experience-card">
+          <h6>Handyman</h6>
+          <p>Short Spell as handyman</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

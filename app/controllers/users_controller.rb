@@ -43,7 +43,6 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    raise
     @user = User.find(params[:id])
   end
 
