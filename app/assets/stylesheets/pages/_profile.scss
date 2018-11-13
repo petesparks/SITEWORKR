@@ -1,0 +1,44 @@
+.user-card{
+  text-align: center;
+  padding: 20px;
+  background-color: white;
+  border: solid 1px;
+  border-color: #F4F4F4;
+  border-radius: 8px;
+}
+
+.about-card{
+  background-color: white;
+  border: solid 1px;
+  border-color: #F4F4F4;
+  border-radius: 8px;
+  padding: 20px;
+  p {
+    font-weight: lighter;
+  }
+}
+
+.experience {
+  background-color: white;
+  border: solid 1px;
+  border-color: #F4F4F4;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px 0px;
+}
+
+.experience-card h6 {
+  font-weight: bold;
+}
+
+.experience-card p {
+  font-weight: lighter;
+}
+
+.profile-header{
+  margin-left: 20px;
+}
+
+.mg-30{
+  margin-top: 30px;
+}
