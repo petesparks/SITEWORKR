@@ -6,9 +6,13 @@
     <li>
       <h3>Job: <%= link_to match.job.title, match %></h3><br>
       <p>Company: <%= match.job.user.name %></p>
-      <p>Rate: <%= match.job.rate %></p>
+      <% unless match.job.rate == nil %>
+        <p>Rate: <%= match.job.rate %></p>
+      <% end %>
       <p>Start: <%= match.job.start_date %></p>
-      <p>Duration: <%= match.job.duration %></p>
+      <% unless match.job.duration == nil %>
+        <p>Duration: <%= match.job.duration %></p>
+      <% end %>
       <p>Contractor: <%= match.user.name %></p>
 
       <%= link_to '', match, class: "fas fa-eye" %> <%= link_to '', edit_match_path(match), class: "fas fa-edit" %> <%= link_to '', match, method: :delete, class: "fas fa-trash-alt", data: { confirm: 'Are you sure?' } %>
