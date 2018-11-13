@@ -4,3 +4,6 @@
 <p>Start: <%= @match.job.start_date %></p>
 <p>Duration: <%= @match.job.duration %></p>
 <p>Contractor: <%= @match.user.name %></p>
+
+<%= link_to '', edit_match_path(@match), class: "fas fa-edit" %>
+<%= link_to 'Back', matches_path %>

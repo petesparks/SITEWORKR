@@ -3,3 +3,7 @@
 <p>Radius: <%= @user.area_of_influence %> miles</p>
 <p>Skill: <%= @user.skill %></p>
 <p>Email: <%= @user.email %></p>
+
+
+<%= link_to '', edit_user_path(@user), class: "fas fa-edit" %>
+<%= link_to 'Back', users_path %>
