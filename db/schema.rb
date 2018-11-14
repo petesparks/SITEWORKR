@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2018_11_12_151835) do
     t.string "title"
     t.string "location"
     t.date "start_date"
-    t.date "duration"
+    t.time "duration"
     t.integer "rate"
     t.string "skill"
     t.datetime "created_at", null: false
@@ -48,6 +48,10 @@ ActiveRecord::Schema.define(version: 2018_11_12_151835) do
     t.integer "area_of_influence"
     t.integer "rate"
     t.string "skill"
+    t.text "about_me"
+    t.string "certificates"
+    t.text "experience"
+    t.string "picture"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

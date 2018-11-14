@@ -6,8 +6,6 @@ class User < ApplicationRecord
 
   has_many :jobs, through: :matches
 
-  validates :name, presence: true
-  validates :address, presence: true
-  validates :area_of_influence, presence: true
-  validates :skill, presence: true
+  validates :name, presence: true, uniqueness: true
+
 end
