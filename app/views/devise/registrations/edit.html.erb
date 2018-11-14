@@ -10,17 +10,20 @@
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
     <% end %>
 
-    <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
-                required: false
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "current-password" } %>
+    <%= f.input :name %>
+    <%= f.input :address %>
+    <%= f.input :area_of_influence %>
+    <%= f.input :skill %>
+    <%= f.input :rate %>
+    <%= f.input :about_me %>
+    <%= f.input :certificates %>
+    <%= f.input :experience %>
+    <%= f.input :picture %>
+    <%= f.input :photo_cache, as: :hidden %><br>
+
+
+
+
   </div>
 
   <div class="form-actions">

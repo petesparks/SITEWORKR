@@ -18,6 +18,10 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.integer :area_of_influence
       t.integer :rate
       t.string :skill
+      t.text :about_me
+      t.string :certificates
+      t.text :experience
+      t.string :picture
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
       # t.datetime :current_sign_in_at

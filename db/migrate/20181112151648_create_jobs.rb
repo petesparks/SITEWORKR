@@ -5,7 +5,7 @@ class CreateJobs < ActiveRecord::Migration[5.2]
       t.string :title
       t.string :location
       t.date :start_date
-      t.date :duration
+      t.time :duration
       t.integer :rate
       t.string :skill
       t.timestamps
