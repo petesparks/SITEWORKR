@@ -9,7 +9,6 @@
         <%= cl_image_tag(user.photo, class: "avatar-medium") %>
         <div class="message-name">
           <h3><%= link_to user.name.capitalize, user %></h3>
-          <p>Experience: <%= user.experience %></p>
         </div>
         <div class="message-body">
           <p><strong><p class="fas fa-clipboard-check">Skills: <%= user.skill %></p></strong></p>

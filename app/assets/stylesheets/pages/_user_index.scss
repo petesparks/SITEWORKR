@@ -32,7 +32,7 @@ ul {
 }
 
 .message-body {
-  font-size: 16px;
+  font-size: 18px;
   padding-left: 10px;
   font-size: 13px;
   color: rgba(0,0,0,0.7);
@@ -44,10 +44,11 @@ ul {
   color: rgba(0,0,0,0.9);
 }
 .message-body p {
+  font-size: 18px;
   margin: 6px 0;
 }
 .message-status {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bold;
 }
 .status.accepted {
