@@ -6,6 +6,9 @@ class User < ApplicationRecord
 
   has_many :jobs, through: :matches
 
+  mount_uploader :photo, PhotoUploader
+
+
   validates :name, presence: true, uniqueness: true
 
 end
