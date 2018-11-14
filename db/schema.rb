@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2018_11_12_151835) do
     t.text "about_me"
     t.string "certificates"
     t.text "experience"
-    t.string "picture"
+    t.string "photo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
