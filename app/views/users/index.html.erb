@@ -1,38 +1,33 @@
-<h1><%= link_to "siteworkrs :#{@users.count}", users_path %></h1>
 
-<div class="container">
+<div class="container row">
+  <div class="index-left col-xs-12 col-md-8 ">
+  <h1><%= link_to "siteworkrs :#{@users.count}", users_path %></h1>
   <ul>
     <% @users.each do |user| %>
     <li>
-      <div class="message">
-        <!-- <img class="avatar-large" src="https://kitt.lewagon.com/placeholder/users/gabriel-dehan"> -->
-        <%= cl_image_tag(user.photo, class: "avatar-large") %>
+      <div class="message user-card">
+
+        <%= cl_image_tag(user.photo, class: "avatar-medium") %>
         <div class="message-name">
           <h3><%= link_to user.name.capitalize, user %></h3>
-          <p><%= user.experience %></p>
+          <p>Experience: <%= user.experience %></p>
         </div>
         <div class="message-body">
-          <p><strong><p class="fas fa-clipboard-check"><%= user.skill %></p></strong></p>
-          <p>
-            <%= user.certificates %>
-          </p>
+          <p><strong><p class="fas fa-clipboard-check">Skills: <%= user.skill %></p></strong></p>
+          <p>Certificates: <%= user.certificates %></p>
         </div>
         <div class="message-status">
           <!-- <p class="status pending">Pending</p> -->
-          <p class="price"><%= user.rate %></p>
+          <p class="price">£<%= user.rate %> per day</p>
         </div>
       </div>
 
     </li>
     <% end %>
   </ul>
+  </div>
+  <div class="index-right col-xs-12 col-md-4">
 
+  </div>
 </div>
 
-
-<!-- <h3><%= link_to user.name.capitalize, user %></h3><br>
-      <p class="fas fa-location-arrow"><%= user.address %></p><br>
-      <p class="fas fa-street-view"><%= user.area_of_influence %> miles</p><br>
-      <p class="fas fa-clipboard-check"><%= user.skill %></p><br>
-      <p class="far fa-envelope"><%= user.email %></p><br>
-      <%= link_to '', user, class: "fas fa-eye" %> <%= link_to '', edit_user_registration_path(user), class: "fas fa-edit" %> <%= link_to '', user, method: :delete, class: "fas fa-trash-alt", data: { confirm: 'Are you sure?' } %> -->
