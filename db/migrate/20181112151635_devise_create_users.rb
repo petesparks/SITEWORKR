@@ -21,7 +21,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.text :about_me
       t.string :certificates
       t.text :experience
-      t.string :picture
+      t.string :photo
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
       # t.datetime :current_sign_in_at
