@@ -1,16 +1,15 @@
-// Specific CSS for your home-page
 .body {
   margin: none;
   min-height: 100vh;
 }
 
+
 .search {
   display: flex;
-  flex: 1 1 auto;
-  margin: none;
+  margin: 0 auto;
   align-items: center;
   height: 40px;
-
+  color: black;
 }
 
 .search1 {
@@ -26,7 +25,12 @@
   padding: 5px;
   border-radius: 1px;
   border:none;
-  margin: -4px;
+  height: 40px;
+}
+.search3 {
+  padding: 5px;
+  border-radius: 1px;
+  border:none;
   height: 40px;
 }
 
@@ -37,4 +41,5 @@
   border:none;
   padding: 0px 20px;
   border-radius: 1px;
+  color:white;
 }
