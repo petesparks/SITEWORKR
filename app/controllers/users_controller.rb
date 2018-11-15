@@ -23,7 +23,8 @@ class UsersController < ApplicationController
   end
 
   def search
-    @users = User.where("skill ILIKE '%#{params[:search]}%'")
+
+    @users = User.where("skill ILIKE ? AND address ILIKE ?", "%#{params[:search]}%", "%#{params[:search2]}%")
     @finds = @users.where.not(latitude: nil, longitude: nil)
 
     @markers = @finds.map do |find|
@@ -32,7 +33,6 @@ class UsersController < ApplicationController
         lat: find.latitude
       }
     end
-
   end
 
   def edit

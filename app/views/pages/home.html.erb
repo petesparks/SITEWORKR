@@ -3,8 +3,15 @@
     <h1>Siteworkr</h1>
     <h3>Build a workforce or join a team</h3>
     <p>connect to local skilled siteworkrs</p>
-    <%= form_tag search_users_path, method: :get do %>
-      <%= text_field_tag :search, params[:search], placeholder: "what skill are you looking for", class: "form-control" %>
+    <div class="search">
+      <%= form_tag search_users_path, method: :get do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Skills you are looking for", class: "search1" %>
+      <%= text_field_tag :search2, params[:search2], placeholder: "Location", class: "search2" %>
+      <%= button_tag :submit, class: "search-btn" do %>
+        <%= "Search" %>
+      <% end %>
+    </div>
+
     <% end %>
 <!--     <a class="btn btn-primary btn-lg">Start now</a>
  -->  </div>
