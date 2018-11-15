@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   def search
-    @users = User.where("skill ILIKE '%#{params[:search]}%'")
+    @users = User.where("skill ILIKE ? AND address ILIKE ?", "%#{params[:search]}%", "%#{params[:search2]}%")
   end
 
   def edit
