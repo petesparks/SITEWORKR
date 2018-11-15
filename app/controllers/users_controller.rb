@@ -4,6 +4,14 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @finds = @users.where.not(latitude: nil, longitude: nil)
+
+    @markers = @finds.map do |find|
+      {
+        lng: find.longitude,
+        lat: find.latitude
+      }
+    end
   end
 
   def show
@@ -16,6 +24,15 @@ class UsersController < ApplicationController
 
   def search
     @users = User.where("skill ILIKE '%#{params[:search]}%'")
+    @finds = @users.where.not(latitude: nil, longitude: nil)
+
+    @markers = @finds.map do |find|
+      {
+        lng: find.longitude,
+        lat: find.latitude
+      }
+    end
+
   end
 
   def edit

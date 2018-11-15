@@ -2,7 +2,9 @@
   "name": "SITEWORKR",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "3.5"
+    "@rails/webpacker": "3.5",
+    "dotenv": "^6.1.0",
+    "mapbox-gl": "^0.51.0"
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"
