@@ -1,30 +1,38 @@
-<%= simple_form_for(@job) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-  <% if @job.errors.any? %>
-    <div class="errors-container">
-      <ul>
-        <% @job.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+<div style="min-height: calc(100vh - 110px);width:100%;background: linear-gradient( rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8) ), url('<%= image_path('construction.jpg')%>');background-position:center;background-size: cover;">
+  <div class="container-fluid" >
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-4 construction">
+          <%= simple_form_for(@job) do |f| %>
+          <%= f.error_notification %>
+          <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+          <% if @job.errors.any? %>
+            <div class="errors-container">
+              <ul>
+                <% @job.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="form-inputs">
+
+            <%= f.input :title %><br>
+            <%= f.input :location %><br>
+            <%= f.input :skill %><br>
+            <%= f.input :rate %><br>
+            <%= f.input :start_date %><br>
+            <%= f.input :duration %><br>
+          </div>
+
+          <div class="form-actions">
+            <%= f.button :submit %>
+          </div>
         <% end %>
-      </ul>
+      </div>
     </div>
-  <% end %>
-
-  <div class="form-inputs">
-
-    <%= f.input :title %><br>
-    <%= f.input :location %><br>
-    <%= f.input :skill %><br>
-    <%= f.input :rate %><br>
-    <%= f.input :start_date %><br>
-    <%= f.input :duration %><br>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+</div>
 
 
 <!-- TAKE IT AS A PLACEHOLDER -->
