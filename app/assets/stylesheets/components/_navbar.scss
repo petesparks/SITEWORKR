@@ -13,6 +13,10 @@
   align-items: center;
   justify-content: space-between;
   margin: 0px 0px;
+  position: absolute;
+  z-index: 3;
+  position: sticky !important;
+  top: 0 !important;
 
 }
 

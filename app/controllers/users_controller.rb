@@ -9,7 +9,8 @@ class UsersController < ApplicationController
     @markers = @finds.map do |find|
       {
         lng: find.longitude,
-        lat: find.latitude
+        lat: find.latitude,
+        infoWindow: { content: render_to_string(partial: "/users/map_window", locals: { find: find }) }
       }
     end
   end
@@ -30,7 +31,9 @@ class UsersController < ApplicationController
     @markers = @finds.map do |find|
       {
         lng: find.longitude,
-        lat: find.latitude
+        lat: find.latitude,
+        infoWindow: { content: render_to_string(partial: "/users/map_window", locals: { find: find }) }
+
       }
     end
   end
