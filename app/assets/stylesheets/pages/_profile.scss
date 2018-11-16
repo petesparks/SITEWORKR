@@ -1,16 +1,17 @@
 .user-card{
   text-align: center;
+  margin-top: 12px;
   padding: 20px;
   background-color: white;
-  border: solid 1px;
-  border-color: #F4F4F4;
   border-radius: 8px;
+  border: 1px solid rgba(230,126,34,0.2);
+  box-shadow: 2px 2px 2px rgba(230,126,34,0.1);
 }
 
 .about-card{
   background-color: white;
   border: solid 1px;
-  border-color: #F4F4F4;
+  border-color: rgba(230,126,34,0.2);
   border-radius: 8px;
   padding: 20px;
   p {
@@ -21,7 +22,7 @@
 .experience {
   background-color: white;
   border: solid 1px;
-  border-color: #F4F4F4;
+  border-color: rgba(230,126,34,0.2);
   border-radius: 8px;
   padding: 20px;
   margin: 10px 0px;

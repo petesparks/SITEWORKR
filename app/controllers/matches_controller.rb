@@ -27,7 +27,7 @@ class MatchesController < ApplicationController
 
     if @match.valid?
       @match.save
-      redirect_to match_path(@match)
+      redirect_to root_path
     else
       render :new
     end
@@ -39,8 +39,7 @@ class MatchesController < ApplicationController
 
   def update
     if @match.update(match_params)
-      redirect_to match_path(@match)
-    else
+      redirect_to root_path
       render :edit
     end
   end
