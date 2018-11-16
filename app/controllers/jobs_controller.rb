@@ -22,7 +22,7 @@ class JobsController < ApplicationController
     @job.user = current_user
     if @job.valid?
       @job.save
-      redirect_to job_path(@job)
+      redirect_to root_path
     else
       render :new
     end

@@ -9,7 +9,7 @@
         <p>Skill: <%= @user.skill %></p>
         <p>Certificates: <%= @user.certificates %></p>
         <p>Rate: £<%= @user.rate %> per day</p>
-        <%= link_to 'Contact', matches_path, class: "btn btn-primary"  %>
+        <%= link_to 'Contact', matches_path, class: "btn btn-primary"  %> <br><br>
         <% if @user == current_user %>
          <%= link_to 'Create a Job', new_job_path, class: "btn btn-primary" %>
         <% else %>
