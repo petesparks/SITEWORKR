@@ -2,7 +2,9 @@ class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
 
   def index
-    @jobs = Job.all
+    @jobs = []
+    Job.all.each { |job| @jobs << job if job.user == current_user}
+    @jobs
   end
 
   def show
@@ -17,7 +19,7 @@ class JobsController < ApplicationController
 
   def create
     @job = Job.new(job_params)
-
+    @job.user = current_user
     if @job.valid?
       @job.save
       redirect_to job_path(@job)

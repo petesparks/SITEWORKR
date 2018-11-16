@@ -1,25 +1,30 @@
-<h1><%= link_to "matches(#{@matches.count})", matches_path %></h1>
-<%= link_to 'Add match', new_match_path %>
-<div class="container">
+<div class="container row">
+  <div class="index-left col-xs-12 col-md-8 col-md-offset-2">
+  <h1><%= link_to "Matches :#{@matches.count}", matches_path %></h1>
+  <%= link_to 'Add match', new_match_path %>
   <ul>
     <% @matches.each do |match| %>
     <li>
-      <h3>Job: <%= link_to match.job.title, match %></h3><br>
-      <p>Company: <%= match.job.user.name %></p>
-      <% unless match.job.rate == nil %>
-        <p>Rate: <%= match.job.rate %></p>
-      <% end %>
-      <p>Start: <%= match.job.start_date %></p>
-      <% unless match.job.duration == nil %>
-        <p>Duration: <%= match.job.duration %></p>
-      <% end %>
-      <p>Contractor: <%= match.user.name %></p>
+      <div class="message user-card">
 
-      <%= link_to '', match, class: "fas fa-eye" %> <%= link_to '', edit_match_path(match), class: "fas fa-edit" %> <%= link_to '', match, method: :delete, class: "fas fa-trash-alt", data: { confirm: 'Are you sure?' } %>
+        <%= cl_image_tag(match.job.user.photo, class: "avatar-medium") %>
+        <div class="message-name">
+          <h3><%= link_to match.job.title.capitalize, match %></h3>
+        </div>
+        <div class="message-body">
+          <p><strong><p class="fas fa-clipboard-check">Company: <%= match.job.user.name %></p></strong></p>
+          <p>Start Date: <%= match.job.start_date %></p>
+        </div>
+        <div class="message-status">
+          <!-- <p class="status pending">Pending</p> -->
+          <p class="price">£<%= match.job.rate %> per day</p>
+        </div>
+      </div>
+
     </li>
     <% end %>
   </ul>
-
+  </div>
 </div>
-
+<%= javascript_pack_tag "map" %>
 
