@@ -1,9 +1,23 @@
-<h3>Job: <%= @match.job.title %></h3><br>
-<p>Company: <%= @match.job.user.name %></p>
-<p>Rate: <%= @match.job.rate %></p>
-<p>Start: <%= @match.job.start_date %></p>
-<p>Duration: <%= @match.job.duration %></p>
-<p>Contractor: <%= @match.user.name %></p>
+<div class="container">
+  <h3 style="text-align:right;"><%= @match.job.user.name %>'s messages  <%= link_to 'Back to Matches', matches_path , class: "btn btn-primary" %></h3>
+  <div class="row mg-30">
+    <div class="col-sm-3">
+      <div class="user-card">
+        <%= cl_image_tag @match.job.user.photo, class: "avatar-large" %>
+        <h3><%= @match.job.user.name %></h3><br>
+        <p><%= @match.job.location %></p>
+        <p>Job Rate: £<%= @match.job.rate %> per day</p>
+      </div>
+    </div>
+    <div class="col-sm-9">
 
-<%= link_to '', edit_match_path(@match), class: "fas fa-edit" %>
-<%= link_to 'Back', matches_path %>
+
+
+
+
+
+
+
+    </div>
+  </div>
+</div>

@@ -1,14 +1,19 @@
 class MatchesController < ApplicationController
-  before_action :set_match, only: [:show, :edit, :update, :destroy]
+  before_action :set_match, only: [:show, :edit, :update, :destroy, :new_message]
 
   def index
-    @matches = Match.all
+    @matches = []
+    Match.all.each { |match| @matches << match if match.job.user.id == current_user.id}
+    @matches
   end
 
   def show
   end
 
   def new
+    @user = User.find(params[:user])
+    @jobs = []
+    Job.all.each { |job| @jobs << job if job.user == current_user}
     @match = Match.new
   end
 
@@ -16,7 +21,9 @@ class MatchesController < ApplicationController
   end
 
   def create
-    @match = Match.new(match_params)
+    set_user
+    set_job
+    @match = Match.new(user: @user, job: @job)
 
     if @match.valid?
       @match.save
@@ -24,6 +31,10 @@ class MatchesController < ApplicationController
     else
       render :new
     end
+  end
+
+  def new_message
+    @match.messages << params[:new_message]
   end
 
   def update
@@ -46,5 +57,12 @@ class MatchesController < ApplicationController
 
   def match_params
     params.require(:match).permit(:user, :job)
+  end
+
+  def set_user
+    @user = User.find(params[:match][:user])
+  end
+  def set_job
+    @job = Job.find(params[:match][:job])
   end
 end
