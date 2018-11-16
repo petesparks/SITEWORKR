@@ -1,4 +1,4 @@
-<div style="min-height: calc(100vh - 110px);width:100%;background: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3) ), url('<%= image_path('construction.jpg')%>');background-position:center;">
+<div style="min-height: calc(100vh - 110px);width:100%;background: linear-gradient( rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8)), url('<%= image_path('construction.jpg')%>');background-position:center;background-size: cover;">
   <div class="container-fluid" >
     <div class="row">
       <div class="col-sm-4 col-sm-offset-4 construction">
@@ -16,7 +16,7 @@
           </div>
 
           <div class="form-actions">
-            <%= f.button :submit, "Log in" %>
+            <%= f.button :submit, "Log in",class: "btn btn-primary" %>
           </div>
         <% end %>
 
