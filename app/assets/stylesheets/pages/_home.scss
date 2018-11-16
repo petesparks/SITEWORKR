@@ -5,41 +5,26 @@
 
 
 .search {
-  display: flex;
   margin: 0 auto;
-  align-items: center;
-  height: 40px;
   color: black;
 }
 
 .search1 {
-  margin:none;
-  border-radius: 1px;
+  border-radius: 4px;
   padding: 5px;
-  margin: none;
+  margin-bottom:15px;
   border: none;
   height: 40px;
-}
+  width: 100%;
 
-.search2 {
-  padding: 5px;
-  border-radius: 1px;
-  border:none;
-  height: 40px;
 }
-.search3 {
-  padding: 5px;
-  border-radius: 1px;
-  border:none;
-  height: 40px;
+svg{
+  padding-bottom: 10px;
 }
 
 .search-btn {
-  margin:none;
-  height: 40px;
   background-color: $orange;
-  border:none;
-  padding: 0px 20px;
-  border-radius: 1px;
+  border-radius: 4px;
   color:white;
 }
+
