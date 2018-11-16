@@ -4,6 +4,22 @@ import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 const mapElement = document.getElementById('map');
 
 const addressInput = document.getElementById('search2');
+const addressInput2 = document.getElementById('user_address');
+const addressInput3 = document.getElementById('job_location');
+
+if (addressInput3) {
+  const places = require('places.js');
+  const placesAutocomplete = places({
+    container: addressInput3
+  });
+}
+
+if (addressInput2) {
+  const places = require('places.js');
+  const placesAutocomplete = places({
+    container: addressInput2
+  });
+}
 
 if (addressInput) {
   const places = require('places.js');
