@@ -23,8 +23,11 @@ if (mapElement) { // only build a map if there's a div#map to inject into
   const markers = JSON.parse(mapElement.dataset.markers);
 
   markers.forEach((marker) => {
+    console.log(marker)
     new mapboxgl.Marker()
       .setLngLat([marker.lng, marker.lat])
+      .setPopup(new mapboxgl.Popup({ offset: 0 }) // add popups
+      .setHTML(marker.infoWindow.content))
       .addTo(map);
   })
   if (mapElement) {
@@ -40,7 +43,7 @@ if (mapElement) { // only build a map if there's a div#map to inject into
       markers.forEach((marker) => {
         bounds.extend([marker.lng, marker.lat]);
       });
-      map.fitBounds(bounds, { duration: 0, padding: 75 })
+      map.fitBounds(bounds, { duration: 1000, padding: 75 })
     }
   }
 }
