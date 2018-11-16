@@ -13,7 +13,7 @@
       <!-- Profile picture with dropdown list -->
       <div>
         <div class="dropdown">
-          <img src="<%= current_user.photo %>"" class="avatar">
+          <img src="<%= current_user.photo %>" class="avatar">
           <div class="dropdown-content dropdown-menu-right">
             <%= link_to 'Edit Profile', edit_user_registration_path %> <br>
             <%= link_to 'Log out', destroy_user_session_path, method: :delete %>

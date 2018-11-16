@@ -1,6 +1,5 @@
 <div class="map-window"><br>
-  <p><%= find.name.capitalize %></p>
+  <p><%= link_to find.name.capitalize, user_path(find) %></p>
   <img class="avatar-s" src="<%= find.photo %>"  alt="">
   <p>£<%= find.rate %>pd</p>
-
 </div>
