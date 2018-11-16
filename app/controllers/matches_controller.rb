@@ -56,7 +56,7 @@ class MatchesController < ApplicationController
   end
 
   def match_params
-    params.require(:match).permit(:user, :jobs)
+    params.require(:match).permit(:user, :job)
   end
 
   def set_user
