@@ -69,7 +69,8 @@ ul {
 
 // map css and styling
 .index-right {
-  height: calc(100vh - 80px);
+  margin: none;
+  height: calc(100vh - 110px)!important;
   position: sticky !important;
-  top: 70px !important;
+  top: 60px !important;
 }
