@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_16_105700) do
+ActiveRecord::Schema.define(version: 2018_11_19_143459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,11 +20,13 @@ ActiveRecord::Schema.define(version: 2018_11_16_105700) do
     t.string "title"
     t.string "location"
     t.date "start_date"
-    t.time "duration"
     t.integer "rate"
     t.string "skill"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "end_date"
+    t.boolean "valid?", default: false
+    t.boolean "company?", default: false
     t.index ["user_id"], name: "index_jobs_on_user_id"
   end
 
@@ -33,7 +35,8 @@ ActiveRecord::Schema.define(version: 2018_11_16_105700) do
     t.bigint "job_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "messages", default: [], array: true
+    t.bigint "conversation_id"
+    t.index ["conversation_id"], name: "index_matches_on_conversation_id"
     t.index ["job_id"], name: "index_matches_on_job_id"
     t.index ["user_id"], name: "index_matches_on_user_id"
   end
