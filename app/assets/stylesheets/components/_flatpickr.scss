@@ -1,0 +1,21 @@
+.hide-input {
+      display: none !important;
+    }
+
+span.flatpickr-weekday {
+  color: #FF7F11 !important;
+}
+
+.flatpickr-months .flatpickr-month {
+color: #FF7F11 !important;
+}
+
+.flatpickr-day.disabled {
+cursor: not-allowed !important;
+color: #FF7F11 !important;
+background-color: #ffcda24a !important;
+}
+
+.flatpickr-day.prevMonthDay, .flatpickr-day.nextMonthDay {
+color: rgba(64, 72, 72, .1) !important;
+}

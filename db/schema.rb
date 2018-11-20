@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2018_11_19_143459) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "end_date"
-    t.boolean "valid?", default: false
+    t.boolean "public?", default: false
     t.boolean "company?", default: false
     t.index ["user_id"], name: "index_jobs_on_user_id"
   end
