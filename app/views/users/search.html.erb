@@ -2,6 +2,9 @@
   <div class="index-left col-xs-12 col-md-8 ">
   <h1><%= link_to "#{params[:search].capitalize}s (#{@users.count})", users_path %></h1>
   <ul>
+  <% if @users.count == 0 %>
+    <%= "Your search has not found any siteworkrs, please try again" %>
+  <% end %>
     <% @users.each do |user| %>
     <li>
       <div class="message user-card">

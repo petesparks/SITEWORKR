@@ -33,17 +33,22 @@ class UsersController < ApplicationController
     @users = []
     search = Geocoder.search(params[:search2])
 
-    @users_by_skill = User.where("skill ILIKE ?", "%#{params[:search]}%")
+    users_by_skill = User.where("skill ILIKE ?", "%#{params[:search]}%")
 
-    @users_by_skill.each do |user|
-      address = Geocoder.search(user.address)
-      @users << user if Geocoder::Calculations.distance_between([search[0].latitude, search[0].longitude], [address[0].latitude, address[0].longitude]) <= user.area_of_influence
+    if search == []
+      @users = users_by_skill
+    else
+      @users_by_skill.each do |user|
+        address = Geocoder.search(user.address)
+        @users << user if Geocoder::Calculations.distance_between([search[0].latitude, search[0].longitude], [address[0].latitude, address[0].longitude]) <= user.area_of_influence
+      end
     end
 
-
     @finds = @users.reject do |user|
-      address = Geocoder.search(user.address)
-      address[0].latitude.nil? || address[0].longitude.nil?
+      if user.address != nil
+        address = Geocoder.search(user.address)
+        address[0].latitude.nil? || address[0].longitude.nil?
+      end
     end
 
     @markers = @finds.map do |find|
@@ -72,6 +77,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
+      raise
       redirect_to user_path(@user)
     else
       render :edit
@@ -90,7 +96,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :address, :area_of_influence, :skill, :rate, :email, :password, :about_me, :certificates, :experience, :photo)
+    params.require(:user).permit(:name, :address, :area_of_influence, :skill, :rate, :email, :password, :about_me, :certificates, :experience, :photo, :company)
   end
 
 end

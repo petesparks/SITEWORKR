@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :jobs, through: :matches
   has_many :matches
 
+
   mount_uploader :photo, PhotoUploader
 
 

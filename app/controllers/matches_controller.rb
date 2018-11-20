@@ -24,18 +24,18 @@ class MatchesController < ApplicationController
     set_user
     set_job
     @match = Match.new(user: @user, job: @job)
-
     if @match.valid?
       @match.save
-      redirect_to root_path
+      # Message.new(user: current_user, match: @match, body: "This is the start of your conversation")
+      redirect_to match_path(@match)
     else
       render :new
     end
   end
 
-  def new_message
-    @match.messages << params[:new_message]
-  end
+  # def new_message
+  #   @match.messages << params[:new_message]
+  # end
 
   def update
     if @match.update(match_params)

@@ -1,0 +1,43 @@
+.messages-list {
+  overflow: scroll;
+  height: 70vh;
+}
+
+.messages {
+  display: flex;
+  flex: 1 0 500px
+}
+.your_message {
+  max-width: 80%;
+  padding: 5px;
+  background-color: $orange;
+  border-radius: 8px 8px 0px 8px;
+  margin: 5px;
+  justify-content: flex-end;
+}
+.other_message {
+  max-width: 500px;
+  padding: 5px;
+  background-color: grey;
+  border-radius: 8px 8px 8px 0px;
+  margin: 5px;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
