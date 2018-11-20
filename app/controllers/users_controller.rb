@@ -16,7 +16,13 @@ class UsersController < ApplicationController
   end
 
   def show
-
+    matches = @user.matches
+    @booked_dates = matches.map do |match|
+      {
+        from: match.job.start_date,
+        to: match.job.end_date
+      }
+    end
   end
 
   def new

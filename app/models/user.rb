@@ -5,7 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :jobs, through: :matches
-  has_many :conversations
+  has_many :matches
+
 
   mount_uploader :photo, PhotoUploader
 
