@@ -1,6 +1,13 @@
 .messages-list {
   overflow: scroll;
   height: 70vh;
+  background-color: white;
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid rgba(230,126,34,0.2);
+  box-shadow: 2px 2px 2px rgba(230,126,34,0.1);
+  margin: 10px 0px;
 }
 
 .messages {
@@ -23,6 +30,12 @@
   margin: 5px;
 }
 
+.field {
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid rgba(230,126,34,0.2);
+  box-shadow: 2px 2px 2px rgba(230,126,34,0.1)
+}
 ::-webkit-scrollbar {
     width: 5px;
 }
