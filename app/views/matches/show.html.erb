@@ -3,20 +3,66 @@
   <div class="row mg-30">
     <div class="col-sm-3">
       <div class="user-card">
-        <%= cl_image_tag @match.job.user.photo, class: "avatar-large" %>
-        <h3><%= @match.job.user.name %></h3><br>
-        <p><%= @match.job.location %></p>
-        <p>Job Rate: £<%= @match.job.rate %> per day</p>
+        <% if current_user == @match.user %>
+          <%= cl_image_tag @match.job.user.photo, class: "avatar-large" %>
+          <h3><%= @match.job.user.name %></h3><br>
+          <p><%= @match.job.user.address %></p>
+          <p>Skill: <%= @match.user.skill %></p>
+          <p>Certificates: <%= @match.user.certificates %></p>
+          <p>User Rate: £<%= @match.user.rate %> per day</p>
+        <% else %>
+          <%= cl_image_tag @match.user.photo, class: "avatar-large" %>
+          <h3><%= @match.user.name %></h3><br>
+          <p><%= @match.job.location %></p>
+          <p> User rate: £<%= @match.user.rate %> per day</p>
+        <% end %>
       </div>
+      <div class="user-card">
+          <h3><%= @match.job.title %></h3><br>
+          <p><%= @match.job.location %></p>
+          <p>Job Rate: £<%= @match.job.rate %> per day</p>
+          <p>Skill: <%= @match.job.skill %></p>
+          <p>Start date: <%= @match.job.start_date %></p>
+          <p>End date<%= @match.job.end_date %></p>
+
+      </div>
+
     </div>
     <div class="col-sm-9">
+      <div class="messages-list">
+        <% @match.messages[-10..-1].each do |message| %>
+          <% if message.body %>
+            <% user = User.find(message.user_id) %>
+            <div class="messages">
+              <% if user == current_user %>
+                <div class="your_message">
+              <% else %>
+                <div class="other_message">
+              <% end %>
+                <div class="header"><strong><%= user.name %></strong> <%= message.created_at %></div>
+                <div class="list">
+                  <div class="item">
+                    <i class="right triangle icon"></i>
+                    <%= message.body %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
 
+      <%= form_for [@match, Message.new], html: {class: "ui reply form"} do |f| %>
+        <div class="field">
+          <%= f.text_area :body, class: "form-control" %>
+        </div>
+          <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
+        <div>
+          <%= f.submit "Add Reply", class: "btn btn-primary" %>
+        </div>
 
-
-
-
-
-
+      <% end %>
+      <%= javascript_pack_tag "messages" %>
 
     </div>
   </div>
