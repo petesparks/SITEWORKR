@@ -10,31 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_19_151345) do
-
+ActiveRecord::Schema.define(version: 2018_11_19_160002) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "conversations", force: :cascade do |t|
-    t.integer "sender_id"
-    t.integer "recipient_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "jobs", force: :cascade do |t|
     t.bigint "user_id"
     t.string "title"
     t.string "location"
     t.date "start_date"
+    t.date "end_date"
     t.integer "rate"
     t.string "skill"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "end_date"
-    t.boolean "valid?", default: false
-    t.boolean "company?", default: false
+    t.boolean "public", default: false
+    t.boolean "finished?", default: false
     t.index ["user_id"], name: "index_jobs_on_user_id"
   end
 
@@ -43,20 +35,18 @@ ActiveRecord::Schema.define(version: 2018_11_19_151345) do
     t.bigint "job_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "conversation_id"
-    t.index ["conversation_id"], name: "index_matches_on_conversation_id"
     t.index ["job_id"], name: "index_matches_on_job_id"
     t.index ["user_id"], name: "index_matches_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
     t.text "body"
-    t.bigint "conversation_id"
+    t.bigint "match_id"
     t.bigint "user_id"
     t.boolean "read", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["match_id"], name: "index_messages_on_match_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
@@ -71,10 +61,15 @@ ActiveRecord::Schema.define(version: 2018_11_19_151345) do
     t.integer "area_of_influence"
     t.integer "rate"
     t.string "skill"
+    t.text "about_me"
+    t.string "certificates"
+    t.text "experience"
+    t.string "photo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "latitude"
     t.float "longitude"
+    t.boolean "company", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

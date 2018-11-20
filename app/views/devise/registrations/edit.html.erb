@@ -14,6 +14,9 @@
               <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
             <% end %>
 
+            <%= "Are you a looking to hire?" %>
+            <%= f.input :company, as: :boolean, checked_value: true, unchecked_value: false  %>
+
             <%= f.input :address %>
             <%= f.input :area_of_influence %>
             <%= f.input :skill %>
