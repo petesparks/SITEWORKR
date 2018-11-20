@@ -10,13 +10,20 @@
           <p>Skill: <%= @match.user.skill %></p>
           <p>Certificates: <%= @match.user.certificates %></p>
           <p>User Rate: £<%= @match.user.rate %> per day</p>
+          <% if @match.job.title == "Query" %>
+            <%= link_to 'Hire', new_match_path(user: @match.job.user), class: "btn btn-primary" %>
+          <% end %>
         <% else %>
           <%= cl_image_tag @match.user.photo, class: "avatar-large" %>
           <h3><%= @match.user.name %></h3><br>
           <p><%= @match.job.location %></p>
           <p> User rate: £<%= @match.user.rate %> per day</p>
+          <% if @match.job.title == "Query" %>
+            <%= link_to 'Hire', new_match_path(user: @match.user), class: "btn btn-primary" %>
+          <% end %>
         <% end %>
       </div>
+      <% unless @match.job.title == "Query" %>
       <div class="user-card">
           <h3><%= @match.job.title %></h3><br>
           <p><%= @match.job.location %></p>
@@ -26,11 +33,12 @@
           <p>End date<%= @match.job.end_date %></p>
 
       </div>
+      <% end %>
 
     </div>
     <div class="col-sm-9">
       <div class="messages-list">
-        <% @match.messages[-10..-1].each do |message| %>
+        <% @match.messages.each do |message| %>
           <% if message.body %>
             <% user = User.find(message.user_id) %>
             <div class="messages">
@@ -58,7 +66,7 @@
         </div>
           <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
         <div>
-          <%= f.submit "Add Reply", class: "btn btn-primary" %>
+          <%= f.submit "Send", class: "btn btn-primary" %>
         </div>
 
       <% end %>

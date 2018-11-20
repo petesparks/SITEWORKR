@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_user!, only: [:index, :search]
+  skip_before_action :authenticate_user!, only: [:index, :search, :show]
 
   def index
     @users = User.all
@@ -25,9 +25,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def new
-    @user = User.new
-  end
+  # def new
+  #   @user = User.new
+  # end
 
   def search
     @users = []
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     if search == []
       @users = users_by_skill
     else
-      @users_by_skill.each do |user|
+      users_by_skill.each do |user|
         address = Geocoder.search(user.address)
         @users << user if Geocoder::Calculations.distance_between([search[0].latitude, search[0].longitude], [address[0].latitude, address[0].longitude]) <= user.area_of_influence
       end
@@ -64,25 +64,24 @@ class UsersController < ApplicationController
   def edit
   end
 
-  def create
-    @user = User.new(user_params)
+  # def create
+  #   @user = User.new(user_params)
 
-    if @user.valid?
-      @user.save
-      redirect_to user_path(@user)
-    else
-      render :new
-    end
-  end
+  #   if @user.valid?
+  #     @user.save
+  #     redirect_to user_path(@user)
+  #   else
+  #     render :new
+  #   end
+  # end
 
-  def update
-    if @user.update(user_params)
-      raise
-      redirect_to user_path(@user)
-    else
-      render :edit
-    end
-  end
+  # def update
+  #   if @user.update(user_params)
+  #     redirect_to user_path(@user)
+  #   else
+  #     render :edit
+  #   end
+  # end
 
   def destroy
     @user.destroy

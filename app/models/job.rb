@@ -1,9 +1,7 @@
 class Job < ApplicationRecord
   belongs_to :user
   has_many :matches
-  validates :title, presence: true
   validates :location, presence: true
-  validates :start_date, presence: true
   validates :skill, presence: true
 
 end
