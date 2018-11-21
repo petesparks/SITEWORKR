@@ -19,28 +19,27 @@
     </div>
     <div class="col-sm-4">
       <div class="form-wrapper" style="width: 300px; margin: 0 auto;">
-      <h3><%= @user.name.capitalize %>'s Availability</h3>
-      <%= simple_form_for :search, method: "get" do |f| %>
-        <%= f.input :starts_at, as: :string, label: false, required: false, input_html: {id: "start_date", class: "hide-input"} %>
-        <%= f.input :ends_at, as: :string, label: false, required: false, input_html: {id: "end_date", class: "hide-input"} %>
-        <%= f.button :submit, "Go", class: "btn btn-primary" %>
-      <% end %>
-    </div>
-  </div>
-    <div class="col-sm-5">
-      <h5 class="profile-header">About me</h5>
-      <div class="about-card">
-        <p><%= @user.about_me %></p>
+        <h3><%= @user.name.capitalize %>'s Availability</h3>
+        <%= simple_form_for :search, method: "get" do |f| %>
+          <%= f.input :starts_at, as: :string, label: false, required: false, input_html: {id: "start_date", class: "hide-input"} %>
+          <%= f.input :ends_at, as: :string, label: false, required: false, input_html: {id: "end_date", class: "hide-input"} %>
+          <%= f.button :submit, "Go", class: "btn btn-primary" %>
+        <% end %>
       </div>
     </div>
-  <div class="container">
-    <div class="col-sm-9">
-      <h5 class="profile-header">Work History</h5>
-        <div class="experience">
-          <div class="experience-card">
-            <p><%= @user.experience %></p>
-          </div>
-        </div>
+  </div>
+  <div class="col-sm-5">
+    <h5 class="profile-header">About me</h5>
+    <div class="about-card">
+      <p><%= @user.about_me %></p>
+    </div>
+  </div>
+  <div class="col-sm-9">
+    <h5 class="profile-header">Work History</h5>
+    <div class="experience">
+      <div class="experience-card">
+        <p><%= @user.experience %></p>
+      </div>
     </div>
   </div>
 </div>
