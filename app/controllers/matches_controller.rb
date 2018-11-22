@@ -9,7 +9,7 @@ class MatchesController < ApplicationController
 
   def show
     @match = Match.find(params[:id])
-    @review = Review.new
+    @reviews = Review.where(match: @match)
   end
 
   def new
