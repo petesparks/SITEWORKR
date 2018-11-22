@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
   resources :matches do
     resources :messages
+    resources :reviews, only: [ :new, :create ]
   end
   resources :jobs do
       collection do

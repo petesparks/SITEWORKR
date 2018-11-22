@@ -8,6 +8,8 @@ class MatchesController < ApplicationController
   end
 
   def show
+    @match = Match.find(params[:id])
+    @reviews = Review.where(match: @match)
   end
 
   def new
