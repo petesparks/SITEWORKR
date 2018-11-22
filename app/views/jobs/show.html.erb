@@ -1,9 +1,10 @@
 <h3><%= @job.title %></h3><br>
 <p>Location: <%= @job.location %></p>
+<p>User: <%= @job.user.name %></p>
 <p>Skill: <%= @job.skill %></p>
 <p>Rate: £<%= @job.rate %>per day</p>
 <p>Start date:<%= @job.start_date %></p>
-<p>Duration: <%= @job.duration %></p>
+<p>Duration: <%= @job.end_date %></p>
 
 <%= link_to '', edit_job_path(@job), class: "fas fa-edit" %>
 <%= link_to 'Back', jobs_path %>

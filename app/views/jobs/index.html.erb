@@ -7,7 +7,7 @@
     <li>
       <div class="message user-card">
 
-        <%= cl_image_tag(job.user.photo, class: "avatar-medium") %>
+        <%= cl_image_tag(job.user.photo.url, class: "avatar-medium") %>
         <div class="message-name">
           <h3><%= link_to job.title.capitalize, job %></h3>
           <o><%= link_to job.location, job %></p>

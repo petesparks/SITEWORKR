@@ -7,6 +7,25 @@ class Job < ApplicationRecord
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
 
+
+
+
+
+  def self.index_for_company(person)
+    jobs_company = []
+    Job.all.each { |job| jobs_company << job if (job.user_id == person.id) && job.title != 'Query' }
+    jobs_company
+  end
+
+  def self.index_for_contractor(person)
+    jobs_contractor = []
+    Job.all.each do |job|
+      if job.title != "Query"
+        job.matches.each { |match| jobs_contractor << job if match.user_id == person.id}
+      end
+    end
+    jobs_contractor
+  end
 end
 
 

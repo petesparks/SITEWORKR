@@ -2,9 +2,7 @@ class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
 
   def index
-    @jobs = []
-    Job.all.each { |job| @jobs << job if job.user == current_user}
-    @jobs
+    Job.all
   end
 
   def search
