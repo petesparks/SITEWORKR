@@ -1,8 +1,11 @@
 class Job < ApplicationRecord
   belongs_to :user
-  has_many :matches
+  has_many :matches, dependent: :destroy
   validates :location, presence: true
   validates :skill, presence: true
+
+  geocoded_by :location
+  after_validation :geocode, if: :will_save_change_to_location?
 
 end
 
