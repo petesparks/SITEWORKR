@@ -41,7 +41,7 @@ class UsersController < ApplicationController
         address = Geocoder.search(user.address)
         unless address == []
           user.area_of_influence = 3 if user.area_of_influence.nil?
-          @users << user if Geocoder::Calculations.distance_between([search[0].latitude, search[0].longitude], [address[0].latitude, address[0].longitude]) <= user.area_of_influence
+          @users << user if Geocoder::Calculations.distance_between([search[0].latitude, search[0].longitude], [address[0].latitude, address[0].longitude]) <= user.area_of_influence && !user.company
         end
       end
     end
