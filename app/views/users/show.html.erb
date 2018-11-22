@@ -3,7 +3,13 @@
   <div class="row mg-30">
     <div class="col-sm-3">
       <div class="user-card" data-dates="<%= @booked_dates.to_json %>">
-        <%= cl_image_tag @user.photo, class: "avatar-large" %>
+        <% if @user == current_user %>
+        <a class="avatar-large" data-toggle="modal" data-target="#pictureModal">
+          <img src="<%= @user.photo %>" alt="avatar" class="avatar-large">
+        </a>
+        <% else %>
+          <img src="<%= @user.photo %>" alt="avatar" class="avatar-large">
+        <% end %>
         <h3><%= @user.name %></h3><br>
         <p><%= @user.address %>
         <% if @user == current_user %>
@@ -48,7 +54,6 @@
   </div>
 </div>
 
-
 <!-- address Modal -->
 <div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -56,27 +61,40 @@
       <div class="modal-body">
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
           <%= f.error_notification %>
-
           <div class="form-inputs">
-
             <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
               <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
             <% end %>
-
             <%= f.input :address %>
-
-            <%= f.input :current_password,
-                        hint: "we need your current password to confirm your changes",
-                        required: true,
-                        input_html: { autocomplete: "current-password" } %>
-
           <div class="form-actions">
             <%= f.button :submit, "Change",class: "btn btn-primary" %>
           </div>
         <% end %>
-
-        <%= render "devise/shared/links" %>
       </div>
     </div>
   </div>
+</div>
+</div>
+
+<!-- picture Modal -->
+<div class="modal fade" id="pictureModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= f.error_notification %>
+          <div class="form-inputs">
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+            <% end %>
+            <%= f.input :photo %>
+            <%= f.input :photo_cache, as: :hidden %>
+          <div class="form-actions">
+            <%= f.button :submit, "Change",class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
