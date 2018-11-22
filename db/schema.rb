@@ -52,6 +52,17 @@ ActiveRecord::Schema.define(version: 2018_11_21_180549) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.text "content"
+    t.integer "rating"
+    t.bigint "match_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["match_id"], name: "index_reviews_on_match_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -78,4 +89,6 @@ ActiveRecord::Schema.define(version: 2018_11_21_180549) do
 
   add_foreign_key "matches", "jobs"
   add_foreign_key "matches", "users"
+  add_foreign_key "reviews", "matches"
+  add_foreign_key "reviews", "users"
 end

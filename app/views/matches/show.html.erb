@@ -1,5 +1,6 @@
 <div class="container">
   <h3 style="text-align:right;"><%= @match.job.user.name %>'s messages  <%= link_to 'Back to Matches', matches_path , class: "btn btn-primary" %></h3>
+
   <div class="row mg-30">
     <div class="col-sm-3">
       <div class="user-card">
@@ -9,6 +10,7 @@
           <p><%= @match.job.user.address %></p>
           <p>Skill: <%= @match.user.skill %></p>
           <p>Certificates: <%= @match.user.certificates %></p>
+          <p>Reviews: <%= @reviews.count %></p>
           <p>User Rate: £<%= @match.user.rate %> per day</p>
           <% if @match.job.title == "Query" %>
             <%= link_to 'Hire', new_match_path(user: @match.job.user), class: "btn btn-primary" %>
@@ -17,12 +19,23 @@
           <%= cl_image_tag @match.user.photo, class: "avatar-large" %>
           <h3><%= @match.user.name %></h3><br>
           <p><%= @match.job.location %></p>
+          <!-- added reviews in matches -->
+          <p>Reviews: <%= @reviews.count %></p>
+          <% @reviews.each do |review|%>
+          <p><%= review.content %></p>
+          <% end %>
           <p> User rate: £<%= @match.user.rate %> per day</p>
           <% if @match.job.title == "Query" %>
             <%= link_to 'Hire', new_match_path(user: @match.user), class: "btn btn-primary" %>
           <% end %>
         <% end %>
       </div>
+        <% if current_user == @match.user %>
+        <% @reviewed_user = @match.job.user %>
+        <% else %>
+        <% @reviewed_user = @match.user %>
+        <% end %>
+        <%= link_to 'Add a Review', new_match_review_path(@match), class: "btn btn-primary" %>
       <% unless @match.job.title == "Query" %>
       <div class="user-card">
           <h3><%= @match.job.title %></h3><br>
