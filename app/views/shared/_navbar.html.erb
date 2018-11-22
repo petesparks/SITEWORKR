@@ -26,8 +26,8 @@
   <% else  %>
 
     <div class="navbar-right hidden-xs hidden-sm">
-     <%= link_to 'Log in', new_user_session_path, class: "btn btn-primary" %>
-     <%= link_to 'Sign up', new_user_registration_path, class: "btn btn-primary" %>
+     <a class="btn btn-primary" data-toggle="modal" data-target="#signUpModal">Sign Up</a>
+     <a class="btn btn-primary" data-toggle="modal" data-target="#logInModal">Log in</span></a>
     </div>
 
   <% end %>
@@ -47,6 +47,74 @@
         <% end %>
       </div>
 
+    </div>
+  </div>
+</div>
+
+
+<!-- signUp Modal -->
+<div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+          <div class="form-inputs">
+
+          <%= f.input :name,
+              required: true,
+              input_html: { autocomplete: "name" }%>
+
+          <%= f.input :email,
+              required: true,
+              autofocus: true ,
+              input_html: { autocomplete: "email" }%>
+
+          <%= f.input :password,
+              required: true,
+              hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+              input_html: { autocomplete: "new-password" } %>
+
+          <%= f.input :password_confirmation,
+              required: true,
+              input_html: { autocomplete: "new-password" } %>
+            <%= "Are you a looking to hire?" %>
+            <%= f.input :company, as: :boolean, checked_value: true, unchecked_value: false  %>
+          </div>
+
+          <div class="form-actions">
+            <%= f.button :submit, "Sign up",class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- logIn Modal -->
+<div class="modal fade" id="logInModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
+          <div class="form-inputs">
+            <%= f.input :email,
+                        required: false,
+                        autofocus: true,
+                        input_html: { autocomplete: "email" } %>
+            <%= f.input :password,
+                        required: false,
+                        input_html: { autocomplete: "current-password" } %>
+            <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+          </div>
+
+          <div class="form-actions">
+            <%= f.button :submit, "Log in",class: "btn btn-primary" %>
+          </div>
+        <% end %>
+
+        <%= render "devise/shared/links" %>
+      </div>
     </div>
   </div>
 </div>
