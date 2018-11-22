@@ -34,21 +34,21 @@ class UsersController < ApplicationController
     search = Geocoder.search(params[:search2])
 
     users_by_skill = User.where("skill ILIKE ?", "%#{params[:search]}%")
-
     if search == []
       @users = users_by_skill
     else
       users_by_skill.each do |user|
         address = Geocoder.search(user.address)
-        @users << user if Geocoder::Calculations.distance_between([search[0].latitude, search[0].longitude], [address[0].latitude, address[0].longitude]) <= user.area_of_influence
+        unless address == []
+          user.area_of_influence = 3 if user.area_of_influence.nil?
+          @users << user if Geocoder::Calculations.distance_between([search[0].latitude, search[0].longitude], [address[0].latitude, address[0].longitude]) <= user.area_of_influence
+        end
       end
     end
 
     @finds = @users.reject do |user|
-      if user.address != nil
         address = Geocoder.search(user.address)
         address[0].latitude.nil? || address[0].longitude.nil?
-      end
     end
 
     @markers = @finds.map do |find|

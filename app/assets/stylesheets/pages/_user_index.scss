@@ -67,6 +67,12 @@ ul {
   width: 90vw;
 }
 
+.head-index {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
 // map css and styling
 .index-right {
   margin: none;

@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   resources :matches do
     resources :messages
   end
-  resources :jobs
+  resources :jobs do
+      collection do
+      get 'search', to: "jobs#search"
+    end
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

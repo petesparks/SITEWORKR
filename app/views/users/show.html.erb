@@ -9,11 +9,12 @@
         <p>Skill: <%= @user.skill %></p>
         <p>Certificates: <%= @user.certificates %></p>
         <p>Rate: £<%= @user.rate %> per day</p>
-        <%= link_to 'Contact', matches_path, class: "btn btn-primary"  %> <br><br>
-        <% if @user == current_user %>
+        <% if @user == current_user && @user.company %>
          <%= link_to 'Create a Job', new_job_path, class: "btn btn-primary" %>
+        <% elsif @user == current_user && !(@user.company)%>
+         <%= link_to 'Find a Job', search_jobs_path, class: "btn btn-primary" %>
         <% else %>
-         <%= link_to 'Hire', new_match_path(user: @user), class: "btn btn-primary" %>
+         <%= link_to 'Connect', new_match_path(user: @user), class: "btn btn-primary" %>
         <% end  %>
       </div>
     </div>

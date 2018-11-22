@@ -1,7 +1,9 @@
 <div class="container row">
   <div class="index-left col-xs-12 col-md-8 ">
-  <h1><%= link_to "#{params[:search].capitalize}s (#{@users.count})", users_path %></h1>
-  <ul>
+  <div class="head-index">
+     <h1>Your search results: (<%= @users.count %>)</h1>
+     <h4><%= link_to "See all siteworks", users_path %></h4>
+  </div>
   <% if @users.count == 0 %>
     <%= "Your search has not found any siteworkrs, please try again" %>
   <% end %>
