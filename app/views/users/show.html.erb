@@ -5,7 +5,10 @@
       <div class="user-card" data-dates="<%= @booked_dates.to_json %>">
         <%= cl_image_tag @user.photo, class: "avatar-large" %>
         <h3><%= @user.name %></h3><br>
-        <p><%= @user.address %> <a class="fas fa-edit" data-toggle="modal" data-target="#addressModal"></a></p>
+        <p><%= @user.address %>
+        <% if @user == current_user %>
+          <a class="fas fa-edit" data-toggle="modal" data-target="#addressModal"></a></p>
+        <% end %>
         <p>Skill: <%= @user.skill %></p>
         <p>Certificates: <%= @user.certificates %></p>
         <p>Rate: £<%= @user.rate %> per day</p>
