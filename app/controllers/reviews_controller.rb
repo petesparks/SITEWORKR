@@ -15,8 +15,8 @@ class ReviewsController < ApplicationController
     else
       render :new
     end
-
   end
+
 
   private
 
