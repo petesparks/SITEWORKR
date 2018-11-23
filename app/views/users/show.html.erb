@@ -64,15 +64,16 @@
         <% jobs_company = Job.index_for_company(@user) %>
         <% jobs_contractor = Job.index_for_contractor(@user) %>
         <% jobs_contractor.each do |job| %>
-          <div class="job-card">
+          <div class="message user-card">
               <%= cl_image_tag(job.user.photo.url, class: "avatar-medium") %>
-            <div class="message-name">
-              <h3><%= link_to job.title.capitalize, job %></h3>
-              <o><%= link_to job.location, job %></p>
+            <div clas, class: "fas fa-trash-alt", class: "fas fa-trash-alt"s="message-name">
+              <h3><%= link_to job.title.capitalize, job.user %></h3>
+              <% location = job.location.split(",") %>
+              <h3><%= location[0] + ", " + location[1] %></h3>
             </div>
             <div class="message-body">
-              <p><strong><p class="fas fa-clipboard-check"> <%= job.user.name %></p></strong></p>
-              <p>Start Date: <%= job.start_date %></p>
+              <h3><%= link_to job.user.name.capitalize, job.user %></h3>
+              <h3>Start Date: <%= job.start_date %></h3>
             </div>
             <div class="message-status">
 
@@ -83,7 +84,7 @@
           </div>
           <% jobs_company.each do |job| %>
             <% job.matches.each do |match| %>
-           <div class="job-card">
+           <div class="message user-card">
 
               <%= cl_image_tag(match.user.photo.url, class: "avatar-medium") %>
             <div class="message-name">
@@ -99,9 +100,9 @@
             </div>
 
             </div>
+</div>
             <% end %>
           <% end %>
-
         </div>
       </div>
 

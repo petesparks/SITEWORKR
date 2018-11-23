@@ -25,6 +25,7 @@ class UsersController < ApplicationController
     end
   end
 
+
   # def new
   #   @user = User.new
   # end
@@ -47,8 +48,10 @@ class UsersController < ApplicationController
     end
 
     @finds = @users.reject do |user|
-        address = Geocoder.search(user.address)
+      address = Geocoder.search(user.address)
+      unless address == []
         address[0].latitude.nil? || address[0].longitude.nil?
+      end
     end
 
     @markers = @finds.map do |find|

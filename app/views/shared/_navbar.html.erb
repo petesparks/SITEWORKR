@@ -1,3 +1,4 @@
+<% count = Match.my_unread_count(current_user) if user_signed_in?  %>
 <div class="navbar">
   <!-- Logo -->
   <div class="navbar-left">
@@ -8,8 +9,8 @@
   <% if user_signed_in?  %>
   <!-- Right Navigation -->
     <div class="navbar-right hidden-xs hidden-sm">
-      <%= link_to 'Matches', matches_path, class: "navbar-link" %>
-      <%= link_to 'Your Profile', user_path(current_user), class: "navbar-link" %>
+      <%= link_to "Connections(#{count})", matches_path, class: "navbar-link" %>
+      <%= link_to 'Dashboard', user_path(current_user), class: "navbar-link" %>
 
       <!-- Profile picture with dropdown list -->
       <div>
