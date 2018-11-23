@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     end
   end
   resources :matches do
+    collection do
+      post "hire", to: "matches#hire"
+      post "accept", to: "matches#accept"
+    end
     resources :messages
     resources :reviews, only: [ :new, :create ]
   end

@@ -6,15 +6,16 @@
       <div class="user-card">
         <% if current_user == @match.user %>
           <%= cl_image_tag @match.job.user.photo.url, class: "avatar-large" %>
-          <h3><%= link_to "#{@match.job.user.name}", user_path(id: @match.job.user)%></h3>
+
+          <h3><%= link_to "#{@match.job.user.name}", user_path(@match.job.user)%></h3>
           <p><%= @match.job.user.address %></p>
           <p>Skill: <%= @match.user.skill %></p>
           <p>Certificates: <%= @match.user.certificates %></p>
           <p>Reviews: <%= @reviews.count %></p>
           <p>User Rate: £<%= @match.user.rate %> per day</p>
           <% if @match.job.title == "Query" %>
-            <%= link_to 'Hire', new_match_path(user: @match.job.user), class: "btn btn-primary btn-margin-btm" %><br>
-            <%= link_to "Leave review", new_match_review_path(@match), class: "btn btn-primary btn-margin-btm" %>
+
+            <%#= link_to "Leave review", new_match_review_path(@match), class: "btn btn-primary btn-margin-btm" %>
           <% end %>
         <% else %>
           <%= cl_image_tag @match.user.photo.url, class: "avatar-large" %>
@@ -26,19 +27,32 @@
           <p><%= review.content %></p>
           <% end %>
           <p> User rate: £<%= @match.user.rate %> per day</p>
-          <% if @match.job.title == "Query" %>
-            <%= link_to 'Hire', new_match_path(user: @match.user), class: "btn btn-primary" %>
+          <% if @match.job.title == "Query" && current_user.company %>
+            <%= link_to 'Add to a job', new_match_path(user: @match.user), class: "btn btn-primary" %>
           <% end %>
         <% end %>
       </div>
         <% if current_user == @match.user %>
-        <% @reviewed_user = @match.job.user %>
+          <% @reviewed_user = @match.job.user %>
         <% else %>
-        <% @reviewed_user = @match.user %>
+         <% @reviewed_user = @match.user %>
         <% end %>
 
-      <% unless @match.job.title == "Query" %>
+º      <% unless @match.job.title == "Query" %>
       <div class="user-card">
+          <% if @match.hired != true && current_user.company%>
+            <%= simple_form_for(@match, :url => hire_matches_path, method: :post) do |form| %>
+              <%= hidden_field_tag :match_id, @match.id %>
+              <%= form.button :submit, "Hire", class: "btn btn-primary"%>
+            <% end %>
+            <%# link_to "Hire", match_path(@match), class: "btn btn-primary" %>
+          <% elsif (@match.hired && @match.accepted == false) && current_user.company == false %>
+            <%= simple_form_for(@match, :url => accept_matches_path, method: :post) do |form| %>
+              <%= hidden_field_tag :match_id, @match.id %>
+              <%= form.button :submit, "Accept", class: "btn btn-primary"%>
+            <% end %>
+            <%# link_to "Accept Job", match_path(@match), method: :accept, class: "btn btn-primary" %>
+          <% end %>
           <h3><%= @match.job.title %></h3><br>
           <p><%= @match.job.location %></p>
           <p>Job Rate: £<%= @match.job.rate %> per day</p>
@@ -61,7 +75,7 @@
               <% else %>
                 <div class="other_message">
               <% end %>
-                <div class="header"><strong><%= user.name %></strong> <%= message.created_at %></div>
+                <div class="small-text"><%= user.name %> <%= message.created_at %></div>
                 <div class="list">
                   <div class="item">
                     <i class="right triangle icon"></i>
@@ -73,19 +87,21 @@
           <% end %>
         <% end %>
       </div>
-
+    <div class= "type-message">
       <%= form_for [@match, Message.new], html: {class: "ui reply form"} do |f| %>
         <div class="field">
           <%= f.text_area :body, class: "form-control" %>
         </div>
-          <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
+          <%= f.text_field :user_id, value: current_user.id, type: "hidden", class: "field-side"  %>
         <div>
-          <%= f.submit "Send", class: "btn btn-primary btn-margin-top" %>
+          <%= f.submit "Send", class: "btn btn-primary btn-side" %>
         </div>
 
       <% end %>
+    </div>
       <%= javascript_pack_tag "messages" %>
 
     </div>
   </div>
 </div>
+

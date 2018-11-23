@@ -13,6 +13,16 @@ class MatchesController < ApplicationController
     @match.messages.each { |message| message.update(read: true) if message.user_id != current_user.id}
   end
 
+  def accept
+    @match = Match.find(params["match_id"].to_i)
+    @match.update(accepted: true)
+  end
+
+  def hire
+    @match = Match.find(params["match_id"].to_i)
+    @match.update(hired: true)
+  end
+
   def new
     @user = User.find(params[:user])
     @jobs = []
@@ -58,7 +68,7 @@ class MatchesController < ApplicationController
   end
 
   def match_params
-    params.require(:match).permit(:user, :job)
+    params.require(:match).permit(:user, :job, :hired, :accepted)
   end
 
   def set_user
