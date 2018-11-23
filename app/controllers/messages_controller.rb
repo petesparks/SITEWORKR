@@ -26,6 +26,7 @@ class MessagesController < ApplicationController
     @message = @match.messages.new
   end
 
+
   def create
     @message = @match.messages.new(message_params)
     if @message.save
