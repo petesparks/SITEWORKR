@@ -10,6 +10,7 @@ class MatchesController < ApplicationController
   def show
     @match = Match.find(params[:id])
     @reviews = Review.where(match: @match)
+    @match.messages.each { |message| message.read = true if message.user != current_user}
   end
 
   def new
