@@ -98,7 +98,7 @@
           </div>
           <% jobs_company.each do |job| %>
             <% job.matches.each do |match| %>
-           <div class="message user-card">
+          <div class="message user-card">
 
               <%= cl_image_tag(match.user.photo.url, class: "avatar-medium") %>
             <div class="message-name">
@@ -112,12 +112,11 @@
             <div class="message-status">
 
             </div>
+          </div>
 
-            </div>
-            </div>
-            <% end %>
-          <% end %>
         </div>
+           <% end %>
+          <% end %>
       </div>
 
     </div>
