@@ -11,13 +11,25 @@
           <img src="<%= @user.photo %>" alt="avatar" class="avatar-large">
         <% end %>
         <h3><%= @user.name %></h3><br>
-        <p><%= @user.address %>
+        <p> Address: <%= @user.address %>
         <% if @user == current_user %>
           <a class="fas fa-edit" data-toggle="modal" data-target="#addressModal"></a></p>
         <% end %>
-        <p>Skill: <%= @user.skill %></p>
-        <p>Certificates: <%= @user.certificates %></p>
-        <p>Rate: £<%= @user.rate %> per day</p>
+        <p>Skill: <%= @user.skill %>
+          <% if @user == current_user %>
+          <a class="fas fa-edit" data-toggle="modal" data-target="#skillModal"></a>
+        </p>
+        <% end %>
+        <p>Certificates: <%= @user.certificates %>
+          <% if @user == current_user %>
+          <a class="fas fa-edit" data-toggle="modal" data-target="#certificatesModal"></a>
+        </p>
+        <% end %>
+        <p>Rate: £<%= @user.rate %> per day
+          <% if @user== current_user %>
+          <a class="fas fa-edit" data-toggle="modal" data-target="#rateModal"></a>
+        </p>
+        <% end %>
         <% if @user == current_user && @user.company %>
          <%= link_to 'Create a Job', new_job_path, class: "btn btn-primary" %>
         <% elsif @user == current_user && !(@user.company)%>
@@ -101,6 +113,7 @@
 
             </div>
           </div>
+
         </div>
            <% end %>
           <% end %>
@@ -149,6 +162,72 @@
             <% end %>
             <%= f.input :photo %>
             <%= f.input :photo_cache, as: :hidden %>
+          <div class="form-actions">
+            <%= f.button :submit, "Change",class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- skill Modal -->
+<div class="modal fade" id="skillModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= f.error_notification %>
+          <div class="form-inputs">
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+            <% end %>
+            <%= f.input :skill %>
+          <div class="form-actions">
+            <%= f.button :submit, "Change",class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- certificates Modal -->
+<div class="modal fade" id="certificatesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= f.error_notification %>
+          <div class="form-inputs">
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+            <% end %>
+            <%= f.input :certificates %>
+          <div class="form-actions">
+            <%= f.button :submit, "Change",class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- certificates Modal -->
+<div class="modal fade" id="rateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= f.error_notification %>
+          <div class="form-inputs">
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+            <% end %>
+            <%= f.input :rate %>
           <div class="form-actions">
             <%= f.button :submit, "Change",class: "btn btn-primary" %>
           </div>
