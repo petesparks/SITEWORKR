@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:3000/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">.algolia-places {
+  width: 100%;
+}
+
+.ap-input, .ap-hint {
+  width: 100%;
+  padding-right: 35px;
+  padding-left: 16px;
+  line-height: 40px;
+  height: 40px;
+  border: 1px solid #CCC;
+  border-radius: 3px;
+  outline: none;
+  font: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+}
+
+.ap-input::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+.ap-input::-ms-clear {
+  display: none;
+}
+
+.ap-input:hover ~ .ap-input-icon svg,
+.ap-input:focus ~ .ap-input-icon svg,
+.ap-input-icon:hover svg {
+  fill: #aaaaaa;
+}
+
+.ap-dropdown-menu {
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  margin-top: 3px;
+  overflow: hidden;
+}
+
+.ap-suggestion {
+  cursor: pointer;
+  height: 46px;
+  line-height: 46px;
+  padding-left: 18px;
+  overflow: hidden;
+}
+
+.ap-suggestion em {
+  font-weight: bold;
+  font-style: normal;
+}
+
+.ap-address {
+  font-size: smaller;
+  margin-left: 12px;
+  color: #aaaaaa;
+}
+
+.ap-suggestion-icon {
+  margin-right: 10px;
+  width: 14px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+.ap-suggestion-icon svg {
+  -webkit-transform: scale(0.9) translateY(2px);
+          transform: scale(0.9) translateY(2px);
+  fill: #cfcfcf;
+}
+
+.ap-input-icon {
+  border: 0;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 16px;
+  outline: none;
+}
+
+.ap-input-icon.ap-icon-pin {
+  cursor: initial;
+}
+
+.ap-input-icon svg {
+  fill: #cfcfcf;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.ap-cursor {
+  background: #efefef;
+}
+
+.ap-cursor .ap-suggestion-icon svg {
+  -webkit-transform: scale(1) translateY(2px);
+          transform: scale(1) translateY(2px);
+  fill: #aaaaaa;
+}
+
+.ap-footer {
+  opacity: .8;
+  text-align: right;
+  padding: .5em 1em .5em 0;
+  font-size: 12px;
+  line-height: 12px;
+}
+
+.ap-footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.ap-footer a svg {
+  vertical-align: text-bottom;
+  max-width: 60px;
+}
+
+.ap-footer:hover {
+  opacity: 1;
+}
+</style>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Siteworkr</title>
+    <meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="j119QXVhk1GVxLVRk01R+oH4jibK64cuSJnX7ETw5GN5tP6tGvDrARRGfGfVXHJf409oHqrVXwMiYVRREVpN0A==">
+    <meta name="action-cable-url" content="/cable">
+    <link rel="stylesheet" media="screen" href="./Siteworkr_files/map-e277a04c0d08d5bf68160bf3889960d0.css">
+    <link rel="stylesheet" media="all" href="./Siteworkr_files/application-36b45749105dc3c54e7390d3b087a386bbae50096b1c284edcde6806515c3be3.css">
+    <link rel="stylesheet" media="screen" href="./Siteworkr_files/application-f25428b5dc662788c2ec1e2cf9bfbd3d.css">
+  </head>
+  <body>
+    <div class="navbar">
+  <!-- Logo -->
+  <div class="navbar-left">
+    <a class="siteworkr-icon" href="http://localhost:3000/"><img src="./Siteworkr_files/logo-6bb1a66eea1f73d7dea38f2388ecaa1194b679569adceed40ced2a7b93de200d.png"></a>
+    <h2><a href="http://localhost:3000/">siteworkr</a></h2>
+  </div>
+
+
+    <div class="navbar-right hidden-xs hidden-sm">
+     <a class="btn btn-primary" data-toggle="modal" data-target="#signUpModal">Sign Up</a>
+     <a class="btn btn-primary" data-toggle="modal" data-target="#logInModal">Log in</a>
+    </div>
+
+
+   <div class="hidden-md hidden-lg">
+    <div class="dropdown">
+      <i class="fas fa-bars"></i>
+      <div class="dropdown-content dropdown-menu-right">
+         <a href="http://localhost:3000/users/sign_in">Log in</a> <br>
+         <a href="http://localhost:3000/users/sign_up">Sign up</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- signUp Modal -->
+<div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form class="simple_form new_user" id="new_user" novalidate="novalidate" action="http://localhost:3000/users" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="j119QXVhk1GVxLVRk01R+oH4jibK64cuSJnX7ETw5GN5tP6tGvDrARRGfGfVXHJf409oHqrVXwMiYVRREVpN0A==">
+          
+          <div class="form-inputs">
+
+          <div class="form-group string required user_name"><label class="form-control-label string required" for="user_name">Name <abbr title="required">*</abbr></label><input class="form-control string required" autocomplete="name" required="required" aria-required="true" type="text" name="user[name]" id="user_name"></div>
+
+          <div class="form-group email required user_email"><label class="form-control-label email required" for="user_email">Email <abbr title="required">*</abbr></label><input class="form-control string email required" autocomplete="email" autofocus="autofocus" required="required" aria-required="true" type="email" value="" name="user[email]" id="user_email"></div>
+
+          <div class="form-group password required user_password"><label class="form-control-label password required" for="user_password">Password <abbr title="required">*</abbr></label><input class="form-control password required" autocomplete="new-password" required="required" aria-required="true" type="password" name="user[password]" id="user_password"></div>
+
+          <div class="form-group password required user_password_confirmation"><label class="form-control-label password required" for="user_password_confirmation">Password confirmation <abbr title="required">*</abbr></label><input class="form-control password required" autocomplete="new-password" required="required" aria-required="true" type="password" name="user[password_confirmation]" id="user_password_confirmation"></div>
+            Are you a looking to hire?
+            <fieldset class="form-group boolean optional user_company"><div class="form-check"><input class="form-check-input boolean optional" type="checkbox" value="true" name="user[company]" id="user_company"><label class="form-check-label boolean optional" for="user_company">Company</label></div></fieldset>
+          </div>
+
+          <div class="form-actions">
+            <input type="submit" name="commit" value="Sign up" class="btn btn btn-primary" data-disable-with="Sign up">
+          </div>
+</form>      </div>
+    </div>
+  </div>
+</div>
+<!-- logIn Modal -->
+<div class="modal fade" id="logInModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form class="simple_form new_user" id="new_user" novalidate="novalidate" action="http://localhost:3000/users/sign_in" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="j119QXVhk1GVxLVRk01R+oH4jibK64cuSJnX7ETw5GN5tP6tGvDrARRGfGfVXHJf409oHqrVXwMiYVRREVpN0A==">
+        
+          <div class="form-inputs">
+            <div class="form-group email optional user_email"><label class="form-control-label email optional" for="user_email">Email</label><input class="form-control string email optional" autocomplete="email" autofocus="autofocus" type="email" value="" name="user[email]" id="user_email"></div>
+            <div class="form-group password optional user_password"><label class="form-control-label password optional" for="user_password">Password</label><input class="form-control password optional" autocomplete="current-password" type="password" name="user[password]" id="user_password"></div>
+            <fieldset class="form-group boolean optional user_remember_me"><div class="form-check"><input name="user[remember_me]" type="hidden" value="0"><input class="form-check-input boolean optional" type="checkbox" value="1" name="user[remember_me]" id="user_remember_me"><label class="form-check-label boolean optional" for="user_remember_me">Remember me</label></div></fieldset>
+          </div>
+
+          <div class="form-actions">
+            <input type="submit" name="commit" value="Log in" class="btn btn btn-primary" data-disable-with="Log in">
+          </div>
+</form>
+        
+
+  <a href="http://localhost:3000/users/password/new">Forgot your password?</a><br>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    <div style="min-height: calc(100vh - 110px)">
+      <div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.2) 0%, rgba(0,36,61,0.3) 50%), url(&#39;https://images.unsplash.com/photo-1534411830035-fdfa62a4613e?ixlib=rb-0.3.5&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;s=18e8802fc68a52aa4e3bce045d34c572&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80&#39;);">
+  <div class="banner-content">
+    <h1>Siteworkr</h1>
+    <h3>Build a workforce or join a team</h3>
+    <p>connect to local skilled siteworkrs</p>
+    <br>
+    <div class="search row">
+      <form action="http://localhost:3000/users/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+      <div class="col-xs-8 col-xs-offset-2 col-md-8 col-md-offset-2">
+      <input type="text" name="search" id="search" placeholder="Skillset" class="search1">
+      <span class="algolia-places" style="position: relative; display: inline-block; direction: ltr;"><input type="text" name="search2" id="search2" placeholder="Location" class="search1 ap-input" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="both" aria-expanded="false" aria-owns="algolia-places-listbox-0" dir="auto" style="position: relative; vertical-align: top;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: &quot;Open Sans&quot;, Helvetica, sans-serif; font-size: 18px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: normal; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><span class="ap-dropdown-menu" role="listbox" id="algolia-places-listbox-0" style="position: absolute; top: 100%; z-index: 100; display: none; left: 0px; right: auto;"><div class="ap-dataset-places"></div></span><button type="button" aria-label="clear" class="ap-input-icon ap-icon-clear" style="display: none;"><svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M.566 1.698L0 1.13 1.132 0l.565.566L6 4.868 10.302.566 10.868 0 12 1.132l-.566.565L7.132 6l4.302 4.3.566.568L10.868 12l-.565-.566L6 7.132l-4.3 4.302L1.13 12 0 10.868l.566-.565L4.868 6 .566 1.698z"></path></svg>
+</button><button type="button" aria-label="focus" class="ap-input-icon ap-icon-pin"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 20"><path d="M7 0C3.13 0 0 3.13 0 7c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5C5.62 9.5 4.5 8.38 4.5 7S5.62 4.5 7 4.5 9.5 5.62 9.5 7 8.38 9.5 7 9.5z"></path></svg>
+</button></span>
+      <button name="button" type="submit" class="search-btn search1">
+        Search
+      </button></div>
+    </form></div>
+  </div>
+</div>
+
+
+    </div>
+    <div class="footer">
+  <div class="footer-links">
+    <a href="http://localhost:3000/#"><i class="fab fa-github"></i></a>
+    <a href="http://localhost:3000/#"><i class="fab fa-instagram"></i></a>
+    <a href="http://localhost:3000/#"><i class="fab fa-facebook"></i></a>
+    <a href="http://localhost:3000/#"><i class="fab fa-twitter"></i></a>
+    <a href="http://localhost:3000/#"><i class="fab fa-linkedin"></i></a>
+  </div>
+  <div class="footer-copyright">
+    Siteworkr was <i class="fas fa-wrench"></i> at Le Wagon
+  </div>
+</div>
+
+    <script src="./Siteworkr_files/application-a6e9536b207fac5cce5bf00c0d1ae165b092623a15afa2c1615a7492d4441445.js"></script>
+    <script src="./Siteworkr_files/application-3a41af6e1f651afe5a56.js"></script>
+    <script src="./Siteworkr_files/map-290c5cbe92473a772443.js"></script>
+  
+
+</body></html>
