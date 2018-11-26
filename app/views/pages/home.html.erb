@@ -7,9 +7,9 @@
     <div class="search row">
       <%= form_tag search_users_path, method: :get do %>
       <div class="col-xs-8 col-xs-offset-2 col-md-8 col-md-offset-2">
-      <%= text_field_tag :search, params[:search], placeholder: "Skillset", class: "search1" %>
-      <%= text_field_tag :search2, params[:search2], placeholder: "Location", class: "search1" %>
-      <%= button_tag :submit, class: "search-btn search1" do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Skillset", class: "search1" %>
+        <%= text_field_tag :search2, params[:search2], placeholder: "Location", class: "search1" %>
+        <%= button_tag :submit, class: "search-btn search1" do %>
         <%= "Search" %>
       </div>
       <% end %>
@@ -17,5 +17,79 @@
     <% end %>
   </div>
 </div>
+<div class="container-fluid how-to-wrapper">
+  <div class="row">
+    <div class="col-xs-12">
+      <div>
+        <h2>How does Siteworkr work?</h2>
+        <p>Sitework is the easy way to find work near you. Or qualified worker near your site</p>
+      </div>
+    </div>
+  </div>
+  <div class="row how-it-works">
+    <div class="col-xs-12 col-sm-4">
+      <div class="how-it-item">
+        <%= image_tag("id-card.svg", class: "how-image")  %>
+        <div class="how-it-text">
+          <h4>Create a Profile</h4>
+          <p>Add all your details:</p>
+          <p>Skills, qualifications, location</p>
+          <p>& a profile picture</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <div class="how-it-item">
+        <%= image_tag("placeholder.svg", class: "how-image") %>
+        <div class="how-it-text">
+          <h4>Search & be Discovered</h4>
+          <p>Find local skilled workrs</p>
+          <p> Or</p>
+          <p>Find local jobs</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <div class="how-it-item">
+        <%= image_tag("like.svg", class: "how-image") %>
+        <div class="how-it-text">
+          <h4>Get matched</h4>
+          <p>Connect</p>
+          <p>start working</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row trusted-wrapper">
+    <div class="col-xs-12">
+      <div>
+        <h2>Trusted By</h2>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2 text-center pagination-centered">
+    <%= image_tag("skanska.jpeg", class: "trusted") %>
+    </div>
+    <div class="col-xs-2 text-center pagination-centered">
+    <%= image_tag("kier.jpeg", class: "trusted") %>
+    </div>
+    <div class="col-xs-2 text-center pagination-centered">
+      <%= image_tag("mitie.jpeg", class: "trusted") %>
+    </div>
+    <div class="col-xs-2 text-center pagination-centered">
+      <%= image_tag("wilmottdixon.jpeg", class: "trusted") %>
+    </div>
+    <div class="col-xs-2 text-center pagination-centered">
+      <%= image_tag("severfield.jpg", class: "trusted") %>
+    </div>
+    <div class="col-xs-2 text-center pagination-centered">
+      <%= image_tag("logo-vinci.png", class: "trusted") %>
+    </div>
+  </div>
+</div>
+
 
 <%#= date_field_tag :search3, params[:search3], placeholder: "Dates", class: "search1" %>
