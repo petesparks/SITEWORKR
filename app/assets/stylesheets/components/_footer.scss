@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50px;
+  height-min: 50px;
   padding: 0px 50px;
   color: rgba(0,0,0,0.3);
 }
@@ -21,6 +21,13 @@
 .footer-links a:hover {
   opacity: 1;
 }
-// .footer .fa-hammer {
-//   color: black;
-// }
+
+// responsive styling
+@media only screen and (max-width: 750px) {
+  .footer-copyright {
+    font-size: 12px;
+  }
+  .footer {
+    padding : 5px;
+  }
+}

@@ -5,6 +5,21 @@ class MatchesController < ApplicationController
     @matches = []
     Match.all.each { |match| @matches << match if match.job.user.id == current_user.id || match.user.id == current_user.id }
     @matches
+    @markers = @matches.map do |matche|
+      if matche.job.user.id == current_user.id
+      {
+        lng: matche.job.longitude,
+        lat: matche.job.latitude,
+        infoWindow: { content: render_to_string(partial: "/users/map_window", locals: { find: matche.user }) }
+      }
+      else
+        {
+        lng: matche.job.longitude,
+        lat: matche.job.latitude,
+        infoWindow: { content: render_to_string(partial: "/users/map_window", locals: { find: matche.job.user }) }
+      }
+      end
+    end
   end
 
   def show

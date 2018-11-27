@@ -6,7 +6,8 @@
     "dotenv": "^6.1.0",
     "flatpickr": "^4.5.2",
     "mapbox-gl": "^0.51.0",
-    "places.js": "^1.13.0"
+    "places.js": "^1.13.0",
+    "sweetalert": "^2.1.2"
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"
