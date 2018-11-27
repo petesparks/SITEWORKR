@@ -1,0 +1,13 @@
+<div class="messages">
+
+<div class="other_message">
+  <%= cl_image_tag message.user.photo.url, class: "avatar" %>
+  <div class="content">
+   <div class="small-text"><strong><%= message.user.name %></strong> <%= message.created_at.strftime(" %H:%M %d-%m-%Y") %></div>
+   <%= message.body %>
+  </div>
+</div>
+
+</div>
+
+

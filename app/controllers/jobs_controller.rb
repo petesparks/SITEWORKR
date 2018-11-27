@@ -36,6 +36,11 @@ class JobsController < ApplicationController
     end
   end
 
+  def finish
+    @job = Job.find(params[:job_id].to_i)
+    @job.update(finished?: true)
+  end
+
   def show
   end
 
@@ -59,7 +64,7 @@ class JobsController < ApplicationController
 
   def update
     if @job.update(job_params)
-      redirect_to job_path(@job)
+      # redirect_to job_path(@job)
     else
       render :edit
     end
