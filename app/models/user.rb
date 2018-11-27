@@ -16,4 +16,9 @@ class User < ApplicationRecord
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
 
+  def self.latest_not_companies
+    last_three = []
+    last_three << User.where(company: 'false')
+    return last_three[0].sample(3)
+  end
 end

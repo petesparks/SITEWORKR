@@ -61,6 +61,28 @@
     </div>
   </div>
 </div>
+<!-- Recently joined candidates -->
+<div class="container-fluid">
+  <div class="row header-wrapper">
+    <div class="col-xs-12">
+      <h2>Recently joined candidates</h2>
+    </div>
+  </div>
+  <div class="row user-wrapper">
+        <% User.latest_not_companies.each do |user| %>
+    <div class="col-xs-12 col-sm-4">
+      <!-- insert <div class="card"> -->
+      <div class="card-recently">
+        <img src="<%= user.photo.url %>" alt="avatar" class="avatar-large">
+        <h4><%= link_to user.name, user %></h4>
+        <p> <%= user.skill %></p>
+      </div>
+    </div>
+      <% end %>
+  </div>
+</div>
+
+<!-- Trusted By-->
 <div class="container-fluid">
   <div class="row trusted-wrapper">
     <div class="col-xs-12">
