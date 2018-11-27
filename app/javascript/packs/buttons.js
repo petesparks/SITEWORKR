@@ -13,3 +13,10 @@ if (accept) {
     accept.classList.add("button-none");
   });
 }
+
+const finish = document.getElementById("finish");
+if (finish) {
+  finish.addEventListener("click", (event) => {
+    finish.classList.add("button-none");
+  });
+}

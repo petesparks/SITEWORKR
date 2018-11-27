@@ -32,6 +32,9 @@
   width: 35px;
   border-radius: 50%;
 }
+.margin-added {
+  margin-left: 20px;
+}
 
 /* Right section */
 .navbar-right {
@@ -60,14 +63,24 @@
   color: #616668;
   font-size: 14px;
   cursor: pointer;
-  padding: 0 20px;
+  padding: 0px 0px 0px 20px;
 }
 .navbar-link:hover {
   color: #da552f;
   text-decoration: none;
 }
 
-
+.counter {
+  font-size: 12px;
+  background-color: $orange;
+  color: white;
+  text-align: center;
+  padding:2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin: 5px;
+}
 
 .dropdown {
     position: relative;

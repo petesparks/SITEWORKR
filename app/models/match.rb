@@ -3,18 +3,18 @@ class Match < ApplicationRecord
   belongs_to :job
 
   has_many :reviews, dependent: :destroy
-
-  # belongs_to :sender, :foreign_key => :sender_id, class_name: "User"
-  # belongs_to :recipient, :foreign_key => :recipient_id, class_name: "User"
-  # belongs_to :match
-
-
   has_many :messages, dependent: :destroy
 
   def self.my_matches(current_user)
     matches = []
     Match.all.each { |match| matches << match if match.job.user.id == current_user.id || match.user.id == current_user.id }
     matches
+  end
+
+  def self.new_offers(user)
+    count = 0
+    Match.my_matches(user).each { |match| count += 1 if match.hired && !match.accepted && !user.company }
+    count
   end
 
   def self.my_unread_count(current_user)
@@ -45,7 +45,17 @@ class Match < ApplicationRecord
     jobs = []
     matches.each { |match| jobs << match if match.job.title != "Query"}
     jobs
-
   end
 
+  def self.stars(user)
+    sum = 0
+    counter = 0
+    Match.my_matches(user).each do |match|
+      match.reviews.each do |review|
+        sum += review.rating
+        counter += 1
+      end
+    end
+    (sum * 2) / counter if sum != 0
+  end
 end

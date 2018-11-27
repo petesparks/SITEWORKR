@@ -14619,7 +14619,8 @@ readers do not read off random characters that represent icons */
 
 /* line 1, app/assets/stylesheets/components/_avatar.scss */
 .avatar {
-  width: 30px;
+  width: 35px;
+  height:35px;
   border-radius: 50%;
 }
 
@@ -14734,16 +14735,24 @@ span.flatpickr-weekday {
 
 /* line 17, app/assets/stylesheets/components/_messages.scss */
 .your_message {
+  display: flex;
   max-width: 80%;
   padding: 5px;
   background-color: #E67E22;
   border-radius: 8px 8px 0px 8px;
   margin: 5px;
   justify-content: flex-end;
+  position: relative;
+
+  .avatar {
+    position: absolute;
+    right:5px;
+  }
 }
 
 /* line 25, app/assets/stylesheets/components/_messages.scss */
 .other_message {
+  display: flex;
   max-width: 500px;
   padding: 5px;
   background-color: grey;

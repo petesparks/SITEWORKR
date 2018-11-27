@@ -40,6 +40,7 @@
     </div>
     <%= render 'shared/footer' %>
     <%= javascript_include_tag 'application' %>
+    <%= yield(:after_js) %>
     <%= javascript_pack_tag 'application' %>
     <%= javascript_pack_tag "map" %>
   </body>

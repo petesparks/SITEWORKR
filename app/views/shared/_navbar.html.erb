@@ -1,4 +1,5 @@
 <% count = Match.my_unread_count(current_user) if user_signed_in?  %>
+<% new_jobs = Match.new_offers(current_user) if user_signed_in?  %>
 <div class="navbar">
   <!-- Logo -->
   <div class="navbar-left">
@@ -9,13 +10,21 @@
   <% if user_signed_in?  %>
   <!-- Right Navigation -->
     <div class="navbar-right hidden-xs hidden-sm">
-      <%= link_to "Connections(#{count})", matches_path, class: "navbar-link" %>
+      <% if new_jobs != 0 %>
+        <%= link_to "Job offers", matches_path, class: "navbar-link" %>
+        <p class="counter"><%= new_jobs %></p>
+      <% end %>
+
+      <%= link_to "Connections", matches_path, class: "navbar-link" %>
+      <% if count != 0 %>
+       <p class="counter"><%= count %></p>
+      <% end %>
       <%= link_to 'Dashboard', user_path(current_user), class: "navbar-link" %>
 
       <!-- Profile picture with dropdown list -->
       <div>
         <div class="dropdown">
-          <%= cl_image_tag(current_user.photo.url, class: "avatar") %>
+          <%= cl_image_tag(current_user.photo.url, class: "avatar margin-added") %>
           <div class="dropdown-content dropdown-menu-right">
             <%= link_to 'Edit Profile', edit_user_registration_path %> <br>
             <%= link_to 'Log out', destroy_user_session_path, method: :delete %>

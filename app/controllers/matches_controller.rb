@@ -38,6 +38,11 @@ class MatchesController < ApplicationController
     @match.update(hired: true)
   end
 
+  def finish
+    @job = Job.find(params[:job_id].to_i)
+    @job.update(finished?: true)
+  end
+
   def new
     @user = User.find(params[:user])
     @jobs = []
