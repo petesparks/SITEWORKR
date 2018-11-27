@@ -1,5 +1,5 @@
 meta_product_name: "Siteworkr"
-meta_title: "Siteworkr - On demand recruitment solution connecting local skilled workers to construction companies"
-meta_description: "Enabling companies to find and instantly connect with local skilled workrs by search criteria and locality"
-meta_image: "logo.png"                       # should exist in `app/assets/images/`
+meta_title: "Siteworkr - Find a Workr"
+meta_description: "On demand recruitment solution connecting local skilled workers to construction companies"
+meta_image: "siteworkr-logo.png"                       # should exist in `app/assets/images/`
 twitter_account: "@siteworkr"
