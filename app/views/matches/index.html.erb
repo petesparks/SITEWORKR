@@ -47,7 +47,8 @@
 
                     <% count = Match.unread_count(match.messages, current_user) %>
                     <%= link_to "(#{count})New", match %><br>
-                    <%= link_to "messages", match, class: "sweet-alert-demo" %>
+                    <%= link_to "messages", match %>
+                    <!-- class: "sweet-alert-demo" -->
                     <%= link_to "", match_path(match), method: :delete, class: "fas fa-trash-alt" %>
                   </div>
                 </div>
