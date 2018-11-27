@@ -1,75 +1,99 @@
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Job Inbox</a></li>
+    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">General</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+
+
+</div>
+
 
 <div class="container">
-  <div class="index-left row">
-  <div class="col-xs-12 col-md-8">
-    <h2>Job Chats</h2>
-    <ul>
-      <% Match.not_queries(@matches).each do |match| %>
-      <li>
-        <div class="message user-card">
+  <div class="row">
+    <div class="col-sm-7">
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade in active" id="home">
+          <ul>
+            <% Match.not_queries(@matches).each do |match| %>
+              <li>
+                <div class="message user-card">
+                  <% if current_user == match.user %>
+                    <%= cl_image_tag(match.job.user.photo.url, class: "avatar-medium") %>
+                  <% else %>
+                    <%= cl_image_tag(match.user.photo.url, class: "avatar-medium") %>
+                  <% end %>
+                    <% if current_user == match.user %>
+                      <h3><%= link_to match.job.user.name.capitalize, match %></h3>
+                    <% else %>
+                      <h3><%= link_to match.user.name.capitalize, match %></h3>
+                    <% end %>
+                  <div class="message-name">
+                    <p><%= match.job.title %></p>
+                    <% location = match.job.location.split(",") %>
+                    <h6><%= link_to location[0] + ", " + location[1], match %></h6>
+                    <p><%= match.job.skill.capitalize %></p>
+                  </div>
+                  <div class="message-body">
 
-            <% if current_user == match.user %>
-              <%= cl_image_tag(match.job.user.photo.url, class: "avatar-medium") %>
-            <% else %>
-              <%= cl_image_tag(match.user.photo.url, class: "avatar-medium") %>
+                    <p>Start Date:</p><br>
+                    <p><%= match.job.start_date %></p>
+                    <p class="price">£<%= match.job.rate %> per day</p>
+                  </div>
+                  <div class="message-status">
+
+                    <% count = Match.unread_count(match.messages, current_user) %>
+                    <%= link_to "(#{count})New", match %><br>
+                    <%= link_to "messages", match, class: "sweet-alert-demo" %>
+                    <%= link_to "", match_path(match), method: :delete, class: "fas fa-trash-alt" %>
+                  </div>
+                </div>
+              </li>
             <% end %>
-
-          <div class="message-name">
-            <% if current_user == match.user %>
-              <h3><%= link_to match.job.user.name.capitalize, match %></h3>
-            <% else %>
-              <h3><%= link_to match.user.name.capitalize, match %></h3>
+          </ul>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="messages">
+          <ul>
+            <% Match.queries(@matches).each do |match| %>
+              <li>
+                <div class="col-xs-12 col-md-7">
+                  <div class="message user-card">
+                    <% if current_user == match.user %>
+                      <% query_user = match.job.user %>
+                    <% else %>
+                      <% query_user = match.user %>
+                    <% end %>
+                    <%= cl_image_tag(query_user.photo.url, class: "avatar-medium") %>
+                    <div class="message-name">
+                      <h3><%= link_to query_user.name.capitalize, match %></h3>
+                    </div>
+                    <div class="message-status">
+                      <% count = Match.unread_count(match.messages, current_user) %>
+                      <p><%= "(#{count})" %></p>
+                      <%= link_to "", match_path(match), method: :delete, class: "fas fa-trash-alt" %>
+                    </div>
+                  </div>
+                </div>
+              </li>
             <% end %>
-            <% location = match.job.location.split(",") %>
-            <h3><%= location[0] + ", " + location[1] %></h3>
-          </div>
-          <div class="message-body">
-            <p><%= match.job.title %></p>
-            <p><%= match.job.skill %></p>
-            <p>Start Date: <%= match.job.start_date %></p>
-          </div>
-          <div class="message-status">
-
-            <% count = Match.unread_count(match.messages, current_user) %>
-            <%= "(#{count})New messages" %>
-            <p class="price">£<%= match.job.rate %> per day</p>
-            <%= link_to "", match_path(match), method: :delete, class: "fas fa-trash-alt" %>
-          </div>
-
+          </ul>
         </div>
-
-      </li>
-    </ul>
-    <% end %>
-  </div>
-      <h2>Other Chats</h2>
-      <ul>
-      <% Match.queries(@matches).each do |match| %>
-      <li>
-    <div class="col-xs-12 col-md-4">
-        <div class="message user-card">
-          <% if current_user == match.user %>
-            <% query_user = match.job.user %>
-          <% else %>
-            <% query_user = match.user %>
-          <% end %>
-
-          <%= cl_image_tag(query_user.photo.url, class: "avatar-medium") %>
-          <div class="message-name">
-            <h3><%= link_to query_user.name.capitalize, match %></h3>
-          </div>
-          <div class="message-status">
-            <% count = Match.unread_count(match.messages, current_user) %>
-            <p><%= "(#{count})" %></p>
-            <%= link_to "", match_path(match), method: :delete, class: "fas fa-trash-alt" %>
-          </div>
-        </div>
-
-      </li>
-      <% end %>
-    </ul>
+      </div>
+    </div>
+    <div class="col-sm-5">
+      <div
+        id="map"
+        style="width: 100%; height: calc(100vh - 100px);"
+        data-markers="<%= @markers.to_json %>"
+      ></div>
+    </div>
   </div>
 </div>
+
 <%= javascript_pack_tag "map" %>
+<%= javascript_pack_tag "alert" %>
 
 

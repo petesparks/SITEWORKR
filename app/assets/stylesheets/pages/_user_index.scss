@@ -6,21 +6,34 @@ ul {
 .message {
   display: flex;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
   border-bottom: 1px solid rgba(220,224,244,0.4);
-  margin: 10px;
-  justify-content: space-between
+  margin: 0px;
+  margin-top: 20px;
+  justify-content: space-around;
+  h3 {
+  font-size: 18px;
+  margin-top: 14px;
+  }
 }
 .message:last-child {
   border-bottom: none;
 }
+
 .message-body {
-  flex-grow: 1;
+  flex-grow: 0;
 }
+
 .message-name {
   padding-left: 20px;
   min-width: 100px;
+  max-width: 200px;
   text-align: left;
+  h6 {
+    font-size: 14px;
+    margin-top: 5.5px;
+    margin-bottom: 1.5px;
+  }
 }
 .message-name h3 {
   font-size: 18px;
@@ -35,18 +48,19 @@ ul {
 .message-body {
   font-size: 18px;
   padding-left: 10px;
-  font-size: 13px;
+  font-size: 0px;
   color: rgba(0,0,0,0.7);
-  padding-left: 20px;
+  padding-left: 0px;
   color: rgba(0,0,0,0.4);
+  margin: 0px 0;
 }
 .message-body strong{
   color: rgba(0,0,0,0.9);
   color: rgba(0,0,0,0.9);
 }
 .message-body p {
-  font-size: 18px;
-  margin: 6px 0;
+  font-size: 14px;
+  margin: 0px 0;
 }
 .message-status {
   font-size: 14px;
@@ -65,7 +79,9 @@ ul {
 .container {
   position: relative;
   margin: 0px auto;
-  width: 90vw;
+  width: 95vw;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .head-index {
@@ -78,14 +94,28 @@ ul {
   font-size: 14px;
   margin: none;
 }
+
 p {
   margin: 0px 0px 0px 0px;
   vertical-align: text-bottom;
 }
+
+
 // map css and styling
 .index-right {
   margin: none;
   height: calc(100vh - 110px)!important;
   position: sticky !important;
   top: 60px !important;
+}
+
+// responsive styling
+@media only screen and (max-width: 750px) {
+  .message-body {
+    display: none;
+  }
+  .message h3 {
+    display: none;
+  }
+
 }
