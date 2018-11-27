@@ -13,43 +13,46 @@
           <p>Certificates: <%= @match.user.certificates %></p>
           <p>Reviews: <%= @reviews.count %></p>
           <p>User Rate: £<%= @match.user.rate %> per day</p>
-          <% if @match.job.title == "Query" %>
-
-            <%#= link_to "Leave review", new_match_review_path(@match), class: "btn btn-primary btn-margin-btm" %>
+          <% if @match.job.title != "Query" && !(Review.exist?(current_user.id, @match.id)) %>
+            <%= link_to "Leave review", new_match_review_path(@match), class: "btn btn-primary btn-margin-btm" %>
           <% end %>
         <% else %>
-          <%= cl_image_tag @match.user.photo.url, class: "avatar-large" %>
-          <h3><%= @match.user.name %></h3><br>
-          <p><%= @match.job.location %></p>
-          <!-- added reviews in matches -->
-          <p>Reviews: <%= @reviews.count %></p>
-          <% @reviews.each do |review|%>
-          <p><%= review.content %></p>
+            <%= cl_image_tag @match.user.photo.url, class: "avatar-large" %>
+            <h3><%= @match.user.name %></h3><br>
+            <p><%= @match.job.location %></p>
+          <% if @match.job.title != "Query" && !(Review.exist?(current_user.id, @match.id)) %>
+            <%= link_to "Leave review", new_match_review_path(@match), class: "btn btn-primary btn-margin-btm" %>
           <% end %>
-          <p> User rate: £<%= @match.user.rate %> per day</p>
+
+            <!-- added reviews in matches -->
+            <p>Reviews: <%= @reviews.count %></p>
+            <% @reviews.each do |review|%>
+             <p><%= review.content %></p>
+            <% end %>
+            <p> User rate: £<%= @match.user.rate %> per day</p>
           <% if @match.job.title == "Query" && current_user.company %>
-            <%= link_to 'Add to a job', new_match_path(user: @match.user), class: "btn btn-primary" %>
+              <%= link_to 'Add to a job', new_match_path(user: @match.user), class: "btn btn-primary" %>
           <% end %>
         <% end %>
       </div>
-        <% if current_user == @match.user %>
-          <% @reviewed_user = @match.job.user %>
-        <% else %>
-         <% @reviewed_user = @match.user %>
-        <% end %>
+      <% if current_user == @match.user %>
+        <% @reviewed_user = @match.job.user %>
+      <% else %>
+       <% @reviewed_user = @match.user %>
+      <% end %>
 
-º      <% unless @match.job.title == "Query" %>
+      <% unless @match.job.title == "Query" %>
       <div class="user-card">
-          <% if @match.hired != true && current_user.company%>
+          <% if @match.hired != true && current_user.company %>
             <%= simple_form_for(@match, :url => hire_matches_path, method: :post) do |form| %>
               <%= hidden_field_tag :match_id, @match.id %>
-              <%= form.button :submit, "Hire", class: "btn btn-primary"%>
+              <%= form.button :submit, "Hire", class: "btn btn-primary", id: "hire" %>
             <% end %>
             <%# link_to "Hire", match_path(@match), class: "btn btn-primary" %>
           <% elsif (@match.hired && @match.accepted == false) && current_user.company == false %>
             <%= simple_form_for(@match, :url => accept_matches_path, method: :post) do |form| %>
               <%= hidden_field_tag :match_id, @match.id %>
-              <%= form.button :submit, "Accept", class: "btn btn-primary"%>
+              <%= form.button :submit, "Accept", class: "btn btn-primary", id: "accept" %>
             <% end %>
             <%# link_to "Accept Job", match_path(@match), method: :accept, class: "btn btn-primary" %>
           <% end %>
@@ -99,6 +102,7 @@
 
       <% end %>
     </div>
+      <%= javascript_pack_tag "buttons" %>
       <%= javascript_pack_tag "messages" %>
 
     </div>
