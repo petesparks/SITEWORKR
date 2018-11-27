@@ -9,7 +9,3 @@ production:
   url: <%= ENV['REDISCLOUD_URL'] %>
   channel_prefix: SITEWORKR_production
 
-
-development:
-  adapter: redis
-  url: 'redis://localhost:6379/1'
