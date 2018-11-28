@@ -15,9 +15,7 @@ class Job < ApplicationRecord
     jobs_company = []
     Job.all.each do |job|
       job.matches.each { |match| jobs_company << job if (job.user_id == person.id) && job.title != 'Query' && match.accepted}
-
     end
-
     if jobs_company.count > 10
       return jobs_company[-10..-1].reverse
     else
@@ -32,12 +30,15 @@ class Job < ApplicationRecord
         job.matches.each { |match| jobs_contractor << job if match.user_id == person.id && match.accepted }
       end
     end
-
     if jobs_contractor.count > 10
       return jobs_contractor[-10..-1].reverse
     else
       return jobs_contractor
     end
+  end
+
+  def self.my_jobs(user)
+    Job.where("user_id = #{user.id}")
   end
 end
 
