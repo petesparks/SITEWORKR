@@ -47,7 +47,7 @@
 
               <% jobs = Job.my_jobs(current_user) %>
               <% if jobs.count == 1 %>
-                <%= link_to 'Connect', matches_path(user: @user, job: jobs[0]), method: :post, class: "btn btn-primary" %>
+                <%= link_to 'Connect', matches_path(match: {user: @user, job: jobs[0]}), method: :post, class: "btn btn-primary" %>
               <% else %>
                 <%= link_to 'Connect', new_match_path(user: @user), class: "btn btn-primary" %>
               <% end %>
