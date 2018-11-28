@@ -119,3 +119,16 @@ p {
   }
 
 }
+.list-container {
+  max-height: calc(100vh - 160px);
+  overflow: scroll;
+}
+
+.counter-position {
+  position: relative;
+  .counter {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
+}
