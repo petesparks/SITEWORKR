@@ -2434,8 +2434,8 @@ pre code {
 
 /* line 39, ../../../.rbenv/versions/2.4.4/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/_grid.scss */
 .row {
-  margin-left: -15px;
-  margin-right: -15px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 /* line 14, ../../../.rbenv/versions/2.4.4/lib/ruby/gems/2.4.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_clearfix.scss */
@@ -14647,10 +14647,12 @@ readers do not read off random characters that represent icons */
   height: 90px;
   border-radius: 50%;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  position: relative;
   border: white 1px solid;
   -o-object-fit: cover;
      object-fit: cover;
 }
+
 
 /* line 29, app/assets/stylesheets/components/_avatar.scss */
 .avatar-bordered {
@@ -14967,6 +14969,7 @@ ul {
 .message-status {
   font-size: 14px;
   font-weight: bold;
+  margin: 0px auto;
 }
 
 /* line 55, app/assets/stylesheets/pages/_user_index.scss */

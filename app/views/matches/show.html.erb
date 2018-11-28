@@ -1,76 +1,213 @@
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Job Inbox</a></li>
+    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">General</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+
+
+</div>
+
+
 <div class="container">
-  <h3 style="text-align:right;"><%= @match.job.user.name %>'s messages  <%= link_to 'Back to Matches', matches_path , class: "btn btn-primary" %></h3>
+  <div class="row">
+    <div class="col-xs-12 col-sm-5 list-container">
+      <div class="tab-content">
+          <div role="tabpanel" class="tab-pane fade in active" id="home">
+          <ul>
+            <% Match.ordered(current_user).reverse.each do |match| %>
+              <li>
+                <% if match == @match%>
+                  <div class="message user-card selected">
 
-  <div class="row mg-30">
-    <div class="col-sm-3">
-      <div class="user-card">
-        <% if current_user == @match.user %>
-          <%= cl_image_tag @match.job.user.photo.url, class: "avatar-large" %>
+                <% else %>
+                  <div class="message user-card">
+                <% end %>
 
-          <h3><%= link_to "#{@match.job.user.name}", user_path(@match.job.user)%></h3>
-          <p><%= @match.job.user.address %></p>
-          <p>Skill: <%= @match.job.skill %></p>
-          <p>Certificates: <%= @match.user.certificates %></p>
-          <p>Reviews: <%= @reviews.count %></p>
-          <p>User Rate: £<%= @match.job.rate %> per day</p>
-          <% if @match.job.title != "Query" && !(Review.exist?(current_user.id, @match.id)) %>
-            <%= link_to "Leave review", new_match_review_path(@match), class: "btn btn-primary btn-margin-btm" %>
-          <% end %>
-        <% else %>
-            <%= cl_image_tag @match.user.photo.url, class: "avatar-large" %>
-            <h3><%= @match.user.name %></h3><br>
-            <p><%= @match.job.location %></p>
-          <% if @match.job.title != "Query" && !(Review.exist?(current_user.id, @match.id)) %>
-            <%= link_to "Leave review", new_match_review_path(@match), class: "btn btn-primary btn-margin-btm" %>
-          <% end %>
+                  <% if current_user == match.user %>
+                    <div class="counter-position">
+                      <%= cl_image_tag(match.job.user.photo.url, class: "avatar-medium") %>
+                      <% count = Match.unread_count(match.messages, current_user) %>
+                      <% if count != 0 %>
+                        <%= link_to count, match, class: "counter" %>
+                      <% end %>
+                    </div>
+                    <div>
+                    <h3><%= link_to match.job.user.name.capitalize, match %></h3>
+                      <% if match.hired && !match.accepted %>
+                        <%= link_to "To be accepted", match, class: "small-text" %>
+                      <% end %>
+                    </div>
+                  <% else %>
+                    <div class="counter-position">
+                      <%= cl_image_tag(match.user.photo.url, class: "avatar-medium") %>
+                      <% count = Match.unread_count(match.messages, current_user) %>
+                      <% if count != 0 %>
+                        <%= link_to count, match, class: "counter" %>
+                      <% end %>
+                    </div>
+                     <div>
+                    <h3><%= link_to match.user.name.capitalize, match %></h3>
+                      <% if match.hired && !match.accepted %>
+                        <%= link_to "To be accepted", match, class: "small-text" %>
+                      <% end %>
+                    </div>
+                  <% end %>
 
-            <!-- added reviews in matches -->
-            <p>Reviews: <%= @reviews.count %></p>
-            <% @reviews.each do |review|%>
-             <p><%= review.content %></p>
+                  <div class="message-name">
+                    <p><%= match.job.title %></p>
+                    <% location = match.job.location.split(",") %>
+                    <h6><%= link_to location[0] + ", " + location[1], match %></h6>
+                    <p><%= match.job.skill.capitalize %></p>
+                  </div>
+                  <div class="message-body">
+
+                    <p>Start Date:</p><br>
+                    <p><%= match.job.start_date.strftime("%d-%m-%Y") %></p>
+                    <p class="price">£<%= match.job.rate %> per day</p>
+                  </div>
+                  <div class="message-status">
+                      <%= link_to "", match_path(match), my_matches: @matches, method: :delete, class: "fas fa-trash-alt" %>
+                    <!-- class: "sweet-alert-demo" -->
+                  </div>
+                </div>
+              </li>
             <% end %>
-            <p> User rate: £<%= @match.user.rate %> per day</p>
-          <% if @match.job.title == "Query" && current_user.company %>
-              <%= link_to 'Add to a job', new_match_path(user: @match.user), class: "btn btn-primary" %>
-          <% end %>
-        <% end %>
+          </ul>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="messages">
+          <ul>
+            <% Match.ordered_queries(current_user).each do |match| %>
+              <li>
+                <div class="col-xs-12 col-md-7">
+                  <div class="message user-card">
+                    <% if current_user == match.user %>
+                      <% query_user = match.job.user %>
+                    <% else %>
+                      <% query_user = match.user %>
+                    <% end %>
+
+                    <div class="counter-position">
+                      <%= cl_image_tag(query_user.photo.url, class: "avatar-medium") %>
+                      <% count = Match.unread_count(match.messages, current_user) %>
+                      <% if count != 0 %>
+                        <%= link_to count, match, class: "counter" %>
+                      <% end %>
+                    </div>
+                    <div>
+                    <h3><%= link_to match.job.user.name.capitalize, match %></h3>
+                      <% if match.hired && !match.accepted %>
+                        <%= link_to "To be accepted", match, class: "small-text" %>
+                      <% end %>
+                    </div>
+                    <div class="message-name">
+                      <h3><%= link_to query_user.name.capitalize, match %></h3>
+                    </div>
+                    <div class="message-status">
+                      <% count = Match.unread_count(match.messages, current_user) %>
+                      <p><%= "(#{count})" %></p>
+                      <%= link_to "", match_path(match), method: :delete, class: "fas fa-trash-alt" %>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
       </div>
-      <% if current_user == @match.user %>
-        <% @reviewed_user = @match.job.user %>
-      <% else %>
-       <% @reviewed_user = @match.user %>
-      <% end %>
-
-      <% unless @match.job.title == "Query" %>
-      <div class="user-card">
-          <% if @match.hired != true && current_user.company %>
-            <%= simple_form_for(@match, :url => hire_matches_path, method: :post) do |form| %>
-              <%= hidden_field_tag :match_id, @match.id %>
-              <%= form.button :submit, "Hire #{@match.user.name.capitalize}", class: "btn btn-primary", id: "hire" %>
-            <% end %>
-          <% elsif (@match.hired && @match.accepted == false) && current_user.company == false %>
-            <%= simple_form_for(@match, :url => accept_matches_path, method: :post) do |form| %>
-              <%= hidden_field_tag :match_id, @match.id %>
-              <%= form.button :submit, "Accept Job", class: "btn btn-primary", id: "accept" %>
-            <% end %>
-          <% elsif (@match.accepted && @match.hired) && !@match.job.finished? %>
-            <%= simple_form_for(@match.job, :url => finish_jobs_path, method: :post) do |form| %>
-              <%= hidden_field_tag :job_id, @match.job_id %>
-              <%= form.button :submit, "Mark Job as Finished", class: "btn btn-primary", id: "finish" %>
-            <% end %>
-          <% end %>
-          <h3><%= @match.job.title %></h3><br>
-          <p><%= @match.job.location %></p>
-          <p>Job Rate: £<%= @match.job.rate %> per day</p>
-          <p>Skill: <%= @match.job.skill %></p>
-          <p>Start date: <%= @match.job.start_date %></p>
-          <p>End date<%= @match.job.end_date %></p>
-
-      </div>
-      <% end %>
-
     </div>
-    <div class="col-sm-9">
+    <div class="col-sm-7">
+
+      <div class="row map-messages">
+        <div class="col-xs-12 col-md-6">
+          <div class="messages-show row user-card">
+            <% if current_user == @match.user %>
+              <div class="col-xs-6">
+                <%= cl_image_tag @match.job.user.photo.url, class: "avatar-large" %> <br>
+                <h3><%= link_to "#{@match.job.user.name}", user_path(@match.job.user)%></h3>
+              </div>
+              <div class="col-xs-6">
+                <h3><%= @match.job.title.upcase %></h3>
+                <p><%= @match.job.location %></p>
+                <p>Skill: <%= @match.job.skill %></p>
+                <p>Reviews: <%= @reviews.count %></p>
+                <p>Rate: £<%= @match.job.rate %> per day</p>
+                <p>Start date: <%= @match.job.start_date %></p>
+                <p>End date<%= @match.job.end_date %></p>
+              </div>
+              <ul>
+                <li>
+                  <% if @match.job.title != "Query" && !(Review.exist?(current_user.id, @match.id)) %>
+                </li>
+                <li>
+                <%= link_to "Leave review", new_match_review_path(@match), class: "btn-orange" %>
+                </li>
+              </ul>
+              <% end %>
+            <% else %>
+              <div class="col-xs-12 col-md-6">
+                <%= cl_image_tag @match.user.photo.url, class: "avatar-large" %>
+                <h3><%= link_to "#{@match.user.name}", user_path(@match.job.user)%></h3>
+              </div>
+              <div class="col xs-12 col-md-6">
+                <h3><%= @match.job.title.upcase %></h3>
+                <p><%= @match.job.location %></p>
+                <p>Skill: <%= @match.user.skill %></p>
+                <p>Certificates: <%= @match.user.certificates %></p>
+                <p>Reviews: <%= @reviews.count %></p>
+                <p>Rate: £<%= @match.user.rate %> per day</p>
+                <p>Start date: <%= @match.job.start_date %></p>
+                <p>End date<%= @match.job.end_date %></p>
+              </div>
+              <ul>
+                <li>
+                  <% if @match.job.title != "Query" && !(Review.exist?(current_user.id, @match.id)) %>
+                    <%= link_to "Leave review", new_match_review_path(@match), class: "btn-orange" %>
+                  <% end %>
+                </li>
+                <li>
+                  <% if @match.job.title == "Query" && current_user.company %>
+                      <%= link_to 'Add to a job', new_match_path(user: @match.user), class: "btn-orange" %>
+                  <% end %>
+                </li>
+              </ul>
+            <% end %>
+
+
+          <% unless @match.job.title == "Query" %>
+
+            <% if @match.hired != true && current_user.company %>
+              <%= simple_form_for(@match, :url => hire_matches_path, method: :post) do |form| %>
+                <%= hidden_field_tag :match_id, @match.id %>
+                <%= form.button :submit, "Hire #{@match.user.name.capitalize}", class: "btn-orange", id: "hire" %>
+              <% end %>
+            <% elsif (@match.hired && @match.accepted == false) && current_user.company == false %>
+              <%= simple_form_for(@match, :url => accept_matches_path, method: :post) do |form| %>
+                <%= hidden_field_tag :match_id, @match.id %>
+                <%= form.button :submit, "Accept Job", class: "btn-orange", id: "accept" %>
+              <% end %>
+            <% elsif (@match.accepted && @match.hired) && !@match.job.finished? %>
+              <%= simple_form_for(@match.job, :url => finish_jobs_path, method: :post) do |form| %>
+                <%= hidden_field_tag :job_id, @match.job_id %>
+                <%= form.button :submit, "Mark Job as Finished", class: "btn-orange", id: "finish" %>
+              <% end %>
+            <% end %>
+        </div>
+          <% end %>
+      </div>
+      <div class="col-xs-12 col-md-6 map-messages">
+        <div
+          id="map"
+          style="width: 100%; height: 40vh;"
+          data-markers="<%= @markers.to_json %>"
+        ></div>
+      </div>
+    </div>
+
+    <div class="col-xs-12">
       <div class="messages-list">
         <% @match.messages.each do |message| %>
           <% if message.body %>
@@ -109,17 +246,34 @@
 
       <% end %>
     </div>
-      <%= javascript_pack_tag "buttons" %>
-      <%= javascript_pack_tag "messages" %>
+
+
+
 
     </div>
   </div>
 </div>
 
 
+
+
+
+
+
+
+
+
+
+<%= javascript_pack_tag "map" %>
+<%= javascript_pack_tag "alert" %>
+<%= javascript_pack_tag "buttons" %>
+<%= javascript_pack_tag "messages" %>
+
+</div>
+
+
 <% content_for :after_js do %>
   <script>
-    console.log("adfasdfasdf")
     scrollLastMessageIntoView();
     App['match_<%= @match.id %>'] = App.cable.subscriptions.create(
       { channel: 'MatchesChannel', match_id: <%= @match.id %> },

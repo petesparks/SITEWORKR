@@ -14,7 +14,7 @@
         </div>
         <div class="message-body">
           <p><strong><p class="fas fa-clipboard-check">Company: <%= job.user.name %></p></strong></p>
-          <p>Start Date: <%= job.start_date %></p>
+          <p>Start Date: <%= job.start_date.strftime("%d-%m-%Y") %></p>
         </div>
         <div class="message-status">
           <!-- <p class="status pending">Pending</p> -->
@@ -25,6 +25,14 @@
     </li>
     <% end %>
   </ul>
+  </div>
+
+  <div class="col-sm-5">
+    <div
+      id="map"
+      style="width: 100%; height: calc(100vh - 100px);"
+      data-markers="<%= @markers.to_json %>"
+    ></div>
   </div>
 </div>
 <%= javascript_pack_tag "map" %>
