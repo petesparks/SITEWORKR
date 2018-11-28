@@ -83,7 +83,12 @@
             <% Match.ordered_queries(current_user).each do |match| %>
               <li>
                 <div>
-                  <div class="message user-card">
+                  <% if match == @match%>
+                    <div class="message user-card selected">
+
+                  <% else %>
+                    <div class="message user-card">
+                  <% end %>
                     <% if current_user == match.user %>
                       <% query_user = match.job.user %>
                     <% else %>
@@ -194,8 +199,8 @@
                 </li>
 
               </ul>
-        </div>
           <% end %>
+        </div>
       </div>
       <div class="col-xs-12 col-md-6 map-messages">
         <div
@@ -269,7 +274,6 @@
 <%= javascript_pack_tag "messages" %>
 
 </div>
-
 
 <% content_for :after_js do %>
   <script>
