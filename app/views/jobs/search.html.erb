@@ -1,5 +1,5 @@
 <div class="container row">
-  <div class="index-left col-xs-12 col-md-8 col-md-offset-2">
+  <div class="index-left col-xs-12 col-md-7">
   <h1><%= link_to "Your Jobs :#{@jobs.count}", jobs_path %></h1>
   <%= link_to 'Create a Job', new_job_path %>
   <ul>
@@ -9,12 +9,12 @@
 
         <%= cl_image_tag(job.user.photo.url, class: "avatar-medium") %>
         <div class="message-name">
-          <h3><%= link_to job.title.capitalize, job %></h3>
-          <o><%= link_to job.location, job %></p>
+          <h3><%= link_to job.title.capitalize, job.user %></h3>
+          <o><%= link_to job.location, job.user %></p>
         </div>
         <div class="message-body">
           <p><strong><p class="fas fa-clipboard-check">Company: <%= job.user.name %></p></strong></p>
-          <p>Start Date: <%= job.start_date %></p>
+          <p>Start Date: <%= job.start_date.strftime("%d-%m-%Y") %></p>
         </div>
         <div class="message-status">
           <!-- <p class="status pending">Pending</p> -->
@@ -26,8 +26,7 @@
     <% end %>
   </ul>
   </div>
-</div>
-  <div class="index-right col-xs-12 col-md-4">
+  <div class="index-right col-xs-12 col-md-5">
     <div
       id="map"
       style="width: 100%;

@@ -13,18 +13,31 @@ class Job < ApplicationRecord
 
   def self.index_for_company(person)
     jobs_company = []
-    Job.all.each { |job| jobs_company << job if (job.user_id == person.id) && job.title != 'Query' }
-    jobs_company
+    Job.all.each do |job|
+      job.matches.each { |match| jobs_company << job if (job.user_id == person.id) && job.title != 'Query' && match.accepted}
+
+    end
+
+    if jobs_company.count > 10
+      return jobs_company[-10..-1].reverse
+    else
+      return jobs_company
+    end
   end
 
   def self.index_for_contractor(person)
     jobs_contractor = []
     Job.all.each do |job|
       if job.title != "Query"
-        job.matches.each { |match| jobs_contractor << job if match.user_id == person.id}
+        job.matches.each { |match| jobs_contractor << job if match.user_id == person.id && match.accepted }
       end
     end
-    jobs_contractor
+
+    if jobs_contractor.count > 10
+      return jobs_contractor[-10..-1].reverse
+    else
+      return jobs_contractor
+    end
   end
 end
 

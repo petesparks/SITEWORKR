@@ -24,6 +24,23 @@ class MatchesController < ApplicationController
 
   def show
     @match = Match.find(params[:id])
+
+
+    @markers = [@match].map do |matche|
+      if matche.job.user.id == current_user.id
+      {
+        lng: matche.job.longitude,
+        lat: matche.job.latitude,
+        infoWindow: { content: render_to_string(partial: "/users/map_window", locals: { find: matche.user }) }
+      }
+      else
+        {
+        lng: matche.job.longitude,
+        lat: matche.job.latitude,
+        infoWindow: { content: render_to_string(partial: "/users/map_window", locals: { find: matche.job.user }) }
+      }
+      end
+    end
     @reviews = Review.where(match: @match)
     @match.messages.each { |message| message.update(read: true) if message.user_id != current_user.id}
   end

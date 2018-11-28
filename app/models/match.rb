@@ -58,4 +58,26 @@ class Match < ApplicationRecord
     end
     (sum * 2) / counter if sum != 0
   end
+
+  def self.ordered(user)
+    matches = Match.not_queries(Match.my_matches(user))
+    matches.sort_by do |match|
+      if match.messages.any?
+        match.messages.last.created_at
+      else
+        match.created_at
+      end
+    end
+  end
+
+  def self.ordered_queries(user)
+    matches = Match.queries(Match.my_matches(user))
+    matches.sort_by do |match|
+      if match.messages.any?
+        match.messages.last.created_at
+      else
+        match.created_at
+      end
+    end
+  end
 end

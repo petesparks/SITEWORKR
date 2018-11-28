@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2018_11_28_132831) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,12 +45,12 @@ ActiveRecord::Schema.define(version: 2018_11_28_132831) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.text "body"
     t.bigint "match_id"
     t.bigint "user_id"
     t.boolean "read", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "body"
     t.index ["match_id"], name: "index_messages_on_match_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end

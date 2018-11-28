@@ -14,23 +14,43 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-7">
+    <div class="col-xs-12 col-sm-7 list-container">
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane fade in active" id="home">
           <ul>
-            <% Match.not_queries(@matches).each do |match| %>
+            <% Match.ordered(current_user).reverse.each do |match| %>
               <li>
                 <div class="message user-card">
                   <% if current_user == match.user %>
-                    <%= cl_image_tag(match.job.user.photo.url, class: "avatar-medium") %>
+                    <div class="counter-position">
+                      <%= cl_image_tag(match.job.user.photo.url, class: "avatar-medium") %>
+                      <% count = Match.unread_count(match.messages, current_user) %>
+                      <% if count != 0 %>
+                        <%= link_to count, match, class: "counter" %>
+                      <% end %>
+                    </div>
+                    <div>
+                    <h3><%= link_to match.job.user.name.capitalize, match %></h3>
+                      <% if match.hired && !match.accepted %>
+                        <%= link_to "To be accepted", match, class: "small-text" %>
+                      <% end %>
+                    </div>
                   <% else %>
-                    <%= cl_image_tag(match.user.photo.url, class: "avatar-medium") %>
+                    <div class="counter-position">
+                      <%= cl_image_tag(match.user.photo.url, class: "avatar-medium") %>
+                      <% count = Match.unread_count(match.messages, current_user) %>
+                      <% if count != 0 %>
+                        <%= link_to count, match, class: "counter" %>
+                      <% end %>
+                    </div>
+                     <div>
+                    <h3><%= link_to match.user.name.capitalize, match %></h3>
+                      <% if match.hired && !match.accepted %>
+                        <%= link_to "To be accepted", match, class: "small-text" %>
+                      <% end %>
+                    </div>
                   <% end %>
-                    <% if current_user == match.user %>
-                      <h3><%= link_to match.job.user.name.capitalize, match %></h3>
-                    <% else %>
-                      <h3><%= link_to match.user.name.capitalize, match %></h3>
-                    <% end %>
+
                   <div class="message-name">
                     <p><%= match.job.title %></p>
                     <% location = match.job.location.split(",") %>
@@ -40,16 +60,12 @@
                   <div class="message-body">
 
                     <p>Start Date:</p><br>
-                    <p><%= match.job.start_date %></p>
+                    <p><%= match.job.start_date.strftime("%d-%m-%Y") %></p>
                     <p class="price">£<%= match.job.rate %> per day</p>
                   </div>
                   <div class="message-status">
-
-                    <% count = Match.unread_count(match.messages, current_user) %>
-                    <%= link_to "(#{count})New", match %><br>
-                    <%= link_to "messages", match %>
+                      <%= link_to "", match_path(match), my_matches: @matches, method: :delete, class: "fas fa-trash-alt" %>
                     <!-- class: "sweet-alert-demo" -->
-                    <%= link_to "", match_path(match), method: :delete, class: "fas fa-trash-alt" %>
                   </div>
                 </div>
               </li>
@@ -58,7 +74,7 @@
         </div>
         <div role="tabpanel" class="tab-pane fade" id="messages">
           <ul>
-            <% Match.queries(@matches).each do |match| %>
+            <% Match.ordered_queries(current_user).each do |match| %>
               <li>
                 <div class="col-xs-12 col-md-7">
                   <div class="message user-card">
@@ -67,7 +83,20 @@
                     <% else %>
                       <% query_user = match.user %>
                     <% end %>
-                    <%= cl_image_tag(query_user.photo.url, class: "avatar-medium") %>
+
+                    <div class="counter-position">
+                      <%= cl_image_tag(query_user.photo.url, class: "avatar-medium") %>
+                      <% count = Match.unread_count(match.messages, current_user) %>
+                      <% if count != 0 %>
+                        <%= link_to count, match, class: "counter" %>
+                      <% end %>
+                    </div>
+                    <div>
+                    <h3><%= link_to match.job.user.name.capitalize, match %></h3>
+                      <% if match.hired && !match.accepted %>
+                        <%= link_to "To be accepted", match, class: "small-text" %>
+                      <% end %>
+                    </div>
                     <div class="message-name">
                       <h3><%= link_to query_user.name.capitalize, match %></h3>
                     </div>

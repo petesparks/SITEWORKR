@@ -1,15 +1,14 @@
 .messages-list {
   overflow: scroll;
-  height: 70vh;
+  height: calc(45vh - 50px);
   background-color: white;
   background-color: white;
   border-radius: 8px;
   padding: 20px;
   border: 1px solid rgba(230,126,34,0.2);
   box-shadow: 2px 2px 2px rgba(230,126,34,0.1);
-  margin: 10px 0px;
+  margin: 10px 0px 5px -15px;
 }
-
 .messages {
   display: flex;
   flex: 1 0 500px
@@ -67,13 +66,75 @@
   box-shadow: 2px 2px 2px rgba(230,126,34,0.1)
 }
 
+.selected {
+  background-color: rgb(240,240,240) !important;
+  border: 2px solid $orange !important;
+}
+.messages-show {
+  padding: 10px 15px;
+  p {
+    font-size: 14px;
+  }
+  h3 {
+    font-size: 18px;
+  }
+}
+.btn-orange {
+  height: 35px;
+  padding: 7px;
+  border: 1px solid $orange;
+  border-radius: 5px;
+  color: $orange;
+  background-color: rgba(255,255,255,0.8);
+  font-size: 14px !important;
+}
+.map-messages {
+  min-height: 35vh;
+  padding: 0px 15px !important;
+  position: relative;
+  .list-inline {
+     position: relative;
+     bottom: 0px;
+     height: 60px;
+  }
+  .avatar-large {
+    margin-top: 30px;
+  }
+
+  .user-msg {
+    margin-top: 20px auto;
+  }
+
+  .list-user{
+    text-align: left;
+    margin-top: 30px;
+    p {
+      margin-top: 5px;
+    }
+    h3 {
+      margin-top: 0px;
+    }
+  }
+}
+
 .button-none {
   display: none !important;
 }
 
+#message_body {
+  height: 50px;
+  margin-left: -15px;
+  margin-right: 0px;
+  width: calc(100% + 15px);
+}
+
+.list-height {
+  max-height: calc(100vh - 160px);
+  overflow: scroll;
+}
 
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 2px;
 }
 
 /* Track */
