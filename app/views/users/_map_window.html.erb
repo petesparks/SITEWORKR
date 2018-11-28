@@ -2,7 +2,5 @@
 
     <p><%= link_to find.name.capitalize, user_path(find) %></p>
     <img class="avatar-s" src="<%= find.photo %>"  alt="">
-    <% if current_user.company %>
     <p>£<%= find.rate %>pd</p>
-    <% end %>
 </div>
