@@ -2,11 +2,7 @@
   <div class="row mg-30">
     <div class="col-xs-12 col-md-8">
       <div class="user-card-profile" data-dates="<%= @booked_dates.to_json %>">
-        <% if @user.banner.nil? %>
-        <div class="img" style="background-image: url('https://www.thespruce.com/thmb/rbw2_8BUAY6364l1u2NPNyewYUQ=/3534x2817/filters:no_upscale():max_bytes(150000):strip_icc()/colorful-computer-wires-in-server-room-200378788-001-5abc42733128340037b86c2c.jpg');"></div>
-        <% else %>
         <%= cl_image_tag( @user.banner.url, class: "img") %>
-        <% end %>
         <div class="special-card-wrapper">
           <% if @user == current_user %>
           <a class="avatar-large-profile" data-toggle="modal" data-target="#pictureModal">
