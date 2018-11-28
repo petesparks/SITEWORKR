@@ -1,63 +1,70 @@
 <div class="container">
-  <h3 style="text-align:right;">Dashboard</h3>
   <div class="row mg-30">
-    <div class="col-xs-12 col-md-3">
-      <div class="user-card" data-dates="<%= @booked_dates.to_json %>">
-        <% if @user == current_user %>
-        <a class="avatar-large" data-toggle="modal" data-target="#pictureModal">
-          <img src="<%= @user.photo %>" alt="avatar" class="avatar-large">
-        </a>
+    <div class="col-xs-12 col-md-8">
+      <div class="user-card-profile" data-dates="<%= @booked_dates.to_json %>">
+        <% if @user.banner.nil? %>
+        <div class="img" style="background-image: url('https://www.thespruce.com/thmb/rbw2_8BUAY6364l1u2NPNyewYUQ=/3534x2817/filters:no_upscale():max_bytes(150000):strip_icc()/colorful-computer-wires-in-server-room-200378788-001-5abc42733128340037b86c2c.jpg');"></div>
         <% else %>
-          <img src="<%= @user.photo %>" alt="avatar" class="avatar-large">
+        <%= cl_image_tag( @user.banner.url, class: "img") %>
         <% end %>
-        <h3><%= @user.name %></h3><br>
-        <p> Address: <%= @user.address %>
-        <% if @user == current_user %>
-          <a class="fas fa-edit" data-toggle="modal" data-target="#addressModal"></a></p>
-        <% end %>
-        <p>Skill: <%= @user.skill %>
+        <div class="special-card-wrapper">
           <% if @user == current_user %>
-          <a class="fas fa-edit" data-toggle="modal" data-target="#skillModal"></a>
-        </p>
-        <% end %>
-        <p>Certificates: <%= @user.certificates %>
-          <% if @user == current_user %>
-          <a class="fas fa-edit" data-toggle="modal" data-target="#certificatesModal"></a>
-        </p>
-        <% end %>
-        <p>Rate: £<%= @user.rate %> per day
-          <% if @user== current_user %>
-          <a class="fas fa-edit" data-toggle="modal" data-target="#rateModal"></a>
-        </p>
-        <% end %>
-        <% if @user == current_user && @user.company %>
-         <%= link_to 'Create a Job', new_job_path, class: "btn btn-primary" %>
-        <% elsif @user == current_user && !(@user.company)%>
-         <%= link_to 'Find a Job', search_jobs_path, class: "btn btn-primary" %>
-        <% else %>
-         <%= link_to 'Connect', new_match_path(user: @user), class: "btn btn-primary" %>
-        <% end  %>
-      </div>
-    </div>
-    <div class="row">
-     <div class="col-xs-12 col-md-5">
+          <a class="avatar-large-profile" data-toggle="modal" data-target="#pictureModal">
+            <img src="<%= @user.photo %>" alt="avatar" class="avatar-large-profile">
+          </a>
+          <% else %>
+          <img src="<%= @user.photo %>" alt="avatar" class="avatar-large-profile">
+          <% end %>
+          <h3><%= @user.name %></h3>
+          <h4>Address:</h4>
+          <p><%= @user.address %>
+            <% if @user == current_user %>
+            <a class="fas fa-edit" data-toggle="modal" data-target="#addressModal"></a></p>
+            <% end %>
+            <h4>Skill:</h4>
+            <p><%= @user.skill %>
+              <% if @user == current_user %>
+              <a class="fas fa-edit" data-toggle="modal" data-target="#skillModal"></a>
+            </p>
+            <% end %>
+            <h4>Certificates:</h4>
+            <p><%= @user.certificates %>
+              <% if @user == current_user %>
+              <a class="fas fa-edit" data-toggle="modal" data-target="#certificatesModal"></a>
+            </p>
+            <% end %>
+            <h4>Rate:</h4>
+            <p>£<%= @user.rate %> per day
+              <% if @user== current_user %>
+              <a class="fas fa-edit" data-toggle="modal" data-target="#rateModal"></a>
+            </p>
+            <% end %>
+            <% if @user == current_user && @user.company %>
+            <%= link_to 'Create a Job', new_job_path, class: "btn btn-primary" %>
+            <% elsif @user == current_user && !(@user.company)%>
+            <%= link_to 'Find a Job', search_jobs_path, class: "btn btn-primary" %>
+            <% else %>
+            <%= link_to 'Connect', new_match_path(user: @user), class: "btn btn-primary" %>
+            <% end  %>
+          </div>
+        </div>
         <h5 class="profile-header">Reviews</h5>
         <div class="about-card">
           <% stars = Match.stars(@user) %>
           <% unless stars.nil? %>
-            <% (stars / 2).times do %>
-              <i class="fas fa-star"></i>
-            <% end %>
-            <% if stars % 2 == 0 %>
-              <% (5 - (stars / 2)).times do %>
-                <i class="far fa-star"></i>
-              <% end %>
-            <% else %>
-              <i class="fas fa-star-half-alt"></i>
-              <i class="fas fa-star-half"></i>
-              <% (4 - (stars / 2)).times do %>
-                <i class="far fa-star"></i>
-              <% end %>
+          <% (stars / 2).times do %>
+          <i class="fas fa-star"></i>
+          <% end %>
+          <% if stars % 2 == 0 %>
+          <% (5 - (stars / 2)).times do %>
+          <i class="far fa-star"></i>
+          <% end %>
+          <% else %>
+          <i class="fas fa-star-half-alt"></i>
+          <i class="fas fa-star-half"></i>
+          <% (4 - (stars / 2)).times do %>
+          <i class="far fa-star"></i>
+          <% end %>
           <% end %>
           <% end %>
         </div>
@@ -66,76 +73,80 @@
         <div class="about-card">
           <p><%= @user.about_me %></p>
         </div>
-      </div>
 
-
-      <div class="col-xs-12 col-md-3">
-        <div class="form-wrapper" style="width: 300px; margin: 0 auto;">
-          <p>Availability</p>
-          <%= simple_form_for :search, method: "get" do |f| %>
-            <%= f.input :starts_at, as: :string, label: false, required: false, input_html: {id: "start_date", class: "hide-input"} %>
-            <%= f.input :ends_at, as: :string, label: false, required: false, input_html: {id: "end_date", class: "hide-input"} %>
-            <%= f.button :submit, "Go", class: "btn btn-primary" %>
-          <% end %>
-        </div>
-      </div>
-      <div class="col-xs-12 col-md-8">
-        <h5 class="profile-header">Work History</h5>
+        <h5 class="profile-header mg30">Work History</h5>
         <div class="experience-card">
           <p><%= @user.experience %></p>
         </div>
       </div>
-
-
-
-      <div class="col-xs-12 col-md-8">
-        <% jobs_company = Job.index_for_company(@user) %>
-        <% jobs_contractor = Job.index_for_contractor(@user) %>
-        <% jobs_contractor.each do |job| %>
-          <div class="message user-card">
-              <%= cl_image_tag(job.user.photo.url, class: "avatar-medium") %>
-            <div clas, class: "fas fa-trash-alt", class: "fas fa-trash-alt"s="message-name">
-              <h3><%= link_to job.title.capitalize, job.user %></h3>
-              <% location = job.location.split(",") %>
-              <h3><%= location[0] + ", " + location[1] %></h3>
-            </div>
-            <div class="message-body">
-              <h3><%= link_to job.user.name.capitalize, job.user %></h3>
-              <h3>Start Date: <%= job.start_date %></h3>
-            </div>
-            <div class="message-status">
-              <%#= job.matches.first.review.rating %>
-            </div>
-
-            </div>
-            <% end %>
-          </div>
-          <% jobs_company.each do |job| %>
-            <% job.matches.each do |match| %>
-          <div class="message user-card">
-
-              <%= cl_image_tag(match.user.photo.url, class: "avatar-medium") %>
-            <div class="message-name">
-              <h3><%= link_to job.title.capitalize, job %></h3>
-              <o><%= link_to job.location, job %></p>
-            </div>
-            <div class="message-body">
-              <p><strong><p class="fas fa-clipboard-check"> <%= match.user.name %></p></strong></p>
-              <p>Start Date: <%= job.start_date %></p>
-            </div>
-            <div class="message-status">
-
+      <div class="col-xs-12 col-md-4 row">
+        <div class="col-xs-12">
+          <div class="user-calendar">
+            <div style="width: 300px; margin: 0 auto;">
+              <p>Availability</p>
+              <%= simple_form_for :search, method: "get" do |f| %>
+              <%= f.input :starts_at, as: :string, label: false, required: false, input_html: {id: "start_date", class: "hide-input"} %>
+              <%= f.input :ends_at, as: :string, label: false, required: false, input_html: {id: "end_date", class: "hide-input"} %>
+              <%= f.button :submit, "Go", class: "btn btn-primary" %>
+              <% end %>
             </div>
           </div>
+          <div class="col-xs-12">
+            <p class="profile-header-job">Existing & Previous Jobs</p>
+            <% jobs_company = Job.index_for_company(@user) %>
+            <% jobs_contractor = Job.index_for_contractor(@user) %>
+            <ul>
+              <% jobs_contractor.each do |job| %>
+              <li>
+                <div class="message-job user-card">
+                  <%= cl_image_tag(job.user.photo.url, class: "avatar-m") %>
+                  <div>
+                    <p><%= link_to job.title.capitalize, job.user %></p>
+                    <% location = job.location.split(",") %>
+                    <p><%= location[0] + ", " + location[1] %></p>
+                  </div>
+                  <div class="message-body-small">
+                    <p><%= link_to job.user.name.capitalize, job.user %></p>
+                    <p>Start Date: <%= job.start_date %></p>
+                  </div>
+                  <div class="message-status">
+                    <%#= job.matches.first.review.rating %>
+                  </div>
 
+                </li>
+                <% end %>
+              </ul>
+              </div>
+            <ul>
+              <% jobs_company.each do |job| %>
+              <% job.matches.each do |match| %>
+              <li>
+                <div class="message-job user-card">
+
+                  <%= cl_image_tag(match.user.photo.url, class: "avatar-m") %>
+                  <div>
+                    <p><%= link_to job.title.capitalize, job %></p>
+                    <o><%= link_to job.location, job %></p>
+                    </div>
+                    <div class="message-body-small">
+                      <p><strong><p class="fas fa-clipboard-check"> <%= match.user.name %></p></strong></p>
+                      <p>Start Date: <%= job.start_date %></p>
+                    </div>
+                    <div class="message-status">
+
+                    </div>
+                </div>
+
+                </li>
+                <% end %>
+                <% end %>
+              </ul>
+            </div>
         </div>
-           <% end %>
-          <% end %>
-      </div>
-
-    </div>
   </div>
 </div>
+
+
 
 
 

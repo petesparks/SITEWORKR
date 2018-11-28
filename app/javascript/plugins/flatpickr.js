@@ -6,7 +6,7 @@ import rangePlugin from "flatpickr/dist/plugins/rangePlugin"
 flatpickr("#start_date", {
   altInput: true,
   plugins: [new rangePlugin({ input: "#end_date"})],
-  disable: JSON.parse(document.querySelector(".user-card").dataset.dates),
+  disable: JSON.parse(document.querySelector(".user-card-profile").dataset.dates),
   inline: true
 })
 
