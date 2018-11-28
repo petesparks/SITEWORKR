@@ -82,8 +82,13 @@
           <ul>
             <% Match.ordered_queries(current_user).each do |match| %>
               <li>
-                <div class="col-xs-12 col-sm-5">
-                  <div class="message user-card">
+                <div>
+                  <% if match == @match%>
+                    <div class="message user-card selected">
+
+                  <% else %>
+                    <div class="message user-card">
+                  <% end %>
                     <% if current_user == match.user %>
                       <% query_user = match.job.user %>
                     <% else %>
@@ -148,8 +153,10 @@
               </div>
               <div class="col xs-12 col-xl-6 list-user">
                 <h3><%= @match.job.title.upcase %></h3>
-                <% location = @match.job.location.split(",") %>
-                <p><%=  location[0] + ", " + location[1] %></p>
+                <% unless @match.job.location == "not defined" %>
+                  <% location = @match.job.location.split(",") %>
+                  <p><%=  location[0] + ", " + location[1] %></p>
+                <% end %>
                 <p>Skill: <%= @match.user.skill %></p>
                 <p>Certificates: <%= @match.user.certificates %></p>
                 <p>Reviews: <%= @reviews.count %></p>
@@ -166,7 +173,7 @@
                     <%= link_to 'Add to a job', new_match_path(user: @match.user), class: "btn-orange" %>
                 <% end %>
               </li>
-          <% unless @match.job.title == "Query" %>
+              <% unless @match.job.title == "Query" %>
                 <li>
                   <% if !(Review.exist?(current_user.id, @match.id)) %>
                     <%= link_to "Leave review", new_match_review_path(@match), class: "btn-orange" %>
@@ -192,8 +199,8 @@
                 </li>
 
               </ul>
-        </div>
           <% end %>
+        </div>
       </div>
       <div class="col-xs-12 col-md-6 map-messages">
         <div
@@ -267,7 +274,6 @@
 <%= javascript_pack_tag "messages" %>
 
 </div>
-
 
 <% content_for :after_js do %>
   <script>

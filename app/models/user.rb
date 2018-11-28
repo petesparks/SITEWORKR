@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
 
   mount_uploader :photo, PhotoUploader
-  mount_uploader :banner, PhotoUploader
+  mount_uploader :banner, BannerUploader
 
 
   validates :name, presence: true, uniqueness: true

@@ -113,8 +113,7 @@
       border-top-right-radius: 8px;
       height: 30vh;
       width: 100%;
-      background-size: cover;
-      background-repeat: no-repeat;
+      object-fit: cover;
 
     }
 }

@@ -12,7 +12,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_up_path_for(resource_or_scope)
-    Job.create!(title: "Query", location: "not defined", skill: "not specified", user_id: current_user.id)
+    Job.create!(title: "Query", location: "London, England", skill: "not specified", user_id: current_user.id, start_date: Date.today, end_date: Date.today)
     user_path(current_user)
   end
 
