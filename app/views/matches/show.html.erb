@@ -123,7 +123,7 @@
 
       <div class="row map-messages">
         <div class="col-xs-12 col-md-6">
-          <div class="messages-show row user-card">
+          <div class="messages-show row user-card map-messages">
             <% if current_user == @match.user %>
               <div class="col-xs-6">
                 <%= cl_image_tag @match.job.user.photo.url, class: "avatar-large" %> <br>
@@ -139,20 +139,13 @@
                 <p>End date<%= @match.job.end_date %></p>
               </div>
               <ul>
-                <li>
-                  <% if @match.job.title != "Query" && !(Review.exist?(current_user.id, @match.id)) %>
-                </li>
-                <li>
-                <%= link_to "Leave review", new_match_review_path(@match), class: "btn-orange" %>
-                </li>
-              </ul>
-              <% end %>
+
             <% else %>
               <div class="col-xs-12 col-md-6">
                 <%= cl_image_tag @match.user.photo.url, class: "avatar-large" %>
                 <h3><%= link_to "#{@match.user.name}", user_path(@match.job.user)%></h3>
               </div>
-              <div class="col xs-12 col-md-6">
+              <div class="col xs-12 col-md-6 list-user">
                 <h3><%= @match.job.title.upcase %></h3>
                 <p><%= @match.job.location %></p>
                 <p>Skill: <%= @match.user.skill %></p>
@@ -162,46 +155,48 @@
                 <p>Start date: <%= @match.job.start_date %></p>
                 <p>End date<%= @match.job.end_date %></p>
               </div>
-              <ul>
-                <li>
-                  <% if @match.job.title != "Query" && !(Review.exist?(current_user.id, @match.id)) %>
-                    <%= link_to "Leave review", new_match_review_path(@match), class: "btn-orange" %>
-                  <% end %>
-                </li>
-                <li>
-                  <% if @match.job.title == "Query" && current_user.company %>
-                      <%= link_to 'Add to a job', new_match_path(user: @match.user), class: "btn-orange" %>
-                  <% end %>
-                </li>
-              </ul>
             <% end %>
 
 
           <% unless @match.job.title == "Query" %>
+              <ul class="list-inline mg-30">
+                <li>
+                  <% if current_user.company %>
+                      <%= link_to 'Add to a job', new_match_path(user: @match.user), class: "btn-orange" %>
+                  <% end %>
+                </li>
+                <li>
+                  <% if !(Review.exist?(current_user.id, @match.id)) %>
+                    <%= link_to "Leave review", new_match_review_path(@match), class: "btn-orange" %>
+                  <% end %>
+                </li>
+                <li>
+                  <% if @match.hired != true && current_user.company %>
+                    <%= simple_form_for(@match, :url => hire_matches_path, method: :post) do |form| %>
+                      <%= hidden_field_tag :match_id, @match.id %>
+                      <%= form.button :submit, "Hire #{@match.user.name.capitalize}", class: "btn-orange", id: "hire" %>
+                    <% end %>
+                  <% elsif (@match.hired && @match.accepted == false) && current_user.company == false %>
+                    <%= simple_form_for(@match, :url => accept_matches_path, method: :post) do |form| %>
+                      <%= hidden_field_tag :match_id, @match.id %>
+                      <%= form.button :submit, "Accept Job", class: "btn-orange", id: "accept" %>
+                    <% end %>
+                  <% elsif (@match.accepted && @match.hired) && !@match.job.finished? %>
+                    <%= simple_form_for(@match.job, :url => finish_jobs_path, method: :post) do |form| %>
+                      <%= hidden_field_tag :job_id, @match.job_id %>
+                      <%= form.button :submit, "Mark Job as Finished", class: "btn-orange", id: "finish" %>
+                    <% end %>
+                  <% end %>
+                </li>
 
-            <% if @match.hired != true && current_user.company %>
-              <%= simple_form_for(@match, :url => hire_matches_path, method: :post) do |form| %>
-                <%= hidden_field_tag :match_id, @match.id %>
-                <%= form.button :submit, "Hire #{@match.user.name.capitalize}", class: "btn-orange", id: "hire" %>
-              <% end %>
-            <% elsif (@match.hired && @match.accepted == false) && current_user.company == false %>
-              <%= simple_form_for(@match, :url => accept_matches_path, method: :post) do |form| %>
-                <%= hidden_field_tag :match_id, @match.id %>
-                <%= form.button :submit, "Accept Job", class: "btn-orange", id: "accept" %>
-              <% end %>
-            <% elsif (@match.accepted && @match.hired) && !@match.job.finished? %>
-              <%= simple_form_for(@match.job, :url => finish_jobs_path, method: :post) do |form| %>
-                <%= hidden_field_tag :job_id, @match.job_id %>
-                <%= form.button :submit, "Mark Job as Finished", class: "btn-orange", id: "finish" %>
-              <% end %>
-            <% end %>
+              </ul>
         </div>
           <% end %>
       </div>
       <div class="col-xs-12 col-md-6 map-messages">
         <div
           id="map"
-          style="width: 100%; height: 40vh;"
+          style="width: 100%; height: 35vh; margin-top: 12px; border-radius: 8px"
           data-markers="<%= @markers.to_json %>"
         ></div>
       </div>
@@ -237,11 +232,11 @@
     <div class= "type-message">
       <%= form_for [@match, Message.new], html: {class: "ui reply form"} do |f| %>
         <div class="field">
-          <%= f.text_area :body, class: "form-control" %>
+          <%= f.text_field :body, class: "form-control", placeholder:"Type here..." %>
         </div>
           <%= f.text_field :user_id, value: current_user.id, type: "hidden", class: "field-side"  %>
         <div>
-          <%= f.submit "Send", class: "btn btn-primary btn-side" %>
+          <%= f.submit "Send", type: "hidden", class: "btn btn-primary btn-side" %>
         </div>
 
       <% end %>

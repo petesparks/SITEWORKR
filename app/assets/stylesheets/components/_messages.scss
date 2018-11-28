@@ -1,6 +1,6 @@
 .messages-list {
   overflow: scroll;
-  height: 35vh;
+  height: calc(45vh - 50px);
   background-color: white;
   background-color: white;
   border-radius: 8px;
@@ -81,7 +81,9 @@
     margin: 0px !important;
   }
 }
-
+.list-user{
+  text-align: left;
+}
 .btn-orange {
   height: 40px;
   padding: 7px;
@@ -92,17 +94,21 @@
   font-size: 14px !important;
 }
 .map-messages {
-  max-height: 40vh !important;
-  padding: 0px 15px;
+  height: 35vh;
+  padding: 0px 15px !important;
+  margin: none !important;
 }
 
 .button-none {
   display: none !important;
 }
 
+#message_body {
+  height: 50px
+}
 
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 2px;
 }
 
 /* Track */
