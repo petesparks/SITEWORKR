@@ -5,7 +5,7 @@
         <%= cl_image_tag( @user.banner.url, class: "img") %>
         <div class="special-card-wrapper">
           <% if @user == current_user %>
-          <a class="avatar-large-profile" data-toggle="modal" data-target="#pictureModal">
+          <a class="avatar-large-profile" data-toggle="modal" data-target="#pictureModal" style="cursor: pointer">
             <img src="<%= @user.photo %>" alt="avatar" class="avatar-large-profile">
           </a>
           <% else %>
@@ -13,255 +13,353 @@
           <% end %>
           <h3><%= @user.name %></h3>
           <h4>Address:</h4>
-          <p><%= @user.address %>
-            <% if @user == current_user %>
-            <a class="fas fa-edit" data-toggle="modal" data-target="#addressModal"></a></p>
-            <% end %>
-            <h4>Skill:</h4>
-            <p><%= @user.skill %>
-              <% if @user == current_user %>
-              <a class="fas fa-edit" data-toggle="modal" data-target="#skillModal"></a>
-            </p>
-            <% end %>
-            <h4>Certificates:</h4>
-            <p><%= @user.certificates %>
-              <% if @user == current_user %>
-              <a class="fas fa-edit" data-toggle="modal" data-target="#certificatesModal"></a>
-            </p>
-            <% end %>
-            <h4>Rate:</h4>
-            <p>£<%= @user.rate %> per day
-              <% if @user== current_user %>
-              <a class="fas fa-edit" data-toggle="modal" data-target="#rateModal"></a>
-            </p>
-            <% end %>
-            <% if @user == current_user && @user.company %>
-            <%= link_to 'Create a Job', new_job_path, class: "btn btn-primary" %>
-            <% elsif @user == current_user && !(@user.company)%>
-            <%= link_to 'Find a Job', search_jobs_path, class: "btn btn-primary" %>
-            <% else %>
-
-              <% jobs = Job.my_jobs(current_user) %>
-              <% if jobs.count == 1 %>
-                <%= link_to 'Connect', matches_path(match: {user: @user, job: jobs[0]}), method: :post, class: "btn btn-primary" %>
-              <% else %>
-                <%= link_to 'Connect', new_match_path(user: @user), class: "btn btn-primary" %>
-              <% end %>
-            <% end  %>
-          </div>
-        </div>
-        <h5 class="profile-header">Reviews</h5>
-        <div class="about-card">
-          <% stars = Match.stars(@user) %>
-          <% unless stars.nil? %>
-              <% (stars / 2).times do %>
-                <i class="fas fa-star"></i>
-              <% end %>
-              <% if stars % 2 == 0 %>
-                <% (5 - (stars / 2)).times do %>
-                  <i class="far fa-star"></i>
-                <% end %>
-              <% else %>
-                <i class="fas fa-star-half-alt"></i>
-                <i class="fas fa-star-half"></i>
-                <% (4 - (stars / 2)).times do %>
-                  <i class="far fa-star"></i>
-                <% end %>
-            <% end %>
+          <% if @user.address == nil && @user == current_user %>
+          <p data-toggle="modal" data-target="#addressModal" style="cursor: pointer; font-weight: lighter;">Click to fill in you address</p>
+          <% else %>
+          <% if @user == current_user %>
+          <p data-toggle="modal" data-target="#addressModal" style="cursor: pointer"><%= @user.address %></p>
+          <% else %>
+          <% if @user.address == nil %>
+          <p>N/A</p>
+          <% else %>
+          <p><% @user.address %></p>
           <% end %>
-        </div>
+          <% end %>
+          <% end %>
+          <h4>Skill:</h4>
+          <% if @user.skill == nil && @user == current_user %>
+          <p data-toggle="modal" data-target="#skillModal" style="cursor: pointer; font-weight: lighter;">Click to fill in you skills</p>
+          <% else %>
+          <% if @user == current_user %>
+          <p data-toggle="modal" data-target="#skillModal" style="cursor: pointer"><%= @user.skill %></p>
+          <% else %>
+          <% if @user.skill == nil %>
+          <p>N/A</p>
+          <% else %>
+          <p><% @user.skill %></p>
+          <% end %>
+          <% end %>
+          <% end %>
+          <h4>Certificates:</h4>
+          <% if @user.certificates == nil && @user == current_user %>
+          <p data-toggle="modal" data-target="#certificatesModal" style="cursor: pointer; font-weight: lighter;">Click to fill in you certificates</p>
+          <% else %>
+          <% if @user == current_user %>
+          <p data-toggle="modal" data-target="#certificatesModal" style="cursor: pointer"><%= @user.certificates %></p>
+          <% else %>
+          <% if @user.certificates == nil %>
+          <p>N/A</p>
+          <% else %>
+          <p><% @user.certificates %></p>
+          <% end %>
+          <% end %>
+          <% end %>
+          <h4>Rate:</h4>
+          <% if @user.rate == nil && @user == current_user %>
+          <p data-toggle="modal" data-target="#rateModal" style="cursor: pointer; font-weight: lighter;">Click to fill in you £ daily rate</p>
+          <% else %>
+          <% if @user == current_user %>
+          <p data-toggle="modal" data-target="#rateModal" style="cursor: pointer">£ <%= @user.rate %> per day</p>
+          <% else %>
+          <% if @user.rate == nil %>
+          <p>N/A</p>
+          <% else %>
+          <p>£<%= @user.rate %>per day</p>
+          <% end %>
+          <% end %>
+          <% end %>
+          <% if @user == current_user && @user.company %>
+          <%= link_to 'Create a Job', new_job_path, class: "btn btn-primary" %>
+          <% elsif @user == current_user && !(@user.company)%>
+          <%= link_to 'Find a Job', search_jobs_path, class: "btn btn-primary" %>
+          <% else %>
 
-        <h5 class="profile-header">About me</h5>
-        <div class="about-card">
-          <p><%= @user.about_me %></p>
-        </div>
-
-        <h5 class="profile-header mg30">Work History</h5>
-        <div class="experience-card">
-          <p><%= @user.experience %></p>
+          <% jobs = Job.my_jobs(current_user) %>
+          <% if jobs.count == 1 %>
+          <%= link_to 'Connect', matches_path(match: {user: @user, job: jobs[0]}), method: :post, class: "btn btn-primary" %>
+          <% else %>
+          <%= link_to 'Connect', new_match_path(user: @user), class: "btn btn-primary" %>
+          <% end %>
+          <% end  %>
         </div>
       </div>
-      <div class="col-xs-12 col-md-4 row">
-        <div class="col-xs-12">
-          <div class="user-calendar">
-            <div style="width: 300px; margin: 0 auto;">
-              <p>Availability</p>
-              <%= simple_form_for :search, method: "get" do |f| %>
-              <%= f.input :starts_at, as: :string, label: false, required: false, input_html: {id: "start_date", class: "hide-input"} %>
-              <%= f.input :ends_at, as: :string, label: false, required: false, input_html: {id: "end_date", class: "hide-input"} %>
-              <%= f.button :submit, "Go", class: "btn btn-primary" %>
-              <% end %>
-            </div>
+      <h5 class="profile-header">Reviews</h5>
+      <div class="about-card">
+        <% stars = Match.stars(@user) %>
+        <% unless stars.nil? %>
+        <% (stars / 2).times do %>
+        <i class="fas fa-star"></i>
+        <% end %>
+        <% if stars % 2 == 0 %>
+        <% (5 - (stars / 2)).times do %>
+        <i class="far fa-star"></i>
+        <% end %>
+        <% else %>
+        <i class="fas fa-star-half-alt"></i>
+        <i class="fas fa-star-half"></i>
+        <% (4 - (stars / 2)).times do %>
+        <i class="far fa-star"></i>
+        <% end %>
+        <% end %>
+        <% end %>
+      </div>
+
+      <h5 class="profile-header">About me</h5>
+      <% if @user == current_user && @user.about_me != nil %>
+      <div class="about-card"  data-toggle="modal" data-target="#aboutModal" style="cursor: pointer">
+        <p><%= @user.about_me %></p>
+      </div>
+      <% else %>
+      <% if @user == current_user %>
+      <div class="about-card"  data-toggle="modal" data-target="#aboutModal" style="cursor: pointer">
+        <p style="font-weight:100;">Click here & write short description about you</p>
+      </div>
+      <% else %>
+      <div class="about-card">
+        <p><%= @user.about_me %></p>
+      </div>
+      <% end %>
+      <% end %>
+
+      <h5 class="profile-header mg30">Work History</h5>
+      <% if @user == current_user && @user.experience != nil %>
+      <div class="experience-card" data-toggle="modal" data-target="#workhistoryModal" style="cursor: pointer">
+        <p><%= @user.experience %></p>
+      </div>
+      <% else %>
+      <% if @user == current_user %>
+      <div class="experience-card"  data-toggle="modal" data-target="#workhistoryModal" style="cursor: pointer">
+        <p style="font-weight:100;">Click to add your work history here</p>
+      </div>
+      <% else %>
+      <div class="about-card">
+        <p><%= @user.experience %></p>
+      </div>
+      <% end %>
+      <% end %>
+
+    </div>
+    <div class="col-xs-12 col-md-4 row">
+      <div class="col-xs-12">
+        <div class="user-calendar">
+          <div style="width: 300px; margin: 0 auto;">
+            <p>Availability</p>
+            <%= simple_form_for :search, method: "get" do |f| %>
+            <%= f.input :starts_at, as: :string, label: false, required: false, input_html: {id: "start_date", class: "hide-input"} %>
+            <%= f.input :ends_at, as: :string, label: false, required: false, input_html: {id: "end_date", class: "hide-input"} %>
+            <%= f.button :submit, "Go", class: "btn btn-primary" %>
+            <% end %>
           </div>
-          <div class="col-xs-12">
-            <p class="profile-header-job">Existing & Previous Jobs</p>
-            <% jobs_company = Job.index_for_company(@user) %>
-            <% jobs_contractor = Job.index_for_contractor(@user) %>
-            <ul>
-              <% jobs_contractor.each do |job| %>
-              <li>
-                <div class="message-job user-card">
-                  <%= cl_image_tag(job.user.photo.url, class: "avatar-m") %>
-                  <div>
-                    <p><%= link_to job.title.capitalize, job.user %></p>
-                    <% location = job.location.split(",") %>
-                    <p><%= location[0] + ", " + location[1] %></p>
+        </div>
+        <div class="col-xs-12">
+          <p class="profile-header-job">Existing & Previous Jobs</p>
+          <% jobs_company = Job.index_for_company(@user) %>
+          <% jobs_contractor = Job.index_for_contractor(@user) %>
+          <ul>
+            <% jobs_contractor.each do |job| %>
+            <li>
+              <div class="message-job user-card">
+                <%= cl_image_tag(job.user.photo.url, class: "avatar-m") %>
+                <div>
+                  <p><%= link_to job.title.capitalize, job.user %></p>
+                  <% location = job.location.split(",") %>
+                  <p><%= location[0] + ", " + location[1] %></p>
+                </div>
+                <div class="message-body-small">
+                  <p><%= link_to job.user.name.capitalize, job.user %></p>
+                  <p>Start Date: <%= job.start_date %></p>
+                </div>
+                <div class="message-status">
+                  <%= job.matches.where("job.user = #{@user}").reviews.where("user != current_user") %>
+                  <%#= job.matches.first.review.rating %>
+                </div>
+
+              </li>
+              <% end %>
+            </ul>
+          </div>
+          <ul>
+            <% jobs_company.each do |job| %>
+            <% job.matches.each do |match| %>
+            <li>
+              <div class="message-job user-card">
+
+                <%= cl_image_tag(match.user.photo.url, class: "avatar-m") %>
+                <div>
+                  <p><%= link_to job.title.capitalize, job %></p>
+                  <o><%= link_to job.location, job %></p>
                   </div>
                   <div class="message-body-small">
-                    <p><%= link_to job.user.name.capitalize, job.user %></p>
+                    <p><strong><p class="fas fa-clipboard-check"> <%= match.user.name %></p></strong></p>
                     <p>Start Date: <%= job.start_date %></p>
                   </div>
                   <div class="message-status">
-                    <%= job.matches.where("job.user = #{@user}").reviews.where("user != current_user") %>
-                    <%#= job.matches.first.review.rating %>
+                    <%= match.reviews.where("user != #{@user}") %>
                   </div>
-
-                </li>
-                <% end %>
-              </ul>
-              </div>
-            <ul>
-              <% jobs_company.each do |job| %>
-              <% job.matches.each do |match| %>
-              <li>
-                <div class="message-job user-card">
-
-                  <%= cl_image_tag(match.user.photo.url, class: "avatar-m") %>
-                  <div>
-                    <p><%= link_to job.title.capitalize, job %></p>
-                    <o><%= link_to job.location, job %></p>
-                    </div>
-                    <div class="message-body-small">
-                      <p><strong><p class="fas fa-clipboard-check"> <%= match.user.name %></p></strong></p>
-                      <p>Start Date: <%= job.start_date %></p>
-                    </div>
-                    <div class="message-status">
-                      <%= match.reviews.where("user != #{@user}") %>
-                    </div>
                 </div>
 
-                </li>
-                <% end %>
-                <% end %>
-              </ul>
-            </div>
+              </li>
+              <% end %>
+              <% end %>
+            </ul>
+          </div>
         </div>
-  </div>
-</div>
-
-
-
-
-
-<!-- +++++++++++++++++++++++++++++++++++++ modals++++++++++++++++++++++++++++++++++++++++++++ -->
-
-<!-- address Modal -->
-<div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-          <%= f.error_notification %>
-          <div class="form-inputs">
-            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-              <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-            <% end %>
-            <%= f.input :address %>
-          <div class="form-actions">
-            <%= f.button :submit, "Change",class: "btn btn-primary" %>
-          </div>
-        <% end %>
       </div>
     </div>
-  </div>
-</div>
-</div>
 
-<!-- picture Modal -->
-<div class="modal fade" id="pictureModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-          <%= f.error_notification %>
-          <div class="form-inputs">
-            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <!-- +++++++++++++++++++++++++++++++++++++ modals++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <!-- address Modal -->
+    <div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <%= f.error_notification %>
+            <div class="form-inputs">
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
               <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-            <% end %>
-            <%= f.input :photo %>
-            <%= f.input :photo_cache, as: :hidden %>
-          <div class="form-actions">
-            <%= f.button :submit, "Change",class: "btn btn-primary" %>
+              <% end %>
+              <%= f.input :address %>
+              <div class="form-actions">
+                <%= f.button :submit, "Change",class: "btn btn-primary" %>
+              </div>
+              <% end %>
+            </div>
           </div>
-        <% end %>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-</div>
 
-<!-- skill Modal -->
-<div class="modal fade" id="skillModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-          <%= f.error_notification %>
-          <div class="form-inputs">
-            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <!-- picture Modal -->
+    <div class="modal fade" id="pictureModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <%= f.error_notification %>
+            <div class="form-inputs">
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
               <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-            <% end %>
-            <%= f.input :skill %>
-          <div class="form-actions">
-            <%= f.button :submit, "Change",class: "btn btn-primary" %>
+              <% end %>
+              <%= f.input :photo %>
+              <%= f.input :photo_cache, as: :hidden %>
+              <div class="form-actions">
+                <%= f.button :submit, "Change",class: "btn btn-primary" %>
+              </div>
+              <% end %>
+            </div>
           </div>
-        <% end %>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-</div>
 
-<!-- certificates Modal -->
-<div class="modal fade" id="certificatesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-          <%= f.error_notification %>
-          <div class="form-inputs">
-            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <!-- skill Modal -->
+    <div class="modal fade" id="skillModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <%= f.error_notification %>
+            <div class="form-inputs">
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
               <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-            <% end %>
-            <%= f.input :certificates %>
-          <div class="form-actions">
-            <%= f.button :submit, "Change",class: "btn btn-primary" %>
+              <% end %>
+              <%= f.input :skill, input_html: {value: "#{@user.skill}", id: 'skill'} %>
+              <div class="form-actions">
+                <%= f.button :submit, "Change",class: "btn btn-primary" %>
+              </div>
+              <% end %>
+            </div>
           </div>
-        <% end %>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-</div>
 
-<!-- certificates Modal -->
-<div class="modal fade" id="rateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-          <%= f.error_notification %>
-          <div class="form-inputs">
-            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <!-- certificates Modal -->
+    <div class="modal fade" id="certificatesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <%= f.error_notification %>
+            <div class="form-inputs">
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
               <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-            <% end %>
-            <%= f.input :rate %>
-          <div class="form-actions">
-            <%= f.button :submit, "Change",class: "btn btn-primary" %>
+              <% end %>
+              <%= f.input :certificates, input_html: {value: "#{@user.certificates}", id: 'certificates'} %>
+              <div class="form-actions">
+                <%= f.button :submit, "Change",class: "btn btn-primary" %>
+              </div>
+              <% end %>
+            </div>
           </div>
-        <% end %>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-</div>
+
+    <!-- certificates Modal -->
+    <div class="modal fade" id="rateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <%= f.error_notification %>
+            <div class="form-inputs">
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+              <% end %>
+              <%= f.input :rate, input_html: {value: "#{@user.rate}", id: 'rate'} %>
+              <div class="form-actions">
+                <%= f.button :submit, "Change",class: "btn btn-primary" %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- about modal -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <%= f.error_notification %>
+            <div class="form-inputs">
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+              <% end %>
+              <%= f.input :about_me, input_html: {value: "#{@user.about_me}", id: 'about_me'}%>
+              <div class="form-actions">
+                <%= f.button :submit, "Change",class: "btn btn-primary" %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- work history modal -->
+    <div class="modal fade" id="workhistoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <%= f.error_notification %>
+            <div class="form-inputs">
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+              <% end %>
+              <%= f.input :experience, input_html: {value: "#{@user.experience}", id: 'experience'}%>
+              <div class="form-actions">
+                <%= f.button :submit, "Change",class: "btn btn-primary" %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
