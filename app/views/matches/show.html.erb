@@ -127,10 +127,10 @@
     <div class="col-sm-7  list-height">
 
       <div class="row map-messages">
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12 col-md-7">
           <div class="messages-show row user-card map-messages">
             <% if current_user == @match.user %>
-              <div class="col-xs-6">
+              <div class="col-xs-5">
                 <%= cl_image_tag @match.job.user.photo.url, class: "avatar-large" %> <br>
                 <h3><%= link_to "#{@match.job.user.name}", user_path(@match.job.user), class: "user-msg" %></h3>
               </div>
@@ -139,7 +139,29 @@
                 <% location = @match.job.location.split(",") %>
                 <p><%=  location[0] + ", " + location[1] %></p>
                 <p>Skill: <%= @match.job.skill %></p>
-                <p>Reviews: <%= @reviews.count %></p>
+
+                <% stars = Match.stars(@match.job.user) %>
+                <% unless stars.nil? %>
+                    <% (stars / 2).times do %>
+                      <i class="fas fa-star"></i>
+                    <% end %>
+                    <% if stars % 2 == 0 %>
+                      <% (5 - (stars / 2)).times do %>
+                        <i class="far fa-star"></i>
+                      <% end %>
+                    <% else %>
+                      <i class="fas fa-star-half"></i>
+                      <% (4 - (stars / 2)).times do %>
+                        <i class="far fa-star"></i>
+                      <% end %>
+                  <% end %>
+                <% end %>
+                <p>Reviews: <%= @reviews.count %> <%= stars %> </p>
+
+
+
+
+
                 <p>Rate: £<%= @match.job.rate %> per day</p>
                 <p>Start date: <%= @match.job.start_date.strftime("%d-%m-%Y") %></p>
                 <p>End date: <%= @match.job.end_date.strftime("%d-%m-%Y") %></p>
@@ -147,11 +169,11 @@
               <ul>
 
             <% else %>
-              <div class="col-xs-12 col-md-6">
+              <div class="col-xs-12 col-md-6 avatar-name">
                 <%= cl_image_tag @match.user.photo.url, class: "avatar-large" %>
-                <h3><%= link_to "#{@match.user.name}", user_path(@match.job.user), class: "user-msg" %></h3>
+                <h3><%= link_to "#{@match.user.name}", user_path(@match.user), class: "user-msg" %></h3>
               </div>
-              <div class="col xs-12 col-xl-6 list-user">
+              <div class="col xs-12 col-md-6 list-user">
                 <h3><%= @match.job.title.upcase %></h3>
                 <% unless @match.job.location == "not defined" %>
                   <% location = @match.job.location.split(",") %>
@@ -202,10 +224,10 @@
           <% end %>
         </div>
       </div>
-      <div class="col-xs-12 col-md-6 map-messages">
+      <div class="col-xs-12 col-md-5 map-messages">
         <div
           id="map"
-          style="width: 100%; height: 35vh; margin-top: 12px; border-radius: 8px"
+          style="width: 100%; height: 360px; margin-top: 12px; border-radius: 8px"
           data-markers="<%= @markers.to_json %>"
         ></div>
       </div>

@@ -54,19 +54,15 @@
         <div class="about-card">
           <% stars = Match.stars(@user) %>
           <% unless stars.nil? %>
-              <% (stars / 2).times do %>
-                <i class="fas fa-star"></i>
+            <% (stars / 2).times do %>
+              <i class="fas fa-star"></i>
+            <% end %>
+            <% if stars % 2 == 0 %>
+              <% (5 - (stars / 2)).times do %>
+                <i class="far fa-star"></i>
               <% end %>
-              <% if stars % 2 == 0 %>
-                <% (5 - (stars / 2)).times do %>
-                  <i class="far fa-star"></i>
-                <% end %>
-              <% else %>
-                <i class="fas fa-star-half-alt"></i>
-                <i class="fas fa-star-half"></i>
-                <% (4 - (stars / 2)).times do %>
-                  <i class="far fa-star"></i>
-                <% end %>
+            <% else %>
+              <i class="fas fa-star-half"></i>
             <% end %>
           <% end %>
         </div>
@@ -112,7 +108,6 @@
                     <p>Start Date: <%= job.start_date %></p>
                   </div>
                   <div class="message-status">
-                    <%= job.matches.where("job.user = #{@user}").reviews.where("user != current_user") %>
                     <%#= job.matches.first.review.rating %>
                   </div>
 
@@ -136,7 +131,6 @@
                       <p>Start Date: <%= job.start_date %></p>
                     </div>
                     <div class="message-status">
-                      <%= match.reviews.where("user != #{@user}") %>
                     </div>
                 </div>
 

@@ -11,4 +11,5 @@ class Review < ApplicationRecord
     end
     false
   end
+
 end
