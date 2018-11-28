@@ -109,9 +109,9 @@ class MatchesController < ApplicationController
   end
 
   def set_user
-    @user = User.find(params[:match][:user])
+    @user = User.find(params[:user])
   end
   def set_job
-    @job = Job.find(params[:match][:job])
+    @job = Job.find(params[:job])
   end
 end

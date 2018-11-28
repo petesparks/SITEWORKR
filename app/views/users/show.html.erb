@@ -44,7 +44,13 @@
             <% elsif @user == current_user && !(@user.company)%>
             <%= link_to 'Find a Job', search_jobs_path, class: "btn btn-primary" %>
             <% else %>
-            <%= link_to 'Connect', new_match_path(user: @user), class: "btn btn-primary" %>
+
+              <% jobs = Job.my_jobs(current_user) %>
+              <% if jobs.count == 1 %>
+                <%= link_to 'Connect', matches_path(user: @user, job: jobs[0]), method: :post, class: "btn btn-primary" %>
+              <% else %>
+                <%= link_to 'Connect', new_match_path(user: @user), class: "btn btn-primary" %>
+              <% end %>
             <% end  %>
           </div>
         </div>
@@ -52,20 +58,20 @@
         <div class="about-card">
           <% stars = Match.stars(@user) %>
           <% unless stars.nil? %>
-          <% (stars / 2).times do %>
-          <i class="fas fa-star"></i>
-          <% end %>
-          <% if stars % 2 == 0 %>
-          <% (5 - (stars / 2)).times do %>
-          <i class="far fa-star"></i>
-          <% end %>
-          <% else %>
-          <i class="fas fa-star-half-alt"></i>
-          <i class="fas fa-star-half"></i>
-          <% (4 - (stars / 2)).times do %>
-          <i class="far fa-star"></i>
-          <% end %>
-          <% end %>
+              <% (stars / 2).times do %>
+                <i class="fas fa-star"></i>
+              <% end %>
+              <% if stars % 2 == 0 %>
+                <% (5 - (stars / 2)).times do %>
+                  <i class="far fa-star"></i>
+                <% end %>
+              <% else %>
+                <i class="fas fa-star-half-alt"></i>
+                <i class="fas fa-star-half"></i>
+                <% (4 - (stars / 2)).times do %>
+                  <i class="far fa-star"></i>
+                <% end %>
+            <% end %>
           <% end %>
         </div>
 
