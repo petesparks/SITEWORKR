@@ -12,4 +12,19 @@ class Review < ApplicationRecord
     false
   end
 
+  def self.my_reviews(person)
+    reviews = []
+    Match.my_matches(person).each do |match|
+      match.reviews.each { |review| reviews << review if review.user != person }
+    end
+    reviews
+  end
+  def self.review_match(person, connection)
+    unless connection.reviews.nil?
+      reviews = []
+      connection.reviews.each { |review| reviews << review if review.person != review.user }
+      return reviews
+    end
+    []
+  end
 end
