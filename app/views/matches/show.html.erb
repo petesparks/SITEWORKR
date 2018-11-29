@@ -2,7 +2,7 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Job Inbox</a></li>
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Connection inbox</a></li>
     <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">General</a></li>
   </ul>
 
@@ -178,9 +178,7 @@
                   <p><%=  location[0] + ", " + location[1] %></p>
                 <% end %>
                 <p>Skill: <%= @match.user.skill %></p>
-                <p>Certificates: <%= @match.user.certificates %></p>
-                <p>Reviews: <%= @reviews.count %></p>
-                <p>Rate: £<%= @match.user.rate %> per day</p>
+
                 <p>Start date: <%= @match.job.start_date.strftime("%d-%m-%Y") %></p>
                 <p>End date: <%= @match.job.end_date.strftime("%d-%m-%Y") %></p>
               </div>
