@@ -198,7 +198,7 @@
 
                       <%= cl_image_tag(match.user.photo.url, class: "avatar-m") %>
                       <div>
-                        <p><%= link_to job.title.capitalize, job %></p>
+                        <p><%= link_to job.title.capitalize, match.user %></p>
                         <% location = job.location.split(",") %>
                         <p><%= location[0] + ", " + location[1] %></p>
                         </div>
