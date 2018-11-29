@@ -111,6 +111,8 @@
   }
 
   .list-user{
+    max-height: 280px;
+    overflow: scroll;
     text-align: left;
     margin: 30px auto;
 
