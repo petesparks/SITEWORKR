@@ -23,6 +23,8 @@ class UsersController < ApplicationController
         to: match.job.end_date
       }
     end
+    @jobs = []
+    Job.all.each { |job| @jobs << job if job.user == current_user}
   end
 
 

@@ -175,6 +175,13 @@
 }
 
 .reviews {
-  max-height: 200px;
+  max-height: 180px;
   overflow: scroll;
+}
+.review-about {
+  height: 300px;
+}
+
+.fas {
+  color: $orange;
 }
