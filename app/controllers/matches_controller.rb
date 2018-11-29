@@ -3,7 +3,7 @@ class MatchesController < ApplicationController
 
   def index
     @matches = []
-    Match.all.each { |match| @matches << match if match.job.user.id == current_user.id || match.user.id == current_user.id }
+    Match.all.each { |match| @matches << match if match.job.user_id == current_user.id || match.user_id == current_user.id }
     @matches
     @markers = @matches.map do |matche|
       if matche.job.user.id == current_user.id

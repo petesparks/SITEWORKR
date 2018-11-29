@@ -74,11 +74,43 @@
           <%= link_to 'Find a Job', search_jobs_path, class: "btn btn-primary" %>
           <% else %>
 
-          <% jobs = Job.my_jobs(current_user) %>
-          <% if jobs.count == 1 %>
-          <%= link_to 'Connect', matches_path(match: {user: @user, job: jobs[0]}), method: :post, class: "btn btn-primary" %>
-          <% else %>
-          <%= link_to 'Connect', new_match_path(user: @user), class: "btn btn-primary" %>
+
+            <% jobs = Job.my_jobs(current_user) %>
+              <% if jobs.count == 1 %>
+                <%= link_to 'Connect', matches_path(match: {user: @user, job: jobs[0]}), method: :post, class: "btn btn-primary" %>
+              <% else %>
+                <%= link_to 'Connect', new_match_path(user: @user), class: "btn btn-primary" %>
+              <% end %>
+            <% end  %>
+          </div>
+        </div>
+        <h5 class="profile-header">Reviews</h5>
+        <div class="about-card">
+          <% stars = Match.stars(@user) %>
+          <% reviews = Review.my_reviews(@user) %>
+          <% unless stars.nil? %>
+            <h4>
+
+            <% (stars / 2).times do %>
+              <i class="fas fa-star"></i>
+            <% end %>
+
+            <% unless stars % 2 == 0 %>
+              <i class="fas fa-star-half"></i>
+            <% end %>
+            <%= "(#{reviews.count})" %>
+            </h4>
+            <br>
+            <div class="reviews">
+              <% reviews.each do |review| %>
+                <%= review.user.name + " " %>
+                <% review.rating.times do %>
+                 <i class="fas fa-star"></i>
+                <% end %> <br>
+                <%= review.content %> <br> <br>
+              <% end %>
+            </div>
+
           <% end %>
           <% end  %>
         </div>
