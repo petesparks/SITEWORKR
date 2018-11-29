@@ -49,28 +49,26 @@
                         <%= link_to count, match, class: "counter" %>
                       <% end %>
                     </div>
-                     <div>
+                  <% end %>
+
+                  <div class="message-name">
                     <h3><%= link_to match.user.name.capitalize, match %></h3>
                       <% if match.hired && !match.accepted %>
                         <%= link_to "To be accepted", match, class: "small-text" %>
                       <% end %>
-                    </div>
-                  <% end %>
-
-                  <div class="message-name">
+                  </div>
+                  <div class="message-body">
                     <p><%= match.job.title %></p>
                     <% location = match.job.location.split(",") %>
                     <h6><%= link_to location[0] + ", " + location[1], match %></h6>
                     <p><%= match.job.skill.capitalize %></p>
-                  </div>
-                  <div class="message-body">
 
+                  </div>
+                  <div class="message-status">
                     <p>Start Date:</p><br>
                     <p><%= match.job.start_date.strftime("%d-%m-%Y") %></p>
                     <p class="price">£<%= match.job.rate %> per day</p>
-                  </div>
-                  <div class="message-status">
-                      <%= link_to "", match_path(match), my_matches: @matches, method: :delete, class: "fas fa-trash-alt" %>
+                      <%#= link_to "", match_path(match), my_matches: @matches, method: :delete, class: "fas fa-trash-alt" %>
                     <!-- class: "sweet-alert-demo" -->
                   </div>
                 </div>
@@ -114,7 +112,6 @@
                     <div class="message-status">
                       <% count = Match.unread_count(match.messages, current_user) %>
                       <p><%= "(#{count})" %></p>
-                      <%= link_to "", match_path(match), method: :delete, class: "fas fa-trash-alt" %>
                     </div>
                   </div>
                 </div>
