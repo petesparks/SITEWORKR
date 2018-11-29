@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2018_11_28_132831) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.text "body"
+    t.string "body"
     t.bigint "match_id"
     t.bigint "user_id"
     t.boolean "read", default: false
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2018_11_28_132831) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.string "content"
+    t.text "content"
     t.integer "rating"
     t.bigint "match_id"
     t.bigint "user_id"
