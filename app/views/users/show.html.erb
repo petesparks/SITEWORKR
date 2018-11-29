@@ -23,7 +23,7 @@
               <% if @user.address == nil %>
                 <p>N/A</p>
               <% else %>
-                <p><% @user.address %></p>
+                <p><%= @user.address %></p>
               <% end %>
             <% end %>
           <% end %>
@@ -38,7 +38,7 @@
               <% if @user.skill == nil %>
                 <p>N/A</p>
               <% else %>
-                <p><% @user.skill %></p>
+                <p><%= @user.skill %></p>
               <% end %>
             <% end %>
           <% end %>
@@ -50,9 +50,9 @@
               <p data-toggle="modal" data-target="#certificatesModal" style="cursor: pointer"><%= @user.certificates %></p>
             <% else %>
               <% if @user.certificates == nil %>
-                <p>N/A</p>
+                <p> N/A</p>
               <% else %>
-                <p><% @user.certificates %></p>
+                <p><%= @user.certificates %></p>
               <% end %>
             <% end %>
           <% end %>
