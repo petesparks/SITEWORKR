@@ -155,7 +155,10 @@ li{
   max-height: calc(100vh - 160px);
   overflow: scroll;
 }
-
+.tabs-messages{
+  position: sticky;
+  top: 60px;
+}
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
     border: none;

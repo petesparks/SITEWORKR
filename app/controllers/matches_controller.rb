@@ -43,6 +43,8 @@ class MatchesController < ApplicationController
     end
     @reviews = Review.where(match: @match)
     @match.messages.each { |message| message.update(read: true) if message.user_id != current_user.id}
+    @jobs = []
+    Job.all.each { |job| @jobs << job if job.user == current_user}
   end
 
   def accept

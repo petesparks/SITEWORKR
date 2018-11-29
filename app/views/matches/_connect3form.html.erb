@@ -1,0 +1,23 @@
+<% new_match = Match.new() %>
+    <%= simple_form_for(new_match) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <% if new_match.errors.any? %>
+      <div class="errors-container">
+        <ul>
+          <% @match.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-inputs">
+      <%= f.hidden_field :user, value: @match.user.id %><br>
+      <%= f.input :job, collection: @jobs %><br>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, class: "btn btn-primary" %>
+    </div>
+  <% end %>

@@ -79,7 +79,8 @@
               <% if jobs.count == 1 %>
                 <%= link_to 'Connect', matches_path(match: {user: @user, job: jobs[0]}), method: :post, class: "btn btn-primary" %>
               <% else %>
-                <%= link_to 'Connect', new_match_path(user: @user), class: "btn btn-primary" %>
+              <p data-toggle="modal" data-target="#connectModal" style="cursor: pointer; font-weight: lighter;" class="btn btn-primary">Connect</p>
+                <%#= link_to 'Connect', new_match_path(user: @user), class: "btn btn-primary" %>
               <% end %>
           <% end %>
           </div>
@@ -375,3 +376,18 @@
         </div>
       </div>
     </div>
+
+
+
+
+<div class="modal fade" id="connectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+           <%= render "./matches/form" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
