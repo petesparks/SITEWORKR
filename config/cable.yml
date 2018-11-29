@@ -6,6 +6,7 @@ test:
 
 production:
   adapter: redis
-  url: redis://redistogo:7b3da2b9b01b5b6fb68956e2b7fe257c@soapfish.redistogo.com:10578/
+  url: <%= ENV["REDISCLOUD_URL"] %>
   channel_prefix: SITEWORKR_production
+
 
