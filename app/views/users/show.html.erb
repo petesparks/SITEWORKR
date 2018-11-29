@@ -9,7 +9,7 @@
               <img src="<%= @user.photo %>" alt="avatar" class="avatar-large-profile">
             </a>
           <% else %>
-            º<img src="<%= @user.photo %>" alt="avatar" class="avatar-large-profile">
+            <img src="<%= @user.photo %>" alt="avatar" class="avatar-large-profile">
           <% end %>
 
           <h3><%= @user.name %></h3>
@@ -181,7 +181,7 @@
                   <p>Start Date: <%= job.start_date %></p>
                 </div>
                 <div class="message-status">
-                  <%= job.matches.where("job.user = #{@user}").reviews.where("user != current_user") %>
+                  <%#= job.matches.where("job.user = #{@user}").reviews.where("user != current_user") %>
                   <%#= job.matches.first.review.rating %>
                 </div>
 
