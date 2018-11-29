@@ -1,4 +1,4 @@
-<div>
+<div class="tabs-messages">
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
@@ -177,12 +177,10 @@
                   <% location = @match.job.location.split(",") %>
                   <p><%=  location[0] + ", " + location[1] %></p>
                 <% end %>
-                <p>Skill: <%= @match.user.skill %></p>
-                <p>Certificates: <%= @match.user.certificates %></p>
-                <p>Reviews: <%= @reviews.count %></p>
-                <p>Rate: £<%= @match.user.rate %> per day</p>
-                <p>Start date: <%= @match.job.start_date.strftime("%d-%m-%Y") %></p>
-                <p>End date: <%= @match.job.end_date.strftime("%d-%m-%Y") %></p>
+                <p><%= @match.user.skill %></p>
+                <p>£<%= @match.user.rate %> per day</p>
+                <p>Starting: <%= @match.job.start_date.strftime("%d-%m-%Y") %></p>
+                <p>Endind: <%= @match.job.end_date.strftime("%d-%m-%Y") %></p>
               </div>
             <% end %>
 
@@ -191,17 +189,22 @@
               <li>
                 <% if current_user.company && @match.job.title == "Query" %>
                     <% if current_user == @match.user %>
-                      <%= link_to 'Add to a job', new_match_path(user: @match.job.user), class: "btn btn-orange" %>
+
+                      <p data-toggle="modal" data-target="#connect2Modal" style="cursor: pointer; font-weight: lighter;" class="btn btn-orange">Add to a job</p>
+                      <%#= link_to 'Add to a job', new_match_path(user: @match.job.user), class: "btn btn-orange" %>
                     <% elsif current_user == @match.job.user %>
-                      <%= link_to 'Add to a job', new_match_path(user: @match.user), class: "btn btn-orange" %>
+                      <p data-toggle="modal" data-target="#connect3Modal" style="cursor: pointer; font-weight: lighter;" class="btn btn-orange">Add to a job</p>
+                      <%#= link_to 'Add to a job', new_match_path(user: @match.user), class: "btn btn-orange" %>
                     <% end %>
 
                 <% end %>
               </li>
               <% unless @match.job.title == "Query" %>
                 <li>
-                  <% if !(Review.exist?(current_user.id, @match.id)) %>
-                    <%= link_to "Leave review", new_match_review_path(@match), class: "btn btn-orange" %>
+                  <% if !(Review.exist?(current_user.id, @match.id))  %>
+                    <p data-toggle="modal" data-target="#reviewModal" style="cursor: pointer; font-weight: lighter;" class="btn btn-orange">Leave a review</p>
+
+
                   <% end %>
                 </li>
                 <li>
@@ -317,3 +320,46 @@
     )
   </script>
 <% end %>
+
+
+
+
+
+
+<!-- review Modal -->
+<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <%= simple_form_for([@match, Review.new(user: current_user)], html: { method: :post }) do |f| %>
+          <%= f.error_notification %>
+
+           <%= f.input :rating %>
+           <%= f.input :content %>
+
+           <%= f.submit class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="connect2Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+           <%= render "./matches/connect2form" %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="connect3Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+           <%= render "./matches/connect3form" %>
+      </div>
+    </div>
+  </div>
+</div>
