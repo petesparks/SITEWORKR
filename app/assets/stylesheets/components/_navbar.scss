@@ -6,7 +6,7 @@
 .navbar {
   box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
   border-radius: 1px;
-  background: white;
+  background-color: #FFF;
   transition: all 0.3s ease;
   height: 60px;
   padding: 0px 30px;
@@ -19,6 +19,16 @@
   position: sticky !important;
   top: 0 !important;
   border-top: 5px solid #FF7F11;
+}
+
+/* transparent navbar on home page*/
+.navbar-home {
+  background-color: transparent;
+  box-shadow: none;
+  .navbar-link {
+    color: #FFF;
+  }
+
 }
 
 /* Logo */

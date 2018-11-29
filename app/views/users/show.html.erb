@@ -112,7 +112,6 @@
                     <p>Start Date: <%= job.start_date.strftime("%d-%m-%Y") %></p>
                   </div>
                   <div class="message-status">
-                    <%= job.matches.where("job.user = #{@user}").reviews.where("user != current_user") %>
                     <%#= job.matches.first.review.rating %>
                   </div>
 
@@ -137,7 +136,6 @@
                       <p>Start Date: <%= job.start_date.strftime("%d-%m-%Y") %></p>
                     </div>
                     <div class="message-status">
-                      <%= match.reviews.where("user != #{@user}") %>
                     </div>
                 </div>
 

@@ -8,4 +8,5 @@
 // layout file, like app/views/layouts/application.html.erb
 import "../plugins/flatpickr";
 import "./buttons";
-console.log('Hello World from Webpacker');
+import { initUpdateNavbarOnScroll } from './navbar';
+initUpdateNavbarOnScroll();
