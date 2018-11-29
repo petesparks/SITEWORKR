@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    matches = @user.matches
+    matches = @user.matches.where(accepted: true)
     @booked_dates = matches.map do |match|
       {
         from: match.job.start_date,

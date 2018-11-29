@@ -1,8 +1,19 @@
 <div class="map-window"><br>
+    <% if find.class == User %>
+      <p><%= link_to find.title.capitalize, user_path(find) %></p>
+      <img class="avatar-s" src="<%= find.photo.url %>"  alt="">
+      <p>£<%= find.rate %>pd</p>
+    <% elsif find.class == Job %>
+      <p><%= link_to find.title.capitalize, user_path(find) %></p>
+      <% person = User.find(find.user_id) %>
+      <img class="avatar-s" src="<%= person.photo.url %>"  alt="">
+      <p>£<%= find.rate %>pd</p>
+    <% elsif find.class == Match %>
+      <p><%= link_to find.title.capitalize, user_path(find) %></p>
+      <img class="avatar-s" src="<%= find.user.photo.url %>"  alt="">
+      <p>£<%= find.rate %>pd</p>
 
-    <p><%= link_to find.title.capitalize, user_path(find) %></p>
-    <img class="avatar-s" src="<%= find.user.photo %>"  alt="">
-    <p>£<%= find.rate %>pd</p>
+    <% end %>
 
 </div>
 
