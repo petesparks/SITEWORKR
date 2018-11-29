@@ -20,14 +20,11 @@ ul {
   border-bottom: none;
 }
 
-.message-body {
-  flex-grow: 0;
-}
+
 
 .message-name {
   padding-left: 20px;
-  min-width: 100px;
-  max-width: 200px;
+  width: 150px;
   text-align: left;
   h6 {
     font-size: 14px;
@@ -53,9 +50,9 @@ ul {
   padding-left: 0px;
   color: rgba(0,0,0,0.4);
   margin: 0px 0;
+  width: 200px;
 }
 .message-body strong{
-  color: rgba(0,0,0,0.9);
   color: rgba(0,0,0,0.9);
 }
 .message-body p {
@@ -65,6 +62,7 @@ ul {
 .message-status {
   font-size: 14px;
   font-weight: bold;
+  width: 100px;
 }
 .status.accepted {
   color: #04A366;
