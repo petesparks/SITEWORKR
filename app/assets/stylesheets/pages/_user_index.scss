@@ -20,14 +20,11 @@ ul {
   border-bottom: none;
 }
 
-.message-body {
-  flex-grow: 0;
-}
+
 
 .message-name {
-  padding-left: 20px;
-  min-width: 100px;
-  max-width: 200px;
+  padding-left: 10px;
+  width: 10%;
   text-align: left;
   h6 {
     font-size: 14px;
@@ -47,15 +44,15 @@ ul {
 
 .message-body {
   font-size: 18px;
-  padding-left: 10px;
+  padding-left: 5px;
   font-size: 0px;
   color: rgba(0,0,0,0.7);
   padding-left: 0px;
   color: rgba(0,0,0,0.4);
   margin: 0px 0;
+  width: 25%;
 }
 .message-body strong{
-  color: rgba(0,0,0,0.9);
   color: rgba(0,0,0,0.9);
 }
 .message-body p {
@@ -65,6 +62,7 @@ ul {
 .message-status {
   font-size: 14px;
   font-weight: bold;
+  width: 15%;
 }
 .status.accepted {
   color: #04A366;
@@ -117,12 +115,6 @@ p {
 
 // responsive styling
 @media only screen and (max-width: 750px) {
-  .message-body {
-    display: none;
-  }
-  .message h3 {
-    display: none;
-  }
 
 }
 .list-container {
