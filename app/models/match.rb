@@ -7,7 +7,7 @@ class Match < ApplicationRecord
 
   def self.my_matches(current_user)
     matches = []
-    Match.all.each { |match| matches << match if match.job.user.id == current_user.id || match.user.id == current_user.id }
+    Match.all.each { |match| matches << match if match.job.user_id == current_user.id || match.user.id == current_user.id }
     matches
   end
 
