@@ -6,6 +6,6 @@ test:
 
 production:
   adapter: redis
-  url: redis://rediscloud:password@localhost:6379
+  url: redis://redistogo:7b3da2b9b01b5b6fb68956e2b7fe257c@soapfish.redistogo.com:10578/
   channel_prefix: SITEWORKR_production
 
