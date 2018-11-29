@@ -48,7 +48,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
 
-  config.action_cable.url = "wss://www.siteworkr.com/cable"
+  config.action_cable.url = "wss://www.siteworkr.herokuapp.com/cable"
   config.action_cable.allowed_request_origins = [ "http://www.siteworkr.com", "https://www.siteworkr.com" ]
 
   # Mount Action Cable outside main process or domain
