@@ -6,6 +6,7 @@ test:
 
 production:
   adapter: redis
-  url: redis://rediscloud:password@localhost:6379
+  url: <%= ENV["REDISCLOUD_URL"] %>
   channel_prefix: SITEWORKR_production
+
 
