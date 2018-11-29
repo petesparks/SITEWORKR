@@ -47,13 +47,15 @@ class Match < ApplicationRecord
     jobs
   end
 
-  def self.stars(user)
+  def self.stars(person)
     sum = 0
     counter = 0
-    Match.my_matches(user).each do |match|
+    Match.my_matches(person).each do |match|
       match.reviews.each do |review|
-        sum += review.rating
-        counter += 1
+        unless review.user == person
+          sum += review.rating
+          counter += 1
+        end
       end
     end
     (sum * 2) / counter if sum != 0
