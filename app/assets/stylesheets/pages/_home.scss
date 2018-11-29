@@ -1,35 +1,59 @@
-
 .search {
   margin: 0 auto;
   color: black;
+  background-color: transparent;
 }
 
 .search1 {
-  border-radius: 4px;
+  border-radius: 0px;
   padding: 5px;
   margin-bottom:15px;
   border: none;
   height: 40px;
   width: 100%;
-
+  background-color: transparent;
+  border-bottom: 1px solid white;
 }
+
+.search1:hover {
+  border-radius: 0px;
+  padding: 5px;
+  margin-bottom:15px;
+  border: none;
+  height: 40px;
+  width: 100%;
+  background-color: transparent;
+  border-bottom: 2px solid #FF7F11;
+  transition: 1.2s;
+}
+
 svg{
   padding-bottom: 10px;
 }
 
 .search-btn {
-  background-color: $orange;
   border-radius: 4px;
-  color:white;
+  color: #ffffffb3;
+  background-color: #ff7f1173;
+  border: 1px solid #ff7f1147;
 }
 
-a:hover{
+.search-btn:hover {
+  border-radius: 4px;
+  color: white;
+  background-color: #FF7F11;
+  border: 1px solid #FF7F11;
+  transition: 1.2s;
+
+}
+
+a:hover {
   text-decoration: none;
 }
 
 
-.how-to-wrapper{
-    background-image: linear-gradient(to right, #FFFFFF, #DFDFDF);
+.how-to-wrapper {
+    background-image: white;
     text-align: center;
     color: grey;
     p{
@@ -46,7 +70,7 @@ a:hover{
     padding: 32px;
 }
 
-.how-it-item{
+.how-it-item {
     background-position: center;
     color: grey;
     position: relative;
@@ -54,26 +78,31 @@ a:hover{
     margin-bottom: 18px;
 }
 
-.how-image{
+.how-image {
   height: 100px;
   width: 100px;
 }
 
-.trusted{
-// width: 100px;
+.how-image-1 {
+  height: 120px;
+  width: 120px;
+  margin-bottom: -20px;
+}
 
-// -webkit-background-clip: padding-box;
-// -moz-background-clip: padding;
-// background-clip: padding-box;
-// margin: 7px 0 0 5px;
-// float: left;
-// background-size: cover;
-// background-position: center center;
+// trusted by partners
+
+.trusted {
 max-width: 50%;
 margin-top: 32px;
 margin-bottom: 32px;
 background-color: white;
+vertical-align: center;
 }
+
+.trusted-1 {
+    max-width: 50%;
+    margin-top: 40px;
+  }
 
 @media(max-width: 720px) {
   .trusted {
@@ -81,32 +110,49 @@ background-color: white;
   }
 }
 
-.trusted-wrapper{
+.trusted-wrapper {
   text-align: center;
   color: grey;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+.trusted-by {
+  background-color: white;
 }
 
-.trusted-wrapper{
-  text-align: center;
-  color: grey;
-}
+//new users css
 
-.user-wrapper{
+.user-wrapper {
   text-align: center;
   color: grey;
   margin-bottom: 32px;
 }
 
-.header-wrapper{
+.header-wrapper {
   margin-top: 32px;
+  margin-bottom: 32px;
   text-align: center;
   color: grey;
 }
 
-.card-recently{
+.new-users-wrapper {
+    background-color: #DAE7E3;
+    text-align: center;
+    color: grey;
+    p{
+      font-weight: 300;
+    }
+    h4{
+      font-weight: 400;
+    }
+}
+
+.card-recently {
   height: auto;
+  width: 290px;
   background-size: cover !important;
   background-position: center;
   position: relative;
   margin: 24px auto;
 }
+

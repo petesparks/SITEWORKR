@@ -1,6 +1,6 @@
 <% count = Match.my_unread_count(current_user) if user_signed_in?  %>
 <% new_jobs = Match.new_offers(current_user) if user_signed_in?  %>
-<div class="navbar">
+<div class="navbar <%= 'navbar-home' if params[:action] == 'home' %>">
   <!-- Logo -->
   <div class="navbar-left">
     <%= link_to image_tag('apple-icon-72x72.png'), root_path, class: "siteworkr-icon" %>
