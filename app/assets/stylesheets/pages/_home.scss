@@ -11,8 +11,21 @@
   border: none;
   height: 40px;
   width: 100%;
-  background-color: transparent;
   border-bottom: 1px solid white;
+  background-color: rgba(255, 255, 255,0.8);
+  border-right: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.home-form {
+  input::placeholder {
+      color: $orange;
+    }
+}
+
+
+#search {
+  color: black !important;
 }
 
 .search1:hover {
@@ -22,7 +35,7 @@
   border: none;
   height: 40px;
   width: 100%;
-  background-color: transparent;
+  background-color: rgba(255,255,255,0.9);
   border-bottom: 2px solid #FF7F11;
   transition: 1.2s;
 }
@@ -34,7 +47,8 @@ svg{
 .search-btn {
   border-radius: 4px;
   color: #ffffffb3;
-  background-color: #ff7f1173;
+  background-color: $orange;
+  opacity: 0.8;
   border: 1px solid #ff7f1147;
 }
 
@@ -43,7 +57,8 @@ svg{
   color: white;
   background-color: #FF7F11;
   border: 1px solid #FF7F11;
-  transition: 1.2s;
+  transition: 0.8s;
+  opacity: 1;
 
 }
 
