@@ -62,6 +62,52 @@
     </div>
   </div>
 </div>
+<!-- testimonials -->
+<div class="container-fluid how-to-wrapper">
+  <div class="row test-wrapper">
+    <div class="col-xs-12">
+      <h2>Testimonials</h2>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <h2>workrs</h2>
+        <div class="test-text">
+          <h4>Joining Siteworkr is easy</h4>
+          <p>Before Siteworkr I was travelling 200 miles up and down the motorway for work. Often staying in temporary accomodation away from my family. Siteworkr brings the work to me, companies now contact me directly to work on sites just minutes from home</p>
+          <div>
+          <p>Registration is free and simple. Siteworkr is like my very own recruitment agent finding me the best local work specific to my skillset</p>
+          </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <% User.not_company.each do |user| %>
+    <img src="<%= user.photo.url %>" alt="avatar" class="avatar-super">
+      <div class="test-text">
+      <p class="test-padding"><strong><%= user.name %></strong> - <i><%= user.skill %></i></p>
+      </div>
+    </div>
+    <% end %>
+  </div>
+    <div class="col-xs-12 col-sm-6">
+      <% User.not_workr.each do |user| %>
+      <img src="<%= user.photo.url %>" alt="avatar" class="avatar-super">
+            <div class="test-text">
+            <p><strong><%= user.name %></strong> - <i><%= user.skill %></i></p>
+            </div>
+    </div>
+      <div class="col-xs-12 col-sm-6">
+      <h2>company</h2>
+        <div class="test-text">
+          <h4>Recruiting made easy</h4>
+          <p>Before Siteworkr we were spending huge amounts of our budget on travel costs, accomodation and upsetting our own site staff. It's transformed finding the right staff locally, quickly and effectively.</p>
+        </div>
+        </div>
+          <p>We can efficiently and confidently take on projects no matter the location.</p>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Recently joined candidates -->
 <div class="container-fluid new-users-wrapper">
   <div class="row header-wrapper">
