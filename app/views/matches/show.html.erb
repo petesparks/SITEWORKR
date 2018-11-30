@@ -20,7 +20,7 @@
           <ul>
             <% Match.ordered(current_user).reverse.each do |match| %>
               <li>
-                <% if match == @match%>
+                <% if match == @match %>
                   <div class="message user-card selected">
 
                 <% else %>
@@ -28,6 +28,7 @@
                 <% end %>
 
                   <% if current_user == match.user %>
+
                     <div class="counter-position">
                       <%= cl_image_tag(match.job.user.photo.url, class: "avatar-medium") %>
                       <% count = Match.unread_count(match.messages, current_user) %>
@@ -35,13 +36,15 @@
                         <%= link_to count, match, class: "counter" %>
                       <% end %>
                     </div>
-                    <div>
+                    <div class="message-name">
                     <h3><%= link_to match.job.user.name.capitalize, match %></h3>
                       <% if match.hired && !match.accepted %>
                         <%= link_to "To be accepted", match, class: "small-text" %>
                       <% end %>
                     </div>
+
                   <% else %>
+
                     <div class="counter-position">
                       <%= cl_image_tag(match.user.photo.url, class: "avatar-medium") %>
                       <% count = Match.unread_count(match.messages, current_user) %>
@@ -49,14 +52,15 @@
                         <%= link_to count, match, class: "counter" %>
                       <% end %>
                     </div>
+                    <div class="message-name">
+                      <h3><%= link_to match.user.name.capitalize, match %></h3>
+                        <% if match.hired && !match.accepted %>
+                          <%= link_to "To be accepted", match, class: "small-text" %>
+                        <% end %>
+                    </div>
+
                   <% end %>
 
-                  <div class="message-name">
-                    <h3><%= link_to match.user.name.capitalize, match %></h3>
-                      <% if match.hired && !match.accepted %>
-                        <%= link_to "To be accepted", match, class: "small-text" %>
-                      <% end %>
-                  </div>
                   <div class="message-body">
                     <p><%= match.job.title %></p>
                     <% location = match.job.location.split(",") %>
@@ -67,7 +71,7 @@
                   <div class="message-status">
                     <p>Start Date:</p><br>
                     <p><%= match.job.start_date.strftime("%d-%m-%Y") %></p>
-                    <p class="price">£<%= match.job.rate %> per day</p>
+                    <p class="price">£<%= match.job.rate %> pd</p>
                       <%#= link_to "", match_path(match), my_matches: @matches, method: :delete, class: "fas fa-trash-alt" %>
                     <!-- class: "sweet-alert-demo" -->
                   </div>
@@ -81,7 +85,7 @@
             <% Match.ordered_queries(current_user).each do |match| %>
               <li>
                 <div>
-                  <% if match == @match%>
+                  <% if match == @match %>
                     <div class="message user-card selected">
 
                   <% else %>
@@ -127,38 +131,23 @@
         <div class="col-xs-12 col-md-7">
           <div class="messages-show row user-card map-messages">
             <% if current_user == @match.user %>
-              <div class="col-xs-5">
+              <div class="col-xs-12 col-md-6 avatar-name">
                 <%= cl_image_tag @match.job.user.photo.url, class: "avatar-large" %> <br>
                 <h3><%= link_to "#{@match.job.user.name}", user_path(@match.job.user), class: "user-msg" %></h3>
               </div>
-              <div class="col-xs-6 list-user">
+              <div class="col xs-12 col-md-6 list-user">
                 <h3><%= @match.job.title.upcase %></h3>
                   <% unless @match.job.location == "not defined" %>
                     <% location = @match.job.location.split(",") %>
                   <p><%=  location[0] + ", " + location[1] %></p>
                 <% end %>
-                <p>Skill: <%= @match.job.skill %></p>
+                <p><%= @match.job.skill %></p>
 
-                <% stars = Match.stars(@match.job.user) %>
-                <% unless stars.nil? %>
-                    <% (stars / 2).times do %>
-                      <i class="fas fa-star"></i>
-                    <% end %>
-                    <% if stars % 2 == 0 %>
-                      <% (5 - (stars / 2)).times do %>
-                        <i class="far fa-star"></i>
-                      <% end %>
-                    <% else %>
-                      <i class="fas fa-star-half"></i>
 
-                  <% end %>
-                <% end %>
-                <p>Reviews: <%= @reviews.count %> <%= stars %> </p>
-
-                <p>Rate: £<%= @match.job.rate %> per day</p>
+                <p>£<%= @match.job.rate %> per day</p>
                 <% unless @match.job.start_date.nil? %>
-                  <p>Start date: <%= @match.job.start_date.strftime("%d-%m-%Y") %></p>
-                  <p>End date: <%= @match.job.end_date.strftime("%d-%m-%Y") %></p>
+                  <p>From: <%= @match.job.start_date.strftime("%d-%m-%Y") %></p>
+                  <p>To: <%= @match.job.end_date.strftime("%d-%m-%Y") %></p>
                   <% end %>
               </div>
               <ul>
@@ -174,7 +163,8 @@
                   <% location = @match.job.location.split(",") %>
                   <p><%=  location[0] + ", " + location[1] %></p>
                 <% end %>
-                <p>Skill: <%= @match.user.skill %></p>
+                <p><%= @match.user.skill %></p>
+                <p>£<%= @match.job.rate %> per day</p>
 
                 <p>From: <%= @match.job.start_date.strftime("%d-%m-%Y") %></p>
                 <p>To: <%= @match.job.end_date.strftime("%d-%m-%Y") %></p>

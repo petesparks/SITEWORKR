@@ -14925,7 +14925,7 @@ ul {
 
 /* line 20, app/assets/stylesheets/pages/_user_index.scss */
 .message-name {
-  padding-left: 20px;
+  padding-left: 10px;
   min-width: 100px;
   text-align: left;
 }

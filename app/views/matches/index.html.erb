@@ -1,4 +1,4 @@
-<div>
+<div class="tabs-messages">
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
@@ -44,14 +44,14 @@
                       <% end %>
 
                     </div>
-                  <% end %>
 
-                  <div class="message-name">
-                    <h3><%= link_to match.user.name.capitalize, match %></h3>
-                      <% if match.hired && !match.accepted %>
-                        <%= link_to "To be accepted", match, class: "small-text" %>
-                      <% end %>
-                  </div>
+                    <div class="message-name">
+                      <h3><%= link_to match.user.name.capitalize, match %></h3>
+                        <% if match.hired && !match.accepted %>
+                          <%= link_to "To be accepted", match, class: "small-text" %>
+                        <% end %>
+                    </div>
+                  <% end %>
                   <div class="message-body">
                     <p><%= match.job.title %></p>
                     <% location = match.job.location.split(",") %>
