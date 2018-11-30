@@ -17,12 +17,13 @@
   position: relative;
   max-width: 80%;
   padding: 5px;
-  background-color: $orange;
+  background-color: rgba(230,126,34,0.8);
   border-radius: 8px 8px 0px 8px;
   margin-right: 5px;
   margin-left: auto;
   justify-content: flex-end;
   margin-bottom: 5px;
+  color: black;
   .content {
     margin-right: 50px;
   }
@@ -42,6 +43,7 @@
   border-radius: 8px 8px 8px 0px;
   margin: 5px;
   text-align: left;
+  color: black;
 
   .content {
     margin-left: 50px;
@@ -83,25 +85,26 @@
   padding: 7px;
   border: 1px solid $orange;
   border-radius: 5px;
-  color: $orange;
-  background-color: rgba(255,255,255,0.8);
+  color: $orange !important;
+  background-color: rgba(255,255,255,0.8) !important;
   font-size: 14px !important;
 }
 .map-messages {
-  height: 360px;
+  height: 310px;
   padding: 0px 15px !important;
   position: relative;
   .list-inline {
-     position: relative;
-     bottom: 0px;
-     height: 60px;
-     margin-bottom: 0px !important;
+    margin: 20px 0px;
+    height: 50px;
+    position: relative;
+    bottom: 10px;
   }
 
   .avatar-name {
     margin: 20px auto;
+    height: 270px;
     .avatar-large {
-      margin-top: 30px auto;
+      margin-top: 30px !important;
     }
 
     .user-msg {
@@ -111,10 +114,11 @@
   }
 
   .list-user{
-    max-height: 280px;
+    max-height: 270px;
     overflow: scroll;
     text-align: left;
-    margin: 30px auto 0px;
+    margin: 30px auto;
+    padding-right: 0px;
 
 
 
